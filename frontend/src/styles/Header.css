@@ -1,0 +1,291 @@
+/* frontend/src/styles/Header.css */
+
+/* Header Bar */
+.header-appbar {
+    background-color: #FFFFFF !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    border-bottom: 1px solid #F0F0F0;
+  }
+  
+  .header-toolbar {
+    justify-content: space-between;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  
+  /* Logo Styles */
+  .header-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .header-logo {
+    height: 45px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header-logo:hover {
+    opacity: 0.7;
+  }
+  
+  .header-logo-drawer {
+    height: 50px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header-logo-drawer:hover {
+    opacity: 0.7;
+  }
+  
+  /* Desktop Menu */
+  .header-desktop-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  .header-menu-button {
+    color: #000000 !important;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .header-menu-button:hover {
+    color: #666666 !important;
+  }
+  
+  .header-menu-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #C0C0C0;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .header-menu-button:hover::after {
+    width: 80%;
+  }
+  
+  /* Book Now Button */
+  .header-book-button {
+    margin-left: 16px !important;
+    padding: 8px 24px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border-radius: 50px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .header-book-button:hover {
+    background-color: #2C2C2C !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  /* Mobile Menu Icon */
+  .header-mobile-menu-button {
+    padding: 0 !important;
+  }
+  
+  .header-hamburger-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header-hamburger-icon:hover {
+    opacity: 0.7;
+  }
+  
+  /* Mobile Drawer */
+  .header-drawer {
+    display: block;
+  }
+  
+  .header-drawer-paper {
+    box-sizing: border-box;
+    width: 280px;
+    background-color: #FFFFFF !important;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .header-drawer-container {
+    width: 280px;
+    height: 100%;
+    background-color: #FFFFFF;
+  }
+  
+  /* Close Button */
+  .header-close-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+  }
+  
+  .header-close-button {
+    padding: 8px !important;
+  }
+  
+  .header-close-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header-close-icon:hover {
+    opacity: 0.6;
+  }
+  
+  /* Drawer Logo Container */
+  .header-drawer-logo-container {
+    padding: 16px 24px;
+  }
+  
+  /* Drawer Menu List */
+  .header-drawer-menu-list {
+    padding: 0 16px;
+  }
+  
+  .header-drawer-menu-item {
+    margin-bottom: 8px;
+  }
+  
+  .header-drawer-menu-text {
+    color: #000000;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: block;
+  }
+  
+  .header-drawer-menu-text:hover {
+    background-color: #F5F5F5;
+    padding-left: 24px;
+  }
+  
+  .header-drawer-menu-text span {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  /* Drawer Book Button */
+  .header-drawer-book-item {
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+  
+  .header-drawer-book-button {
+    width: 100%;
+    padding: 12px 0 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border-radius: 50px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .header-drawer-book-button:hover {
+    background-color: #2C2C2C !important;
+    transform: scale(1.02);
+  }
+  
+  /* Media Queries */
+  @media (max-width: 959px) {
+    .header-desktop-menu {
+      display: none;
+    }
+  }
+  
+  @media (min-width: 960px) {
+    .header-mobile-menu-button {
+      display: none !important;
+    }
+    
+    .header-drawer {
+      display: none !important;
+    }
+  }
+  
+  /* Mobile Responsive Improvements */
+  @media (max-width: 768px) {
+    .header-toolbar {
+      padding: 8px 16px;
+    }
+    
+    .header-logo {
+      height: 35px;
+    }
+    
+    .header-hamburger-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-appbar {
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    .header-toolbar {
+      padding: 8px 12px;
+    }
+    
+    .header-logo {
+      height: 30px;
+    }
+    
+    .header-drawer-paper {
+      width: 100% !important;
+    }
+    
+    .header-drawer-container {
+      width: 100%;
+    }
+    
+    .header-drawer-logo-container {
+      text-align: center;
+    }
+    
+    .header-drawer-menu-list {
+      padding: 0 24px;
+    }
+    
+    .header-drawer-book-item {
+      padding: 0 24px;
+    }
+  }
+  
+  /* Animations */
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .header-drawer-paper {
+    animation: slideIn 0.3s ease-out;
+  }
