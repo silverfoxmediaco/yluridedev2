@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import vanBackground from '../assets/mercedesvanv1.jpg';
-import vanBackgroundMobile from '../assets/blackmvanmobi.webp';
+import vanBackgroundMobile from '../assets/mercedesvanv1.jpg';
 import '../styles/Hero.css';
 
 const Hero = () => {
