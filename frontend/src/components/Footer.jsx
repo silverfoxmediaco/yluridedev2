@@ -18,7 +18,7 @@ import {
   Email,
   LocationOn,
 } from '@mui/icons-material';
-import logo from '../assets/yluridelogo.png';
+import logo from '../assets/dallassprintervanrentalsmainlogo200.png';
 import '../styles/Footer.css';
 
 const Footer = () => {
