@@ -14,7 +14,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/yluridelogo.png';
+import logo from '../assets/dallassprintervanrentalsmaintranslogo200.png';
 import hamburgerMenu from '../assets/hamburgermenu.png';
 import closingX from '../assets/closingx.png';
 import '../styles/Header.css';
