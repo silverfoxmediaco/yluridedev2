@@ -6,6 +6,15 @@ import VanGrid from '../components/VanGrid';
 import BookingModal from '../components/BookingModal';
 import '../styles/Booking.css';
 
+// Import van images
+import sprintervan1 from '../assets/vans/sprintervan1.png';
+import sprintervanhotel1 from '../assets/vans/sprintervanhotel1.png';
+import mbExecutiveSprinter from '../assets/vans/MB-Executive-Sprinter-Van.jpg';
+import mercedesvan2 from '../assets/vans/mercedesvan2.webp';
+import mercedesvanv1 from '../assets/vans/mercedesvanv1.jpg';
+import vaninterior1 from '../assets/vans/vaninterior1.png';
+import vaninteriorsideview1 from '../assets/vans/vaninteriorsideview1.png';
+
 // Temporary mock data until API is connected
 const mockVans = [
   {
@@ -16,8 +25,8 @@ const mockVans = [
     seating: 14,
     description: 'Our flagship luxury Sprinter van with premium amenities.',
     features: ['Leather Seats', 'WiFi', 'TV Screens', 'USB Charging', 'Climate Control', 'Tinted Windows'],
-    thumbnailImage: '/api/placeholder/400/300',
-    images: ['/api/placeholder/400/300', '/api/placeholder/400/300'],
+    thumbnailImage: sprintervan1,
+    images: [vaninterior1, vaninteriorsideview1, sprintervanhotel1],
     pricing: {
       hourlyRate: 75,
       dailyRate: 450,
@@ -37,8 +46,8 @@ const mockVans = [
     seating: 12,
     description: 'Executive class Sprinter perfect for corporate events.',
     features: ['Executive Seating', 'Conference Setup', 'WiFi', 'Privacy Partition'],
-    thumbnailImage: '/api/placeholder/400/300',
-    images: ['/api/placeholder/400/300'],
+    thumbnailImage: mbExecutiveSprinter,
+    images: [mercedesvanv1, mercedesvan2],
     pricing: {
       hourlyRate: 65,
       dailyRate: 400,
@@ -58,8 +67,8 @@ const mockVans = [
     seating: 10,
     description: 'Party-ready Sprinter with premium sound system and lighting.',
     features: ['Sound System', 'LED Lighting', 'Cooler', 'USB Charging'],
-    thumbnailImage: '/api/placeholder/400/300',
-    images: [],
+    thumbnailImage: sprintervanhotel1,
+    images: [vaninterior1, sprintervan1],
     pricing: {
       hourlyRate: 85,
       dailyRate: 500,
