@@ -11,17 +11,24 @@
   }
   
   .header-toolbar {
-    justify-content: space-between;
+    justify-content: space-between !important;
     padding-top: 8px;
     padding-bottom: 8px;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .header-logo-link {
+    margin-right: auto;
   }
   
   /* Logo Styles */
-  .header-logo-link {
+  .header-logo-link.MuiBox-root {
     display: flex;
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
+    margin-right: auto !important;
   }
 
   .header-logo {
@@ -238,7 +245,7 @@
   /* Mobile Responsive Improvements */
   @media (max-width: 768px) {
     .header-toolbar {
-      padding: 8px 16px;
+      padding: 8px 24px !important;
       min-height: 60px;
     }
 
@@ -276,7 +283,7 @@
     }
 
     .header-toolbar {
-      padding: 8px 12px;
+      padding: 8px 16px !important;
       min-height: 56px;
     }
 
