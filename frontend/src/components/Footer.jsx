@@ -47,7 +47,7 @@ const Footer = () => {
             <Box className="footer-company-section">
               <img 
                 src={logo} 
-                alt="YLURIDE" 
+                alt="NTX Luxury Van Rentals" 
                 className="footer-logo"
               />
               <Typography variant="body2" className="footer-tagline">
@@ -104,7 +104,7 @@ const Footer = () => {
                 </Box>
                 <Box className="footer-contact-item">
                   <Email className="footer-icon" />
-                  <Typography variant="body2">info@yluride.com</Typography>
+                  <Typography variant="body2">bookings@ntxluxuryvanrentals.com</Typography>
                 </Box>
                 <Box className="footer-contact-item">
                   <LocationOn className="footer-icon" />
@@ -123,7 +123,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <Box className="footer-bottom">
           <Typography variant="body2" className="footer-copyright">
-            © {currentYear} YLU Ride. All rights reserved.
+            © {currentYear} NTX Luxury Van Rentals. All rights reserved.
           </Typography>
           <Box className="footer-legal">
             <Link to="/privacy" className="footer-legal-link">

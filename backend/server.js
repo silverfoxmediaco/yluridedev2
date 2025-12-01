@@ -32,7 +32,7 @@ app.use('/api/payments', paymentRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'YLU Ride API is running' });
+  res.json({ status: 'OK', message: 'NTX Luxury Van Rentals API is running' });
 });
 
 // Serve static files in production
@@ -55,7 +55,7 @@ app.use((err, req, res, next) => {
 });
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/yluride';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ntxluxuryvans';
 
 if (MONGODB_URI) {
   mongoose.connect(MONGODB_URI)

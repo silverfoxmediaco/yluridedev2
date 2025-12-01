@@ -39,6 +39,27 @@ Edit Summary Log
 - Updated header menu links to navy blue and uppercase
 - Updated Book Now button to navy blue
 
+2025-12-01: Rebrand from YLU Ride to NTX Luxury Van Rentals
+- Updated frontend/src/components/Header.jsx: Changed alt tags to "NTX Luxury Van Rentals"
+- Updated frontend/src/components/Footer.jsx:
+  - Changed alt tag to "NTX Luxury Van Rentals"
+  - Changed email to bookings@ntxluxuryvanrentals.com
+  - Changed copyright to "NTX Luxury Van Rentals"
+- Updated frontend/src/pages/Home.jsx: Changed "Why Choose YLU Ride" to "NTX Luxury Van Rentals"
+- Updated frontend/index.html:
+  - Changed all meta tags to NTX Luxury Van Rentals
+  - Updated og:url and twitter:url to ntxluxuryvanrentals.com
+  - Updated title to "NTX Luxury Van Rentals - Premium Mercedes Sprinter Vans in Dallas"
+  - Changed apple-touch-icon to NTXfaviconv2.png
+- Updated backend/server.js:
+  - Changed health check message to "NTX Luxury Van Rentals API"
+  - Changed local MongoDB database name to ntxluxuryvans
+- Increased logo sizes:
+  - Desktop: 200px → 250px (25% larger)
+  - Mobile 768px: 130px → 195px (50% larger)
+  - Mobile 480px: 130px → 175px (50% larger)
+  - Mobile 360px: 110px → 150px (50% larger)
+
 2025-12-01: Mobile Responsiveness & PWA Optimizations
 - Updated frontend/src/styles/Header.css:
   - Logo scales properly: 200px desktop → 130px mobile → 110px small screens

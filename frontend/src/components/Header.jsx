@@ -62,7 +62,7 @@ const Header = () => {
       <Box className="header-drawer-logo-container">
         <img 
           src={logo} 
-          alt="YLU Ride" 
+          alt="NTX Luxury Van Rentals" 
           className="header-logo-drawer"
           onClick={() => {
             navigate('/');
@@ -117,7 +117,7 @@ const Header = () => {
           >
             <img 
               src={logo} 
-              alt="YLU Ride" 
+              alt="NTX Luxury Van Rentals" 
               className="header-logo"
             />
           </Box>

@@ -77,7 +77,7 @@ const Home = () => {
         <Container maxWidth="lg">
           <div className="section-header">
             <Typography variant="h2" className="section-title">
-              Why Choose YLU Ride
+              Why Choose NTX Luxury Van Rentals
             </Typography>
             <Typography variant="body1" className="section-subtitle">
               Premium service, exceptional vehicles, unforgettable experiences
