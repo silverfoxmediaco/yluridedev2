@@ -1,0 +1,265 @@
+/* frontend/src/styles/VanCard.css */
+
+.van-card {
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF !important;
+  border: 1px solid #E0E0E0;
+}
+
+.van-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 34, 68, 0.15) !important;
+}
+
+/* Image Container & Carousel */
+.van-card-image-container {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.van-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.van-card:hover .van-card-image {
+  transform: scale(1.05);
+}
+
+/* Navigation Buttons */
+.van-card-nav-button {
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #002244 !important;
+  width: 36px !important;
+  height: 36px !important;
+  opacity: 0;
+  transition: opacity 0.3s ease !important;
+}
+
+.van-card:hover .van-card-nav-button {
+  opacity: 1;
+}
+
+.van-card-nav-button:hover {
+  background-color: #FFFFFF !important;
+}
+
+.van-card-nav-prev {
+  left: 8px;
+}
+
+.van-card-nav-next {
+  right: 8px;
+}
+
+/* Dot Indicators */
+.van-card-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.van-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.van-card-dot.active {
+  background-color: #FFFFFF;
+  width: 20px;
+  border-radius: 4px;
+}
+
+.van-card-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Availability Badge */
+.van-card-availability {
+  position: absolute !important;
+  top: 12px;
+  right: 12px;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+.van-card-availability.available {
+  background-color: #4CAF50 !important;
+  color: #FFFFFF !important;
+}
+
+.van-card-availability.booked {
+  background-color: #F44336 !important;
+  color: #FFFFFF !important;
+}
+
+/* Card Content */
+.van-card-content {
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.van-card-title {
+  font-weight: 700 !important;
+  color: #002244;
+  margin-bottom: 4px !important;
+  font-size: 1.25rem !important;
+}
+
+.van-card-type {
+  color: #666666;
+  margin-bottom: 16px !important;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  letter-spacing: 1px;
+}
+
+/* Details */
+.van-card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.van-card-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.van-card-detail-icon {
+  color: #FB4F14 !important;
+  font-size: 1.1rem !important;
+}
+
+.van-card-detail-item p {
+  color: #333333;
+  font-size: 0.875rem;
+}
+
+/* Features */
+.van-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.van-card-feature-chip {
+  background-color: #F5F5F5 !important;
+  color: #333333 !important;
+  font-size: 0.7rem !important;
+}
+
+.van-card-feature-more {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+}
+
+/* Pricing */
+.van-card-pricing {
+  margin-bottom: 16px;
+  margin-top: auto;
+}
+
+.van-card-price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.van-card-price {
+  font-weight: 700 !important;
+  color: #002244;
+  font-size: 1.75rem !important;
+}
+
+.van-card-price-label {
+  color: #666666;
+}
+
+.van-card-hourly {
+  color: #888888;
+  font-size: 0.8rem !important;
+  margin-top: 4px;
+}
+
+/* Book Button */
+.van-card-book-button {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+  padding: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.van-card-book-button:hover {
+  background-color: #FB4F14 !important;
+  transform: scale(1.02);
+}
+
+.van-card-book-button:disabled {
+  background-color: #CCCCCC !important;
+  color: #666666 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .van-card-image-container {
+    height: 180px;
+  }
+
+  .van-card-content {
+    padding: 16px !important;
+  }
+
+  .van-card-title {
+    font-size: 1.1rem !important;
+  }
+
+  .van-card-price {
+    font-size: 1.5rem !important;
+  }
+
+  .van-card-nav-button {
+    opacity: 1;
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .van-card-details {
+    gap: 12px;
+  }
+
+  .van-card-detail-item p {
+    font-size: 0.75rem;
+  }
+}

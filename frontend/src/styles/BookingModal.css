@@ -1,0 +1,201 @@
+/* frontend/src/styles/BookingModal.css */
+
+.booking-modal .MuiDialog-paper {
+  border-radius: 16px !important;
+  max-height: 90vh;
+}
+
+.booking-modal-title {
+  background-color: #002244;
+  color: #FFFFFF;
+  padding: 20px 24px !important;
+}
+
+.booking-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.booking-modal-van-name {
+  font-weight: 700 !important;
+  color: #FFFFFF;
+  margin-bottom: 4px !important;
+}
+
+.booking-modal-van-type {
+  color: #C0C0C0;
+}
+
+.booking-modal-close {
+  color: #FFFFFF !important;
+  margin: -8px -8px 0 0 !important;
+}
+
+.booking-modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.booking-modal-content {
+  padding: 24px !important;
+}
+
+.booking-modal-section {
+  margin-bottom: 24px;
+}
+
+.booking-modal-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #002244;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+  font-size: 1rem !important;
+}
+
+.booking-modal-section-title svg {
+  color: #FB4F14;
+}
+
+.booking-modal-datetime {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.booking-modal-input .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.booking-modal-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.booking-modal-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.booking-modal-input .MuiInputLabel-root.Mui-focused {
+  color: #002244;
+}
+
+/* Pricing Section */
+.booking-modal-pricing {
+  background-color: #F8F9FA;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.booking-modal-price-summary {
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #CCCCCC;
+}
+
+.booking-modal-dates {
+  color: #002244;
+  font-weight: 500;
+}
+
+.booking-modal-duration {
+  color: #666666;
+  font-size: 0.85rem !important;
+  margin-top: 4px;
+}
+
+.booking-modal-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.booking-modal-price-row p {
+  margin: 0;
+  color: #333333;
+}
+
+.booking-modal-deposit p {
+  color: #666666;
+  font-style: italic;
+}
+
+.booking-modal-total {
+  background-color: #002244;
+  margin: 0 -20px -20px -20px;
+  padding: 16px 20px !important;
+  border-radius: 0 0 12px 12px;
+}
+
+.booking-modal-total h6 {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* Actions */
+.booking-modal-actions {
+  padding: 16px 24px !important;
+  gap: 12px;
+}
+
+.booking-modal-cancel {
+  color: #666666 !important;
+}
+
+.booking-modal-cancel:hover {
+  background-color: #F5F5F5 !important;
+}
+
+.booking-modal-submit {
+  background-color: #FB4F14 !important;
+  color: #FFFFFF !important;
+  padding: 10px 32px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
+
+.booking-modal-submit:hover {
+  background-color: #c93e10 !important;
+}
+
+.booking-modal-submit:disabled {
+  background-color: #CCCCCC !important;
+  color: #666666 !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .booking-modal .MuiDialog-paper {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+  }
+
+  .booking-modal-datetime {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-modal-content {
+    padding: 16px !important;
+  }
+
+  .booking-modal-pricing {
+    padding: 16px;
+  }
+
+  .booking-modal-total {
+    margin: 0 -16px -16px -16px;
+    padding: 12px 16px !important;
+  }
+
+  .booking-modal-actions {
+    flex-direction: column;
+    padding: 16px !important;
+  }
+
+  .booking-modal-submit,
+  .booking-modal-cancel {
+    width: 100%;
+  }
+}

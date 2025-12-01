@@ -15,3 +15,26 @@ Edit Summary Log
   - verifyConnection() - tests email connection on startup
 - Updated backend/.env with EMAIL_USER and EMAIL_PASS
 - Updated backend/server.js to verify email connection on startup
+
+2025-12-01: Built Booking Page with Van Grid and Booking Modal
+- Created backend/models/Van.js - Van schema with pricing, availability, and date calculations
+- Created frontend/src/components/VanCard.jsx - Card with image carousel, details, pricing
+- Created frontend/src/components/VanGrid.jsx - Grid layout for van cards
+- Created frontend/src/components/BookingModal.jsx - Modal with date/time picker and pricing calculator
+- Created frontend/src/pages/Booking.jsx - Main booking page with hero and van grid
+- Created frontend/src/styles/VanCard.css, VanGrid.css, BookingModal.css, Booking.css
+- Updated backend/routes/vanRoutes.js - Full CRUD + availability/pricing endpoints
+- Features:
+  - Image carousel with navigation arrows and dot indicators
+  - Availability badges on van cards
+  - Date and time selection in booking modal
+  - Hourly/daily/weekly rental duration options
+  - Automatic price calculation with fees breakdown
+  - Responsive design for mobile
+
+2025-12-01: Updated Brand Colors
+- Updated frontend/src/styles/theme.js with brand colors:
+  - Navy Blue: #002244 (primary)
+  - Orange: #FB4F14 (accent)
+- Updated header menu links to navy blue and uppercase
+- Updated Book Now button to navy blue

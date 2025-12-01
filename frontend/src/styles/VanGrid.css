@@ -1,0 +1,53 @@
+/* frontend/src/styles/VanGrid.css */
+
+.van-grid-container {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.van-grid-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.van-grid-loading p {
+  color: #666666;
+  font-size: 1rem;
+}
+
+.van-grid-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.van-grid-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 8px;
+}
+
+.van-grid-empty h6 {
+  color: #002244;
+}
+
+.van-grid-empty p {
+  color: #666666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .van-grid-container {
+    padding: 16px 0;
+  }
+}
