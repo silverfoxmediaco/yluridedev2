@@ -3,6 +3,8 @@
 .booking-modal .MuiDialog-paper {
   border-radius: 16px !important;
   max-height: 90vh;
+  width: 100%;
+  max-width: 500px;
 }
 
 .booking-modal-title {
@@ -168,16 +170,30 @@
 /* Responsive */
 @media (max-width: 600px) {
   .booking-modal .MuiDialog-paper {
-    margin: 16px;
-    max-height: calc(100vh - 32px);
+    margin: 12px;
+    max-height: calc(100vh - 24px);
+    border-radius: 12px !important;
+  }
+
+  .booking-modal-title {
+    padding: 16px !important;
+  }
+
+  .booking-modal-van-name {
+    font-size: 1.1rem !important;
   }
 
   .booking-modal-datetime {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .booking-modal-content {
     padding: 16px !important;
+  }
+
+  .booking-modal-section {
+    margin-bottom: 20px;
   }
 
   .booking-modal-pricing {
@@ -192,10 +208,58 @@
   .booking-modal-actions {
     flex-direction: column;
     padding: 16px !important;
+    gap: 10px;
   }
 
   .booking-modal-submit,
   .booking-modal-cancel {
     width: 100%;
+    min-height: 48px;
+  }
+
+  .booking-modal-submit {
+    order: 1;
+  }
+
+  .booking-modal-cancel {
+    order: 2;
+  }
+
+  .booking-modal-input .MuiInputBase-input {
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-modal .MuiDialog-paper {
+    margin: 8px;
+    max-height: calc(100vh - 16px);
+  }
+
+  .booking-modal-section-title {
+    font-size: 0.9rem !important;
+  }
+
+  .booking-modal-price-row p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .booking-modal-van-name {
+    font-size: 1rem !important;
+  }
+
+  .booking-modal-content {
+    padding: 12px !important;
+  }
+
+  .booking-modal-pricing {
+    padding: 12px;
+  }
+
+  .booking-modal-total {
+    margin: 0 -12px -12px -12px;
+    padding: 10px 12px !important;
   }
 }

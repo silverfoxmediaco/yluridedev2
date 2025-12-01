@@ -9,6 +9,7 @@
   flex-direction: column;
   background-color: #FFFFFF !important;
   border: 1px solid #E0E0E0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .van-card:hover {
@@ -19,14 +20,20 @@
 /* Image Container & Carousel */
 .van-card-image-container {
   position: relative;
-  height: 220px;
+  width: 100%;
+  padding-top: 66.67%; /* 3:2 aspect ratio */
   overflow: hidden;
+  background-color: #F5F5F5;
 }
 
 .van-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.3s ease;
 }
 
@@ -232,7 +239,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .van-card-image-container {
-    height: 180px;
+    padding-top: 60%; /* Slightly shorter on tablet */
   }
 
   .van-card-content {
@@ -249,8 +256,39 @@
 
   .van-card-nav-button {
     opacity: 1;
-    width: 32px !important;
-    height: 32px !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+
+  .van-card-book-button {
+    padding: 14px !important;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .van-card-image-container {
+    padding-top: 56.25%; /* 16:9 aspect ratio on mobile */
+  }
+
+  .van-card-nav-button {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  .van-card-dots {
+    bottom: 16px;
+  }
+
+  .van-card-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .van-card-dot.active {
+    width: 24px;
   }
 }
 
@@ -260,6 +298,33 @@
   }
 
   .van-card-detail-item p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .van-card-feature-chip {
+    font-size: 0.75rem !important;
+    height: 28px !important;
+  }
+
+  .van-card-book-button {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .van-card-content {
+    padding: 12px !important;
+  }
+
+  .van-card-title {
+    font-size: 1rem !important;
+  }
+
+  .van-card-price {
+    font-size: 1.25rem !important;
+  }
+
+  .van-card-details {
+    gap: 8px;
   }
 }

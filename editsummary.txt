@@ -39,6 +39,39 @@ Edit Summary Log
 - Updated header menu links to navy blue and uppercase
 - Updated Book Now button to navy blue
 
+2025-12-01: Mobile Responsiveness & PWA Optimizations
+- Updated frontend/src/styles/Header.css:
+  - Logo scales properly: 200px desktop → 130px mobile → 110px small screens
+  - Added flex-shrink and object-fit for logo containment
+  - Increased touch targets (min-height 48px on drawer items)
+  - Better breakpoints for 768px, 480px, 360px screens
+- Updated frontend/src/styles/VanCard.css:
+  - Changed image container to aspect ratio (3:2 desktop, 16:9 mobile)
+  - Images scale within container using absolute positioning
+  - Larger touch targets for nav buttons (44px on mobile)
+  - Better responsive scaling across all breakpoints
+- Updated frontend/src/styles/BookingModal.css:
+  - Full-width on mobile with proper margins
+  - Inputs sized at 16px to prevent iOS zoom
+  - Stack buttons vertically on mobile with submit first
+  - Added breakpoints for 600px, 480px, 360px
+- Updated frontend/src/styles/Footer.css:
+  - Logo scales: 200px desktop → 160px mobile → 140px small
+  - Increased touch targets (44px min) for links and buttons
+  - Better font sizing across breakpoints
+- Updated frontend/index.html:
+  - Added PWA meta tags (apple-mobile-web-app-capable, etc.)
+  - Updated viewport with viewport-fit=cover for notched devices
+  - Updated theme-color to brand navy (#002244)
+- Updated frontend/src/index.css:
+  - Added touch-friendly optimizations (tap-highlight, touch-callout)
+  - Safe area insets for notched phones (iPhone X+)
+  - Minimum 44px touch targets for buttons/links
+  - Active states for touch devices
+  - PWA standalone mode optimizations
+  - Landscape orientation handling
+  - Reduced motion preference support
+
 2025-12-01: Updated Homepage with Brand Colors
 - Updated frontend/src/styles/Hero.css:
   - CTA button: Orange background (#FB4F14), hovers to navy blue (#002244)
