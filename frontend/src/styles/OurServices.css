@@ -15,7 +15,7 @@
     right: -25%;
     width: 50%;
     height: 200%;
-    background: radial-gradient(circle, rgba(192, 192, 192, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 34, 68, 0.08) 0%, transparent 70%);
     animation: float 20s ease-in-out infinite;
   }
   
@@ -36,7 +36,7 @@
   }
   
   .os-overline {
-    color: #C0C0C0 !important;
+    color: #FB4F14 !important;
     font-weight: 600 !important;
     letter-spacing: 3px !important;
     font-size: 0.875rem !important;
@@ -44,10 +44,10 @@
     display: block;
     animation: slideDown 0.8s ease-out;
   }
-  
+
   .os-main-title {
     font-weight: 700 !important;
-    color: #000000;
+    color: #002244;
     margin-bottom: 16px !important;
     font-size: clamp(2rem, 5vw, 3rem) !important;
     animation: slideUp 0.8s ease-out 0.2s both;
@@ -117,21 +117,21 @@
   
   .os-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border-color: #C0C0C0;
+    box-shadow: 0 20px 40px rgba(0, 34, 68, 0.15);
+    border-color: #FB4F14;
   }
-  
+
   .os-card.os-popular {
-    border: 2px solid #C0C0C0;
+    border: 2px solid #FB4F14;
     background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
   }
-  
+
   /* Popular Badge */
   .os-popular-badge {
     position: absolute;
     top: -1px;
     right: 20px;
-    background: #000000;
+    background: #FB4F14;
     color: #FFFFFF;
     padding: 6px 16px;
     font-size: 0.75rem;
@@ -148,11 +148,11 @@
     margin-bottom: 30px;
     display: inline-block;
   }
-  
+
   .os-icon {
     width: 70px;
     height: 70px;
-    background: #000000;
+    background: #002244;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -161,32 +161,32 @@
     z-index: 2;
     transition: all 0.3s ease;
   }
-  
+
   .os-icon svg {
     font-size: 32px;
     color: #FFFFFF;
     transition: all 0.3s ease;
   }
-  
+
   .os-icon-background {
     position: absolute;
     top: 10px;
     left: 10px;
     width: 70px;
     height: 70px;
-    background: #C0C0C0;
+    background: #FB4F14;
     border-radius: 20px;
     opacity: 0.3;
     transition: all 0.3s ease;
   }
-  
+
   .os-card:hover .os-icon {
     transform: rotate(-5deg) scale(1.1);
-    background: #C0C0C0;
+    background: #FB4F14;
   }
-  
+
   .os-card:hover .os-icon svg {
-    color: #000000;
+    color: #FFFFFF;
   }
   
   .os-card:hover .os-icon-background {
@@ -197,14 +197,14 @@
   /* Service Content */
   .os-title {
     font-weight: 600 !important;
-    color: #000000;
+    color: #002244;
     margin-bottom: 12px !important;
     font-size: 1.5rem !important;
     transition: color 0.3s ease;
   }
-  
+
   .os-short-desc {
-    color: #C0C0C0;
+    color: #FB4F14;
     font-weight: 500 !important;
     margin-bottom: 16px !important;
     text-transform: uppercase;
@@ -251,7 +251,7 @@
   .os-feature-dot {
     width: 6px;
     height: 6px;
-    background: #C0C0C0;
+    background: #FB4F14;
     border-radius: 50%;
     margin-right: 12px;
     flex-shrink: 0;
@@ -266,8 +266,8 @@
   /* Service CTA Button */
   .os-cta {
     width: 100%;
-    border: 2px solid #000000 !important;
-    color: #000000 !important;
+    border: 2px solid #002244 !important;
+    color: #002244 !important;
     font-weight: 600 !important;
     padding: 12px 24px !important;
     border-radius: 50px !important;
@@ -275,7 +275,7 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .os-cta::before {
     content: '';
     position: absolute;
@@ -283,16 +283,16 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #000000;
+    background: #002244;
     transition: left 0.3s ease;
     z-index: -1;
   }
-  
+
   .os-cta:hover {
     color: #FFFFFF !important;
-    border-color: #000000 !important;
+    border-color: #002244 !important;
   }
-  
+
   .os-cta:hover::before {
     left: 0;
   }
@@ -300,13 +300,13 @@
   /* Bottom CTA Section */
   .os-bottom-cta {
     margin-top: 80px;
-    background: linear-gradient(135deg, #000000 0%, #2C2C2C 100%);
+    background: linear-gradient(135deg, #002244 0%, #001833 100%);
     border-radius: 24px;
     padding: 60px;
     position: relative;
     overflow: hidden;
   }
-  
+
   .os-bottom-cta::before {
     content: '';
     position: absolute;
@@ -314,7 +314,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(192, 192, 192, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(251, 79, 20, 0.1) 0%, transparent 70%);
     animation: rotate 30s linear infinite;
   }
   
@@ -334,7 +334,7 @@
   
   .os-cta-icon {
     font-size: 48px !important;
-    color: #C0C0C0;
+    color: #FB4F14;
     margin-bottom: 24px;
     animation: bounce 2s ease-in-out infinite;
   }
@@ -352,7 +352,7 @@
   }
   
   .os-cta-text {
-    color: #C0C0C0;
+    color: rgba(255, 255, 255, 0.8);
     max-width: 600px;
     margin: 0 auto 32px !important;
     font-size: 1.125rem !important;
@@ -370,23 +370,24 @@
   }
   
   .os-cta-button-primary {
-    background: #C0C0C0 !important;
-    color: #000000 !important;
+    background: #FB4F14 !important;
+    color: #FFFFFF !important;
     padding: 14px 32px !important;
     font-weight: 600 !important;
     border-radius: 50px !important;
     font-size: 1rem !important;
     transition: all 0.3s ease !important;
   }
-  
+
   .os-cta-button-primary:hover {
     background: #FFFFFF !important;
+    color: #002244 !important;
     transform: scale(1.05);
     box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
   }
-  
+
   .os-cta-button-secondary {
-    color: #C0C0C0 !important;
+    color: #FB4F14 !important;
     font-weight: 500 !important;
     text-transform: uppercase;
     letter-spacing: 1px;

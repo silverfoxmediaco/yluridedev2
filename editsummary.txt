@@ -38,3 +38,23 @@ Edit Summary Log
   - Orange: #FB4F14 (accent)
 - Updated header menu links to navy blue and uppercase
 - Updated Book Now button to navy blue
+
+2025-12-01: Updated Homepage with Brand Colors
+- Updated frontend/src/styles/Hero.css:
+  - CTA button: Orange background (#FB4F14), hovers to navy blue (#002244)
+  - Subtitle: Changed to orange (#FB4F14)
+  - Scroll indicator: Changed to orange accents
+- Updated frontend/src/styles/Home.css:
+  - Feature cards: Navy blue icons (#002244), orange on hover, orange border on hover
+  - Feature titles: Navy blue
+  - Services section: Orange checkmark icons, navy blue CTA button
+  - Stats section: Navy blue background (#002244), orange numbers (#FB4F14)
+  - CTA section: Orange primary button, navy blue secondary button
+- Updated frontend/src/styles/OurServices.css:
+  - Overline text: Orange (#FB4F14)
+  - Main title: Navy blue (#002244)
+  - Service icons: Navy blue background, orange on hover
+  - Popular badge: Orange background
+  - Feature dots: Orange
+  - CTA buttons: Navy blue with white on hover
+  - Bottom CTA section: Navy blue gradient background, orange accents
