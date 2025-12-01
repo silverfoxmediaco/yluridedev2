@@ -98,7 +98,13 @@ const Booking = () => {
       setLoading(true);
       // Try to fetch from API
       const response = await axios.get('/api/vans');
-      setVans(response.data);
+      // If API returns empty array, use mock data
+      if (response.data && response.data.length > 0) {
+        setVans(response.data);
+      } else {
+        console.log('No vans in database, using mock data');
+        setVans(mockVans);
+      }
       setError('');
     } catch (err) {
       console.log('API not available, using mock data');
