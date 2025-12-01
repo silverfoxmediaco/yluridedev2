@@ -1,19 +1,40 @@
 // frontend/src/styles/theme.js
 import { createTheme } from '@mui/material/styles';
 
+/*
+ * NTX Luxury Van Rentals - Brand Color Guide
+ * ==========================================
+ *
+ * Primary Brand Colors:
+ * - Navy Blue: #002244 | RGB(0, 34, 68) | HSL(210°, 100%, 13%)
+ * - Orange:    #FB4F14 | RGB(251, 79, 20) | HSL(14°, 96%, 53%)
+ *
+ * Supporting Colors:
+ * - White:     #FFFFFF
+ * - Silver:    #C0C0C0
+ * - Black:     #000000
+ */
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#000000', // Black
-      light: '#2C2C2C', // Dark Gray
-      dark: '#000000',
+      main: '#002244', // Navy Blue (Brand Primary)
+      light: '#003366',
+      dark: '#001a33',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#C0C0C0', // Silver
-      light: '#E0E0E0', // Light Silver
-      dark: '#808080', // Dark Silver
-      contrastText: '#000000',
+      main: '#FB4F14', // Orange (Brand Accent)
+      light: '#fc7243',
+      dark: '#c93e10',
+      contrastText: '#FFFFFF',
+    },
+    brand: {
+      navy: '#002244',
+      orange: '#FB4F14',
+      white: '#FFFFFF',
+      silver: '#C0C0C0',
+      black: '#000000',
     },
     background: {
       default: '#FFFFFF', // White
@@ -96,33 +117,33 @@ const theme = createTheme({
           fontSize: '1rem',
         },
         containedPrimary: {
-          backgroundColor: '#000000',
+          backgroundColor: '#002244', // Navy Blue
           '&:hover': {
-            backgroundColor: '#2C2C2C',
+            backgroundColor: '#003366',
           },
         },
         containedSecondary: {
-          backgroundColor: '#C0C0C0',
-          color: '#000000',
+          backgroundColor: '#FB4F14', // Orange
+          color: '#FFFFFF',
           '&:hover': {
-            backgroundColor: '#808080',
+            backgroundColor: '#c93e10',
             color: '#FFFFFF',
           },
         },
         outlinedPrimary: {
-          borderColor: '#000000',
-          color: '#000000',
+          borderColor: '#002244',
+          color: '#002244',
           '&:hover': {
-            borderColor: '#000000',
-            backgroundColor: 'rgba(0, 0, 0, 0.04)',
+            borderColor: '#002244',
+            backgroundColor: 'rgba(0, 34, 68, 0.04)',
           },
         },
         outlinedSecondary: {
-          borderColor: '#C0C0C0',
-          color: '#666666',
+          borderColor: '#FB4F14',
+          color: '#FB4F14',
           '&:hover': {
-            borderColor: '#808080',
-            backgroundColor: 'rgba(192, 192, 192, 0.1)',
+            borderColor: '#c93e10',
+            backgroundColor: 'rgba(251, 79, 20, 0.1)',
           },
         },
       },

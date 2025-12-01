@@ -51,17 +51,18 @@
   }
   
   .header-menu-button {
-    color: #000000 !important;
+    color: #002244 !important;
     font-size: 1rem;
     font-weight: 500;
+    text-transform: uppercase !important;
     padding: 8px 16px;
     border-radius: 4px;
     transition: all 0.3s ease;
     position: relative;
   }
-  
+
   .header-menu-button:hover {
-    color: #666666 !important;
+    color: #003366 !important;
   }
   
   .header-menu-button::after {
@@ -86,17 +87,18 @@
     padding: 8px 24px !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
-    background-color: #000000 !important;
+    background-color: #002244 !important;
     color: #FFFFFF !important;
+    border: none !important;
     border-radius: 50px !important;
     transition: all 0.3s ease !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 10px rgba(0, 34, 68, 0.2) !important;
   }
-  
+
   .header-book-button:hover {
-    background-color: #2C2C2C !important;
+    background-color: #003366 !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 4px 20px rgba(0, 34, 68, 0.3) !important;
   }
   
   /* Mobile Menu Icon */
