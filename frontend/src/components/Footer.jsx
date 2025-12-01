@@ -18,7 +18,7 @@ import {
   Email,
   LocationOn,
 } from '@mui/icons-material';
-import logo from '../assets/NTXmainlogov4.png';
+import logo from '../assets/NTXlargemainlogotrans.png';
 import '../styles/Footer.css';
 
 const Footer = () => {
