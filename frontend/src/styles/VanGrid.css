@@ -5,6 +5,13 @@
   padding: 20px 0;
 }
 
+/* Desktop: 3 columns */
+.van-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
 .van-grid-loading {
   display: flex;
   flex-direction: column;
@@ -45,9 +52,22 @@
   color: #666666;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Tablet: 2 columns */
+@media (max-width: 960px) {
+  .van-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 600px) {
   .van-grid-container {
     padding: 16px 0;
+  }
+
+  .van-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

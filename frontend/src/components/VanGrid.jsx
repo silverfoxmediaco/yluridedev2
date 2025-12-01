@@ -1,6 +1,6 @@
 // frontend/src/components/VanGrid.jsx
 import React from 'react';
-import { Grid, Box, Typography, CircularProgress } from '@mui/material';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import VanCard from './VanCard';
 import '../styles/VanGrid.css';
 
@@ -39,13 +39,11 @@ const VanGrid = ({ vans, loading, error, onBookNow }) => {
 
   return (
     <Box className="van-grid-container">
-      <Grid container spacing={3}>
+      <Box className="van-grid">
         {vans.map((van) => (
-          <Grid item xs={12} sm={6} md={4} key={van._id}>
-            <VanCard van={van} onBookNow={onBookNow} />
-          </Grid>
+          <VanCard key={van._id} van={van} onBookNow={onBookNow} />
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };
