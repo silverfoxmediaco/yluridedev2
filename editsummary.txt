@@ -1,0 +1,17 @@
+Edit Summary Log
+================
+
+2025-12-01: Replaced logos with new NTXmainlogov4.png
+- Updated frontend/src/components/Header.jsx: Changed logo import to 'NTXmainlogov4.png'
+- Updated frontend/src/components/Footer.jsx: Changed logo import to 'NTXmainlogov4.png'
+
+2025-12-01: Set up Nodemailer with Outlook
+- Created backend/utils/emailService.js with:
+  - Outlook SMTP configuration
+  - sendBookingConfirmation() - sends confirmation to customer
+  - sendBookingNotification() - notifies admin of new booking
+  - sendContactEmail() - handles contact form submissions
+  - sendEmail() - generic email function
+  - verifyConnection() - tests email connection on startup
+- Updated backend/.env with EMAIL_USER and EMAIL_PASS
+- Updated backend/server.js to verify email connection on startup
