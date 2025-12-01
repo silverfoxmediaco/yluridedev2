@@ -288,8 +288,8 @@
     }
 
     .header-logo {
-      width: 175px;
-      max-height: 50px;
+      width: 250px;
+      margin-right: 40px !important;
     }
 
     .header-logo-drawer {
