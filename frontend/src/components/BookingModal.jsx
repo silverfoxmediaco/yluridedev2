@@ -16,11 +16,24 @@ import {
   Divider,
   IconButton,
   Alert,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormLabel,
 } from '@mui/material';
-import { Close, CalendarMonth, AccessTime } from '@mui/icons-material';
+import {
+  Close,
+  CalendarMonth,
+  AccessTime,
+  Person,
+  DriveEta,
+  ContactPhone,
+  CloudUpload,
+} from '@mui/icons-material';
 import '../styles/BookingModal.css';
 
 const BookingModal = ({ open, onClose, van }) => {
+  // Date & Time
   const [pickupDate, setPickupDate] = useState('');
   const [pickupTime, setPickupTime] = useState('09:00');
   const [duration, setDuration] = useState('day');
@@ -29,6 +42,38 @@ const BookingModal = ({ open, onClose, van }) => {
   const [includeDestinationFee, setIncludeDestinationFee] = useState(false);
   const [pricing, setPricing] = useState(null);
   const [error, setError] = useState('');
+
+  // Customer Info
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [contactPreference, setContactPreference] = useState('text');
+
+  // Driver & Pickup Logic
+  const [needsDriver, setNeedsDriver] = useState('');
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [dropoffAddress, setDropoffAddress] = useState('');
+  const [sameDropoff, setSameDropoff] = useState('yes');
+
+  // Driver's License (only if driving themselves)
+  const [licenseNumber, setLicenseNumber] = useState('');
+  const [licenseState, setLicenseState] = useState('');
+  const [licenseExpiration, setLicenseExpiration] = useState('');
+  const [licenseImage, setLicenseImage] = useState(null);
+  const [licenseImageName, setLicenseImageName] = useState('');
+  const [uploadingLicense, setUploadingLicense] = useState(false);
+
+  // Our pickup location
+  const PICKUP_LOCATION = '123 Luxury Lane, Dallas, TX 75201'; // Update with actual address
+
+  // US States for license
+  const US_STATES = [
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC'
+  ];
 
   // Reset form when modal opens with new van
   useEffect(() => {
@@ -40,6 +85,23 @@ const BookingModal = ({ open, onClose, van }) => {
       setCustomDays(1);
       setPricing(null);
       setError('');
+      // Reset customer info
+      setFullName('');
+      setEmail('');
+      setPhone('');
+      setContactPreference('text');
+      // Reset driver/pickup
+      setNeedsDriver('');
+      setPickupAddress('');
+      setDropoffAddress('');
+      setSameDropoff('yes');
+      // Reset license
+      setLicenseNumber('');
+      setLicenseState('');
+      setLicenseExpiration('');
+      setLicenseImage(null);
+      setLicenseImageName('');
+      setUploadingLicense(false);
     }
   }, [open, van]);
 
@@ -111,22 +173,133 @@ const BookingModal = ({ open, onClose, van }) => {
     });
   };
 
-  const handleProceedToPayment = () => {
+  const validateForm = () => {
     if (!pickupDate) {
       setError('Please select a pickup date');
+      return false;
+    }
+    if (!fullName.trim()) {
+      setError('Please enter your full name');
+      return false;
+    }
+    if (!email.trim() || !email.includes('@')) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+    if (!phone.trim() || phone.length < 10) {
+      setError('Please enter a valid phone number');
+      return false;
+    }
+    if (!needsDriver) {
+      setError('Please select if you need a driver');
+      return false;
+    }
+    if (needsDriver === 'yes' && !pickupAddress.trim()) {
+      setError('Please enter your pickup address');
+      return false;
+    }
+    if (needsDriver === 'no') {
+      if (!licenseNumber.trim()) {
+        setError('Please enter your driver\'s license number');
+        return false;
+      }
+      if (!licenseState) {
+        setError('Please select the state your license was issued');
+        return false;
+      }
+      if (!licenseExpiration) {
+        setError('Please enter your license expiration date');
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleProceedToPayment = () => {
+    if (!validateForm()) {
       return;
     }
 
-    // TODO: Integrate with Stripe
-    console.log('Proceeding to payment with:', {
+    // Collect all booking data
+    const bookingData = {
       van,
       pricing,
       pickupDate,
       pickupTime,
       duration,
-    });
+      // Customer info
+      customer: {
+        fullName,
+        email,
+        phone,
+        contactPreference,
+      },
+      // Driver/Pickup info
+      needsDriver: needsDriver === 'yes',
+      pickupAddress: needsDriver === 'yes' ? pickupAddress : PICKUP_LOCATION,
+      dropoffAddress: needsDriver === 'yes' && sameDropoff === 'no' ? dropoffAddress : null,
+      // License info (only if driving themselves)
+      driversLicense: needsDriver === 'no' ? {
+        licenseNumber,
+        licenseState,
+        licenseExpiration,
+        licenseImageUrl: licenseImage, // Will be Cloudinary URL
+      } : null,
+    };
+
+    // TODO: Integrate with Stripe
+    console.log('Proceeding to payment with:', bookingData);
 
     alert('Payment integration coming soon! Booking details have been logged.');
+  };
+
+  const handleLicenseUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      setError('Invalid file type. Please upload a JPG, PNG, or PDF file.');
+      return;
+    }
+
+    // Validate file size (10MB max)
+    if (file.size > 10 * 1024 * 1024) {
+      setError('File too large. Maximum size is 10MB.');
+      return;
+    }
+
+    setUploadingLicense(true);
+    setLicenseImageName(file.name);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      formData.append('licenseImage', file);
+
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/upload/license`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setLicenseImage(data.data.url);
+        console.log('License uploaded successfully:', data.data.url);
+      } else {
+        throw new Error(data.message || 'Upload failed');
+      }
+    } catch (err) {
+      console.error('License upload error:', err);
+      setError('Failed to upload license. Please try again.');
+      setLicenseImageName('');
+      setLicenseImage(null);
+    } finally {
+      setUploadingLicense(false);
+    }
   };
 
   const formatCurrency = (amount) => {
@@ -146,8 +319,26 @@ const BookingModal = ({ open, onClose, van }) => {
     }).format(date);
   };
 
+  const formatPhoneNumber = (value) => {
+    const phoneNumber = value.replace(/\D/g, '');
+    if (phoneNumber.length <= 3) return phoneNumber;
+    if (phoneNumber.length <= 6) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+  };
+
   // Get minimum date (today)
   const getMinDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
+  // Get minimum expiration date (today - license must be valid)
+  const getMinExpirationDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
@@ -184,6 +375,219 @@ const BookingModal = ({ open, onClose, van }) => {
             {error}
           </Alert>
         )}
+
+        {/* Customer Information */}
+        <Box className="booking-modal-section">
+          <Typography variant="h6" className="booking-modal-section-title">
+            <Person /> Your Information
+          </Typography>
+
+          <TextField
+            label="Full Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            fullWidth
+            required
+            className="booking-modal-input"
+            sx={{ mb: 2 }}
+          />
+
+          <TextField
+            type="email"
+            label="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            required
+            className="booking-modal-input"
+            sx={{ mb: 2 }}
+          />
+
+          <TextField
+            label="Phone Number"
+            value={phone}
+            onChange={handlePhoneChange}
+            fullWidth
+            required
+            placeholder="(555) 123-4567"
+            className="booking-modal-input"
+            sx={{ mb: 2 }}
+          />
+
+          <FormControl component="fieldset">
+            <FormLabel component="legend" sx={{ fontSize: '0.875rem', color: '#666' }}>
+              Contact Preference
+            </FormLabel>
+            <RadioGroup
+              row
+              value={contactPreference}
+              onChange={(e) => setContactPreference(e.target.value)}
+            >
+              <FormControlLabel value="text" control={<Radio size="small" />} label="Text" />
+              <FormControlLabel value="call" control={<Radio size="small" />} label="Phone Call" />
+              <FormControlLabel value="either" control={<Radio size="small" />} label="Either" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
+
+        {/* Driver & Pickup Section */}
+        <Box className="booking-modal-section">
+          <Typography variant="h6" className="booking-modal-section-title">
+            <DriveEta /> Driver & Pickup
+          </Typography>
+
+          <FormControl component="fieldset" sx={{ mb: 2 }}>
+            <FormLabel component="legend" sx={{ fontSize: '0.875rem', color: '#666' }}>
+              Do you need a driver?
+            </FormLabel>
+            <RadioGroup
+              row
+              value={needsDriver}
+              onChange={(e) => setNeedsDriver(e.target.value)}
+            >
+              <FormControlLabel value="yes" control={<Radio size="small" />} label="Yes, I need a driver" />
+              <FormControlLabel value="no" control={<Radio size="small" />} label="No, I'll drive myself" />
+            </RadioGroup>
+          </FormControl>
+
+          {/* If needs driver - show pickup address */}
+          {needsDriver === 'yes' && (
+            <>
+              <TextField
+                label="Pickup Address"
+                value={pickupAddress}
+                onChange={(e) => setPickupAddress(e.target.value)}
+                fullWidth
+                required
+                multiline
+                rows={2}
+                placeholder="Enter the address where you'd like to be picked up"
+                className="booking-modal-input"
+                sx={{ mb: 2 }}
+              />
+
+              <FormControl component="fieldset" sx={{ mb: 2 }}>
+                <FormLabel component="legend" sx={{ fontSize: '0.875rem', color: '#666' }}>
+                  Drop-off at same location?
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={sameDropoff}
+                  onChange={(e) => setSameDropoff(e.target.value)}
+                >
+                  <FormControlLabel value="yes" control={<Radio size="small" />} label="Yes" />
+                  <FormControlLabel value="no" control={<Radio size="small" />} label="No, different location" />
+                </RadioGroup>
+              </FormControl>
+
+              {sameDropoff === 'no' && (
+                <TextField
+                  label="Drop-off Address"
+                  value={dropoffAddress}
+                  onChange={(e) => setDropoffAddress(e.target.value)}
+                  fullWidth
+                  required
+                  multiline
+                  rows={2}
+                  placeholder="Enter the drop-off address"
+                  className="booking-modal-input"
+                  sx={{ mb: 2 }}
+                />
+              )}
+            </>
+          )}
+
+          {/* If driving themselves - show pickup location and collect license */}
+          {needsDriver === 'no' && (
+            <>
+              <Alert severity="info" sx={{ mb: 2 }}>
+                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  Van Pickup Location:
+                </Typography>
+                <Typography variant="body2">
+                  {PICKUP_LOCATION}
+                </Typography>
+              </Alert>
+
+              <Typography variant="subtitle2" sx={{ mb: 1, color: '#002244', fontWeight: 600 }}>
+                Driver's License Information
+              </Typography>
+
+              <TextField
+                label="License Number"
+                value={licenseNumber}
+                onChange={(e) => setLicenseNumber(e.target.value.toUpperCase())}
+                fullWidth
+                required
+                className="booking-modal-input"
+                sx={{ mb: 2 }}
+              />
+
+              <Box className="booking-modal-datetime" sx={{ mb: 2 }}>
+                <FormControl fullWidth className="booking-modal-input">
+                  <InputLabel>State Issued</InputLabel>
+                  <Select
+                    value={licenseState}
+                    onChange={(e) => setLicenseState(e.target.value)}
+                    label="State Issued"
+                  >
+                    {US_STATES.map((state) => (
+                      <MenuItem key={state} value={state}>{state}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <TextField
+                  type="date"
+                  label="Expiration Date"
+                  value={licenseExpiration}
+                  onChange={(e) => setLicenseExpiration(e.target.value)}
+                  InputLabelProps={{ shrink: true }}
+                  inputProps={{ min: getMinExpirationDate() }}
+                  fullWidth
+                  required
+                  className="booking-modal-input"
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="body2" sx={{ mb: 1, color: '#666' }}>
+                  Upload Driver's License Photo
+                </Typography>
+                <Button
+                  variant="outlined"
+                  component="label"
+                  startIcon={<CloudUpload />}
+                  fullWidth
+                  disabled={uploadingLicense}
+                  sx={{
+                    borderColor: '#002244',
+                    color: '#002244',
+                    '&:hover': { borderColor: '#FB4F14', color: '#FB4F14' },
+                    '&.Mui-disabled': { borderColor: '#ccc', color: '#999' }
+                  }}
+                >
+                  {uploadingLicense ? 'Uploading...' : (licenseImageName || 'Choose File')}
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*,.pdf"
+                    onChange={handleLicenseUpload}
+                  />
+                </Button>
+                {licenseImage && !uploadingLicense && (
+                  <Typography variant="caption" sx={{ color: 'green', mt: 1, display: 'block' }}>
+                    License uploaded successfully
+                  </Typography>
+                )}
+              </Box>
+            </>
+          )}
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
 
         {/* Date & Time Selection */}
         <Box className="booking-modal-section">

@@ -112,3 +112,34 @@ Edit Summary Log
   - Feature dots: Orange
   - CTA buttons: Navy blue with white on hover
   - Bottom CTA section: Navy blue gradient background, orange accents
+
+2025-12-01: Enhanced BookingModal with Customer Info & Driver Logic
+- Updated frontend/src/components/BookingModal.jsx:
+  - Added Customer Information section: Full Name, Email, Phone (with formatting), Contact Preference
+  - Added Driver & Pickup section with conditional logic:
+    - "Do you need a driver?" Yes/No selection
+    - If Yes: Pickup Address field, Drop-off same/different location
+    - If No: Shows pickup location, collects Driver's License info
+  - Added Driver's License section: License Number, State (dropdown), Expiration Date
+  - Added file upload for Driver's License photo with Cloudinary integration
+  - Form validation for all required fields
+  - Phone number auto-formatting to (XXX) XXX-XXXX
+
+2025-12-01: Set up Cloudinary Integration for Driver's License Uploads
+- Created backend/config/cloudinary.js:
+  - Cloudinary SDK configuration
+  - CloudinaryStorage for multer with license folder
+  - File type validation (JPG, PNG, PDF)
+  - 10MB file size limit
+  - Helper functions: deleteImage(), getSecureUrl()
+- Created backend/routes/uploadRoutes.js:
+  - POST /api/upload/license - Upload driver's license image
+  - DELETE /api/upload/license/:publicId - Delete uploaded license
+  - Error handling middleware for multer errors
+- Updated backend/server.js:
+  - Added uploadRoutes import
+  - Registered /api/upload route
+- Updated backend/.env:
+  - Added CLOUDINARY_CLOUD_NAME placeholder
+  - Added CLOUDINARY_API_KEY placeholder
+  - Added CLOUDINARY_API_SECRET placeholder
