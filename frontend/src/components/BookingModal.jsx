@@ -42,6 +42,7 @@ const BookingModal = ({ open, onClose, van }) => {
   const [includeDestinationFee, setIncludeDestinationFee] = useState(false);
   const [pricing, setPricing] = useState(null);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Customer Info
   const [fullName, setFullName] = useState('');
@@ -102,6 +103,7 @@ const BookingModal = ({ open, onClose, van }) => {
       setLicenseImage(null);
       setLicenseImageName('');
       setUploadingLicense(false);
+      setIsSubmitting(false);
     }
   }, [open, van]);
 
@@ -215,10 +217,13 @@ const BookingModal = ({ open, onClose, van }) => {
     return true;
   };
 
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = async () => {
     if (!validateForm()) {
       return;
     }
+
+    setIsSubmitting(true);
+    setError('');
 
     // Collect all booking data
     const bookingData = {
@@ -243,14 +248,33 @@ const BookingModal = ({ open, onClose, van }) => {
         licenseNumber,
         licenseState,
         licenseExpiration,
-        licenseImageUrl: licenseImage, // Will be Cloudinary URL
+        licenseImageUrl: licenseImage,
       } : null,
     };
 
-    // TODO: Integrate with Stripe
-    console.log('Proceeding to payment with:', bookingData);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/payments/create-checkout-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
 
-    alert('Payment integration coming soon! Booking details have been logged.');
+      const data = await response.json();
+
+      if (data.success && data.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.message || 'Failed to create checkout session');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError(err.message || 'Failed to proceed to payment. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const handleLicenseUpload = async (event) => {
@@ -730,9 +754,9 @@ const BookingModal = ({ open, onClose, van }) => {
           variant="contained"
           onClick={handleProceedToPayment}
           className="booking-modal-submit"
-          disabled={!pricing}
+          disabled={!pricing || isSubmitting}
         >
-          Proceed to Payment
+          {isSubmitting ? 'Processing...' : 'Proceed to Payment'}
         </Button>
       </DialogActions>
     </Dialog>

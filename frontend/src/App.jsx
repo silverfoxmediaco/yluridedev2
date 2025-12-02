@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Fleet from './pages/Fleet';
 import VanDetail from './pages/VanDetail';
 import Booking from './pages/Booking';
+import BookingSuccess from './pages/BookingSuccess';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
@@ -37,6 +38,7 @@ function App() {
               <Route path="/fleet" element={<Fleet />} />
               <Route path="/van/:id" element={<VanDetail />} />
               <Route path="/booking" element={<Booking />} />
+              <Route path="/booking/success" element={<BookingSuccess />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />

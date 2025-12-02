@@ -143,3 +143,31 @@ Edit Summary Log
   - Added CLOUDINARY_CLOUD_NAME placeholder
   - Added CLOUDINARY_API_KEY placeholder
   - Added CLOUDINARY_API_SECRET placeholder
+
+2025-12-01: Integrated Stripe Checkout for Payments
+- Updated backend/routes/paymentRoutes.js:
+  - POST /api/payments/create-checkout-session - Creates Stripe Checkout session
+  - GET /api/payments/session/:sessionId - Retrieves session details for success page
+  - POST /api/payments/webhook - Handles Stripe webhook events
+  - POST /api/payments/refund - Process refunds (admin)
+  - Line items for rental fee, insurance, destination fee, security deposit
+  - Stores all booking metadata for post-payment processing
+- Created frontend/src/pages/BookingSuccess.jsx:
+  - Displays booking confirmation after successful payment
+  - Shows van details, pickup date/time, customer info, payment summary
+  - Fetches session details from Stripe
+  - Responsive design with brand colors
+- Created frontend/src/styles/BookingSuccess.css:
+  - Success page styling with checkmark icon
+  - Payment breakdown display
+  - Mobile responsive layout
+- Updated frontend/src/App.jsx:
+  - Added /booking/success route
+- Updated frontend/src/components/BookingModal.jsx:
+  - Connected "Proceed to Payment" button to Stripe Checkout API
+  - Added loading state while creating checkout session
+  - Redirects to Stripe hosted checkout page
+- Updated backend/.env:
+  - Added STRIPE_SECRET_KEY placeholder
+  - Added STRIPE_WEBHOOK_SECRET placeholder
+  - Added FRONTEND_URL for Stripe redirects
