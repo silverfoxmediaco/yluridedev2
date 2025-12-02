@@ -1,0 +1,237 @@
+/* frontend/src/styles/Contact.css */
+
+.contact-page {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* Hero Section */
+.contact-hero {
+  background: linear-gradient(135deg, #002244 0%, #003366 100%);
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.contact-hero-title {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  margin-bottom: 16px !important;
+}
+
+.contact-hero-subtitle {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 400 !important;
+}
+
+/* Main Content */
+.contact-container {
+  padding: 60px 16px;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Contact Form */
+.contact-form-paper {
+  padding: 40px;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.contact-form-title {
+  color: #002244 !important;
+  font-weight: 600 !important;
+  margin-bottom: 24px !important;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-input .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.contact-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.contact-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.contact-input .MuiInputLabel-root.Mui-focused {
+  color: #002244;
+}
+
+.contact-submit-btn {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+  padding: 14px 32px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 50px !important;
+  margin-top: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.contact-submit-btn:hover {
+  background-color: #FB4F14 !important;
+  transform: translateY(-2px);
+}
+
+.contact-submit-btn:disabled {
+  background-color: #ccc !important;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-info-paper {
+  padding: 32px;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.contact-info-title {
+  color: #002244 !important;
+  font-weight: 600 !important;
+  margin-bottom: 24px !important;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.contact-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.contact-info-icon {
+  color: #FB4F14 !important;
+  font-size: 28px !important;
+  margin-top: 2px;
+}
+
+.contact-info-label {
+  color: #666 !important;
+  font-weight: 500 !important;
+  margin-bottom: 4px !important;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.5px;
+}
+
+.contact-info-link {
+  color: #002244;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info-link:hover {
+  color: #FB4F14;
+}
+
+/* Business Hours */
+.contact-hours-paper {
+  padding: 24px 32px;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  background: linear-gradient(135deg, #002244 0%, #003366 100%) !important;
+}
+
+.contact-hours-title {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+}
+
+.contact-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-hours-row p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.contact-hours-row p:last-child {
+  font-weight: 500;
+  color: #FB4F14;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-info {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-hero {
+    padding: 60px 0 40px;
+  }
+
+  .contact-container {
+    padding: 40px 16px;
+  }
+
+  .contact-form-paper {
+    padding: 24px;
+  }
+
+  .contact-info-paper {
+    padding: 24px;
+  }
+
+  .contact-hours-paper {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact-form-paper {
+    padding: 20px 16px;
+  }
+
+  .contact-form {
+    gap: 16px;
+  }
+
+  .contact-info-paper {
+    padding: 20px 16px;
+  }
+
+  .contact-hours-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

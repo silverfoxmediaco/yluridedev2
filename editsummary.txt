@@ -171,3 +171,26 @@ Edit Summary Log
   - Added STRIPE_SECRET_KEY placeholder
   - Added STRIPE_WEBHOOK_SECRET placeholder
   - Added FRONTEND_URL for Stripe redirects
+
+2025-12-01: Built Contact Page
+- Updated frontend/src/pages/Contact.jsx:
+  - Hero section with navy blue gradient background
+  - Contact form with name, email, phone, subject, message fields
+  - Phone number auto-formatting
+  - Form validation and submission to API
+  - Success/error message alerts
+  - Contact info sidebar with email, phone, location
+  - Business hours display
+- Created frontend/src/styles/Contact.css:
+  - Two-column layout (form + info)
+  - Brand colors (navy blue, orange accents)
+  - Mobile responsive design
+- Created backend/routes/contactRoutes.js:
+  - POST /api/contact - handles form submission
+  - Validates required fields and email format
+  - Sends email via emailService
+- Updated backend/utils/emailService.js:
+  - Added subject field to sendContactEmail
+  - Updated email template with brand colors
+- Updated backend/server.js:
+  - Added contactRoutes import and registration

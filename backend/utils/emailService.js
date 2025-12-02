@@ -104,25 +104,27 @@ const sendBookingNotification = async (bookingDetails) => {
 
 // Send contact form email
 const sendContactEmail = async (contactDetails) => {
-  const { name, email, phone, message } = contactDetails;
+  const { name, email, phone, subject, message } = contactDetails;
 
   const mailOptions = {
     from: `"NTX Website Contact" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_USER,
     replyTo: email,
-    subject: `Contact Form - ${name}`,
+    subject: `Contact Form: ${subject}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #000; border-bottom: 2px solid #C0C0C0; padding-bottom: 10px;">
+        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
           New Contact Form Submission
         </h1>
         <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-          <h3>Message:</h3>
-          <p>${message}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <h3 style="color: #002244; margin-top: 20px;">Message:</h3>
+          <p style="white-space: pre-wrap;">${message}</p>
         </div>
+        <p style="color: #666; font-size: 12px;">This message was sent from the NTX Luxury Van Rentals website contact form.</p>
       </div>
     `
   };
