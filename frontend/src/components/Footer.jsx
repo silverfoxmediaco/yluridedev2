@@ -27,7 +27,6 @@ const Footer = () => {
   const quickLinks = [
     { text: 'Our Fleet', path: '/fleet' },
     { text: 'Book a Van', path: '/booking' },
-    { text: 'About Us', path: '/about' },
     { text: 'Contact', path: '/contact' },
   ];
 
