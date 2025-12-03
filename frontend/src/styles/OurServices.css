@@ -72,13 +72,13 @@
   }
   
   /* Force 3-column grid on desktop */
-  @media (min-width: 1200px) {
+  @media (min-width: 1024px) {
     .os-grid.MuiGrid-container {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
       gap: 30px !important;
     }
-    
+
     .os-grid .MuiGrid-item {
       max-width: 100% !important;
       padding: 0 !important;
@@ -422,11 +422,11 @@
   }
   
   /* Responsive Design */
-  @media (max-width: 1200px) {
+  @media (max-width: 1023px) {
     .os-card {
       padding: 35px 25px;
     }
-    
+
     .os-bottom-cta {
       padding: 50px 40px;
     }
