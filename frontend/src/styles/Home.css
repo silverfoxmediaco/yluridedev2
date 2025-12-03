@@ -212,6 +212,20 @@
     align-items: center;
   }
   
+  .services-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 34, 68, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .services-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 34, 68, 0.2);
+  }
+
   .image-placeholder {
     width: 100%;
     max-width: 500px;
@@ -224,7 +238,7 @@
     justify-content: center;
     transition: all 0.3s ease;
   }
-  
+
   .image-placeholder:hover {
     border-color: #FB4F14;
     box-shadow: 0 10px 30px rgba(0, 34, 68, 0.15);

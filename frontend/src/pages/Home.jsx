@@ -20,6 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 import OurServices from '../components/OurServices';
+import sprinterVanImage from '../assets/vans/sprintervanhotel1.png';
 import '../styles/Home.css';
 
 const Home = () => {
@@ -143,10 +144,11 @@ const Home = () => {
             
             <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <div className="services-image-container">
-                <div className="image-placeholder">
-                  {/* You can add an image here later */}
-                  <Groups sx={{ fontSize: 100, color: '#C0C0C0' }} />
-                </div>
+                <img
+                  src={sprinterVanImage}
+                  alt="Mercedes Sprinter Van"
+                  className="services-image"
+                />
               </div>
             </Grid>
           </Grid>
