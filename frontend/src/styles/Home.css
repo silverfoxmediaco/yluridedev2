@@ -110,53 +110,68 @@
     background-color: #F5F5F5;
     overflow: hidden;
   }
-  
+
+  .services-section .MuiGrid-root.MuiGrid-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .services-section .MuiGrid-root.MuiGrid-container > div {
+    max-width: 100% !important;
+    flex-basis: 100% !important;
+  }
+
   /* Desktop layout for services - left-aligned text */
   @media (min-width: 960px) {
-    .services-section .MuiGrid-root.MuiGrid-container {
-      justify-content: space-between !important;
-      align-items: center !important;
-    }
-    
     .services-section .MuiGrid-item:first-child {
       text-align: left !important;
     }
-    
+
     .services-title {
       text-align: left !important;
     }
-    
+
     .services-description {
       text-align: left !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
-    
+
     .services-list {
       margin-left: 0;
       margin-right: 0;
       display: block;
     }
   }
-  
+
   /* Mobile/tablet centered layout */
   @media (max-width: 959px) {
+    .services-section .MuiGrid-root.MuiGrid-container {
+      grid-template-columns: 1fr;
+    }
+
     .services-section {
       text-align: center;
     }
-    
+
     .services-title {
       text-align: center !important;
     }
-    
+
     .services-description {
       text-align: center !important;
       margin-left: auto !important;
       margin-right: auto !important;
     }
-    
+
     .services-list {
       display: inline-block;
+    }
+
+    .services-image-container {
+      order: -1;
     }
   }
   
