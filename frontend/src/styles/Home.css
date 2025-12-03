@@ -108,6 +108,7 @@
   /* Services Section */
   .services-section {
     background-color: #F5F5F5;
+    overflow: hidden;
   }
   
   /* Desktop layout for services - left-aligned text */
@@ -210,12 +211,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
+    overflow: hidden;
   }
-  
+
   .services-image {
     width: 100%;
     max-width: 500px;
+    max-height: 400px;
     height: auto;
+    object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 34, 68, 0.15);
     transition: all 0.3s ease;
