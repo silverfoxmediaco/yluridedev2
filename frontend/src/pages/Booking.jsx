@@ -8,8 +8,8 @@ import mockVans from '../data/vanData';
 import '../styles/Booking.css';
 
 const Booking = () => {
-  const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [vans, setVans] = useState(mockVans);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedVan, setSelectedVan] = useState(null);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);

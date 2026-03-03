@@ -301,6 +301,13 @@ Edit Summary Log
   - .van-card-title-link: cursor pointer, orange hover color
   - .van-card-details-link: orange text, 44px min touch target, hover to navy
 
+2026-03-03: Fixed mobile scroll-to-top landing at bottom of Booking page
+- Updated ScrollToTop.jsx: switched from useEffect to useLayoutEffect (fires before paint)
+- Updated ScrollToTop.jsx: added behavior: 'instant' to override CSS smooth scrolling
+- Updated Booking.jsx: initialize vans state with mockVans instead of empty array
+  - Eliminates content layout shift that was pushing viewport down on mobile
+  - Page renders at full height immediately, so scroll-to-top sticks
+
 2026-03-03: Fixed CSS bleed and scroll position on page transitions
 - Removed global .MuiContainer-root override from Home.css that was bleeding into all pages
 - Created frontend/src/components/ScrollToTop.jsx: scrolls to top on every route change
