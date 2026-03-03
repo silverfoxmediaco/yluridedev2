@@ -1,5 +1,5 @@
 // frontend/src/components/VanCard.jsx
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Card,
   CardMedia,
@@ -21,9 +21,20 @@ import '../styles/VanCard.css';
 
 const VanCard = ({ van, onBookNow }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const thumbnailsRef = useRef(null);
 
   // Combine thumbnail with additional images for carousel
   const allImages = [van.thumbnailImage, ...(van.images || [])];
+
+  // Scroll active thumbnail into view
+  useEffect(() => {
+    if (thumbnailsRef.current) {
+      const activeThumb = thumbnailsRef.current.children[currentImageIndex];
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [currentImageIndex]);
 
   const handlePrevImage = (e) => {
     e.stopPropagation();
@@ -92,6 +103,21 @@ const VanCard = ({ van, onBookNow }) => {
           className={`van-card-availability ${van.availability ? 'available' : 'booked'}`}
         />
       </Box>
+
+      {/* Thumbnail Strip */}
+      {allImages.length > 1 && (
+        <Box className="van-card-thumbnails" ref={thumbnailsRef}>
+          {allImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`${van.name} ${index + 1}`}
+              className={`van-card-thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+              onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(index); }}
+            />
+          ))}
+        </Box>
+      )}
 
       <CardContent className="van-card-content">
         {/* Van Name & Type */}

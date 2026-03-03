@@ -222,3 +222,29 @@ Edit Summary Log
   - Images sourced from S3 kirkjohnsonX4 folder (Capture1-18.JPG, 3 per van)
   - Pricing: hourlyRate = dailyRate/8, weeklyRate = dailyRate×5
   - American Coach gets $750 deposit / $100 insurance; all others $500 / $75
+
+2026-03-02: Added All S3 Van Images + Thumbnail Navigation
+- Updated frontend/src/pages/Booking.jsx:
+  - Replaced kirkImg helper with per-van S3 image arrays using encodeURIComponent
+  - Van 1 (American Coach): 21 images from "2019 Mercedes Benz Sprinter 3500 - American Coach/"
+  - Van 2 (Executive Custom Build): 20 images from "2022 Mercedes Benz Sprinter W1X8ED3Y7NP477617/"
+  - Van 3 (Legends Executive): 17 images from "Legends Executive/"
+  - Van 4 (Legends All Terrain Executive): 20 images from "LEGENDS ALL TERRAIN EXECUTIVE/"
+  - Van 5 (Executive Shuttle): 13 images from "WDZPF0CD6KP126126 U12MDc/"
+  - Van 6 (Kirk Johnson Remodeled): 19 images from "kirkjohnsonX4 /"
+  - Updated Van 1 features: added Lagun Table, Entry Step, Mosquito Netting, Flip Up Computer Tables, Molded Spoiler
+  - Updated Van 3 features: added Rear Couches Fold to Bed, Heated Front Seating, Removable Tables, Tray Tables
+  - Updated Van 4 features: added Streaming, reordered to match owner spec
+  - Updated Van 5 pricing: $419/day → $300/day, hourlyRate $52 → $38, weeklyRate $2095 → $1500
+  - thumbnailImage = first image, images = remaining (no duplicates in carousel)
+- Updated frontend/src/components/VanCard.jsx:
+  - Added horizontally-scrollable thumbnail strip below main carousel image
+  - Each thumbnail is a tappable img that sets currentImageIndex
+  - Active thumbnail gets orange (#FB4F14) border
+  - Auto-scrolls active thumbnail into view on index change
+  - Kept existing arrow nav + dot indicators
+- Updated frontend/src/styles/VanCard.css:
+  - Added .van-card-thumbnails: horizontal flex, overflow-x auto, hidden scrollbar
+  - Added .van-card-thumbnail: 56×40px, object-fit cover, rounded, pointer cursor
+  - Added .van-card-thumbnail.active: 2px orange border, full opacity
+  - Mobile (600px): 48×44px thumbnails for 44px min touch target
