@@ -483,6 +483,19 @@ Edit Summary Log
   - Fleet/Marketplace type chip badge on listing cards
   - Dynamic page title based on listing type
 
+2026-03-03: Switched Email Service from Outlook to SendGrid
+- Updated backend/utils/emailService.js:
+  - Replaced Outlook SMTP (smtp.office365.com) with SendGrid SMTP (smtp.sendgrid.net)
+  - Auth user set to literal "apikey", auth pass uses SENDGRID_API_KEY env var
+  - Removed Outlook-specific TLS config (ciphers: 'SSLv3')
+  - Hardcoded all `from` fields to james@silverfoxmedia.co
+  - Admin notification emails (booking, contact, listing) send to james@silverfoxmedia.co
+  - All 8 email functions unchanged in signatures and HTML templates
+- Updated backend/.env:
+  - Removed EMAIL_PASS and old Outlook EMAIL_USER
+  - Set EMAIL_USER=james@silverfoxmedia.co
+  - SENDGRID_API_KEY already present
+
 2026-03-03: Van Owner Marketplace — Phase 3: Admin Dashboard
 - Created backend/routes/adminRoutes.js:
   - All routes protected + authorize('admin')

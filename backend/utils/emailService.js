@@ -1,18 +1,14 @@
 const nodemailer = require('nodemailer');
 
-// Create reusable transporter using Outlook SMTP
+// Create reusable transporter using SendGrid SMTP
 const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
+  host: 'smtp.sendgrid.net',
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: 'apikey',
+    pass: process.env.SENDGRID_API_KEY,
   },
-  tls: {
-    ciphers: 'SSLv3',
-    rejectUnauthorized: false
-  }
 });
 
 // Verify connection
@@ -32,7 +28,7 @@ const sendBookingConfirmation = async (bookingDetails) => {
   const { customerEmail, customerName, vanName, pickupDate, returnDate, totalPrice } = bookingDetails;
 
   const mailOptions = {
-    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to: customerEmail,
     subject: 'Booking Confirmation - NTX Luxury Van Rentals',
     html: `
@@ -69,8 +65,8 @@ const sendBookingNotification = async (bookingDetails) => {
   const { customerEmail, customerName, customerPhone, vanName, pickupDate, returnDate, totalPrice } = bookingDetails;
 
   const mailOptions = {
-    from: `"NTX Booking System" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: '"NTX Booking System" <james@silverfoxmedia.co>',
+    to: 'james@silverfoxmedia.co',
     subject: `New Booking - ${customerName}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -107,8 +103,8 @@ const sendContactEmail = async (contactDetails) => {
   const { name, email, phone, subject, message } = contactDetails;
 
   const mailOptions = {
-    from: `"NTX Website Contact" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: '"NTX Website Contact" <james@silverfoxmedia.co>',
+    to: 'james@silverfoxmedia.co',
     replyTo: email,
     subject: `Contact Form: ${subject}`,
     html: `
@@ -144,7 +140,7 @@ const sendOwnerWelcomeEmail = async (ownerDetails) => {
   const { email, firstName, businessName } = ownerDetails;
 
   const mailOptions = {
-    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to: email,
     subject: 'Welcome to NTX Luxury Van Rentals Marketplace!',
     html: `
@@ -181,8 +177,8 @@ const sendListingSubmittedNotification = async (listingDetails) => {
   const { ownerName, ownerEmail, vanName, vanId } = listingDetails;
 
   const mailOptions = {
-    from: `"NTX Marketplace" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: '"NTX Marketplace" <james@silverfoxmedia.co>',
+    to: 'james@silverfoxmedia.co',
     subject: `New Listing Submitted — ${vanName}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -214,7 +210,7 @@ const sendListingApprovedEmail = async (listingDetails) => {
   const { ownerEmail, ownerName, vanName } = listingDetails;
 
   const mailOptions = {
-    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to: ownerEmail,
     subject: `Your Listing Has Been Approved — ${vanName}`,
     html: `
@@ -245,7 +241,7 @@ const sendListingRejectedEmail = async (listingDetails) => {
   const { ownerEmail, ownerName, vanName, reason } = listingDetails;
 
   const mailOptions = {
-    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to: ownerEmail,
     subject: `Listing Update — ${vanName}`,
     html: `
@@ -275,7 +271,7 @@ const sendListingRejectedEmail = async (listingDetails) => {
 // Generic send email function
 const sendEmail = async (to, subject, html, text = null) => {
   const mailOptions = {
-    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to,
     subject,
     html,

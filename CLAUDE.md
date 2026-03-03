@@ -43,7 +43,7 @@ cd frontend && npm run lint
 - **Integrations**:
   - **Stripe** — checkout sessions, webhooks, refunds (`/api/payments`)
   - **AWS S3** — driver's license image uploads via multer + multer-s3 (`/api/upload`), static site images served from `s3://ntxvanrentals/siteimages/`
-  - **Nodemailer** — Outlook SMTP for booking confirmations, admin notifications, contact form (`backend/utils/emailService.js`)
+  - **Nodemailer** — SendGrid SMTP for booking confirmations, admin notifications, contact form (`backend/utils/emailService.js`)
 - **Auth**: JWT-based (`backend/middleware/auth.js`)
 - **Models**: User, Van, Booking, Payment
 
@@ -60,7 +60,7 @@ Server serves the Vite build from `frontend/dist/` with a catch-all route for SP
 
 ## Environment Variables (backend/.env)
 
-Required: `MONGODB_URI`, `JWT_SECRET`, `EMAIL_USER`, `EMAIL_PASS`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `S3_BUCKET_NAME`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `FRONTEND_URL`
+Required: `MONGODB_URI`, `JWT_SECRET`, `EMAIL_USER`, `SENDGRID_API_KEY`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `S3_BUCKET_NAME`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `FRONTEND_URL`
 
 ## Conventions
 
