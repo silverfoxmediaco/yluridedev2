@@ -17,11 +17,13 @@ import {
   ChevronLeft,
   ChevronRight,
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import '../styles/VanCard.css';
 
 const VanCard = ({ van, onBookNow }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const thumbnailsRef = useRef(null);
+  const navigate = useNavigate();
 
   // Combine thumbnail with additional images for carousel
   const allImages = [van.thumbnailImage, ...(van.images || [])];
@@ -58,7 +60,7 @@ const VanCard = ({ van, onBookNow }) => {
   return (
     <Card className="van-card">
       {/* Image Carousel */}
-      <Box className="van-card-image-container">
+      <Box className="van-card-image-container" onClick={() => navigate(`/van/${van._id}`)} style={{ cursor: 'pointer' }}>
         <CardMedia
           component="img"
           image={allImages[currentImageIndex]}
@@ -121,7 +123,11 @@ const VanCard = ({ van, onBookNow }) => {
 
       <CardContent className="van-card-content">
         {/* Van Name & Type */}
-        <Typography variant="h5" className="van-card-title">
+        <Typography
+          variant="h5"
+          className="van-card-title van-card-title-link"
+          onClick={() => navigate(`/van/${van._id}`)}
+        >
           {van.name}
         </Typography>
         <Typography variant="body2" className="van-card-type">
@@ -164,6 +170,14 @@ const VanCard = ({ van, onBookNow }) => {
             )}
           </Box>
         )}
+
+        {/* View Details Link */}
+        <Box
+          className="van-card-details-link"
+          onClick={() => navigate(`/van/${van._id}`)}
+        >
+          View Details →
+        </Box>
 
         {/* Pricing */}
         <Box className="van-card-pricing">

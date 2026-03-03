@@ -1,0 +1,818 @@
+/* frontend/src/styles/VanDetail.css */
+
+/* Loading & Not Found States */
+.van-detail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.van-detail-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.van-detail-not-found-title {
+  font-weight: 700 !important;
+  color: #002244;
+  margin-bottom: 12px !important;
+}
+
+.van-detail-not-found-text {
+  color: #666;
+  margin-bottom: 24px !important;
+  max-width: 400px;
+}
+
+.van-detail-back-button {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+  padding: 12px 32px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  min-height: 48px;
+}
+
+.van-detail-back-button:hover {
+  background-color: #FB4F14 !important;
+}
+
+/* Page Layout */
+.van-detail-page {
+  padding-bottom: 40px;
+}
+
+/* Breadcrumbs */
+.van-detail-breadcrumbs-bar {
+  background-color: #F5F5F5;
+  padding: 14px 0;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.van-detail-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.van-detail-breadcrumb-link {
+  color: #002244;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.van-detail-breadcrumb-link:hover {
+  color: #FB4F14;
+}
+
+.van-detail-breadcrumb-sep {
+  color: #999 !important;
+  font-size: 1rem !important;
+}
+
+.van-detail-breadcrumb-current {
+  color: #666;
+  font-size: 0.875rem !important;
+}
+
+/* Container */
+.van-detail-container {
+  padding-top: 32px;
+}
+
+/* ===== GALLERY ===== */
+.van-detail-gallery {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+/* Main Image */
+.van-detail-main-image-wrap {
+  position: relative;
+  flex: 0 0 65%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #F5F5F5;
+}
+
+.van-detail-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.van-detail-main-image-wrap:hover .van-detail-main-image {
+  transform: scale(1.02);
+}
+
+/* Gallery Arrows */
+.van-detail-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #002244;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.van-detail-gallery-arrow:hover {
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.van-detail-gallery-arrow-prev {
+  left: 12px;
+}
+
+.van-detail-gallery-arrow-next {
+  right: 12px;
+}
+
+/* Image Counter */
+.van-detail-image-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  z-index: 2;
+}
+
+/* Desktop Thumbnail Grid */
+.van-detail-thumb-grid {
+  flex: 0 0 35%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #CCC transparent;
+  align-content: start;
+}
+
+.van-detail-thumb-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.van-detail-thumb-grid::-webkit-scrollbar-thumb {
+  background-color: #CCC;
+  border-radius: 3px;
+}
+
+.van-detail-thumb {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.van-detail-thumb:hover {
+  opacity: 0.9;
+}
+
+.van-detail-thumb-active {
+  border-color: #FB4F14;
+  opacity: 1;
+}
+
+/* Mobile Thumbnail Strip (hidden on desktop) */
+.van-detail-thumb-strip {
+  display: none;
+}
+
+/* ===== INFO SECTION ===== */
+.van-detail-info-section {
+  display: flex;
+  gap: 40px;
+}
+
+.van-detail-details {
+  flex: 0 0 60%;
+  min-width: 0;
+}
+
+/* Van Header */
+.van-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.van-detail-name {
+  font-weight: 700 !important;
+  color: #002244;
+  font-size: 2rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 12px !important;
+}
+
+.van-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.van-detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.van-detail-meta-icon {
+  color: #FB4F14 !important;
+  font-size: 1.2rem !important;
+}
+
+.van-detail-meta-item p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Share Button */
+.van-detail-share-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.van-detail-share-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #E0E0E0;
+  background-color: #FFFFFF;
+  color: #002244;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.van-detail-share-btn:hover {
+  background-color: #F5F5F5;
+  border-color: #002244;
+}
+
+.van-detail-share-tooltip {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #002244;
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem !important;
+  white-space: nowrap;
+}
+
+/* Section Titles */
+.van-detail-section-title {
+  font-weight: 700 !important;
+  color: #002244;
+  font-size: 1.35rem !important;
+  margin-bottom: 16px !important;
+}
+
+/* Description */
+.van-detail-description-section {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.van-detail-description-text {
+  color: #444;
+  line-height: 1.7 !important;
+  font-size: 1rem !important;
+}
+
+/* Features Grid */
+.van-detail-features-section {
+  margin-bottom: 32px;
+}
+
+.van-detail-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.van-detail-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.van-detail-feature-icon {
+  color: #FB4F14 !important;
+  font-size: 1.2rem !important;
+  flex-shrink: 0;
+}
+
+.van-detail-feature-item p {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* ===== PRICING CARD ===== */
+.van-detail-pricing-card {
+  flex: 0 0 calc(40% - 40px);
+}
+
+.van-detail-pricing-card-inner {
+  position: sticky;
+  top: 100px;
+  background-color: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0, 34, 68, 0.08);
+}
+
+.van-detail-pricing-title {
+  font-weight: 700 !important;
+  color: #002244;
+  font-size: 1.25rem !important;
+  margin-bottom: 20px !important;
+}
+
+.van-detail-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.van-detail-price-row-main {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.van-detail-price-label {
+  color: #555 !important;
+  font-size: 0.9rem !important;
+}
+
+.van-detail-price-value {
+  font-weight: 600 !important;
+  color: #002244 !important;
+  font-size: 0.95rem !important;
+}
+
+.van-detail-price-daily {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: #002244 !important;
+}
+
+.van-detail-price-unit {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #666;
+}
+
+.van-detail-price-note {
+  color: #888 !important;
+  font-size: 0.8rem !important;
+  margin-bottom: 12px !important;
+  margin-top: -4px !important;
+}
+
+.van-detail-price-divider {
+  height: 1px;
+  background-color: #E0E0E0;
+  margin: 16px 0;
+}
+
+.van-detail-book-button {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+  padding: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  margin-top: 20px !important;
+  min-height: 48px;
+  transition: all 0.3s ease !important;
+}
+
+.van-detail-book-button:hover {
+  background-color: #FB4F14 !important;
+  transform: scale(1.02);
+}
+
+.van-detail-book-button:disabled {
+  background-color: #CCCCCC !important;
+  color: #666666 !important;
+}
+
+.van-detail-contact-link {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: #FB4F14;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.van-detail-contact-link:hover {
+  color: #002244;
+  text-decoration: underline;
+}
+
+/* ===== MOBILE STICKY CTA ===== */
+.van-detail-mobile-cta {
+  display: none;
+}
+
+/* ===== LIGHTBOX ===== */
+.van-detail-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.van-detail-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: background-color 0.2s;
+}
+
+.van-detail-lightbox-close:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.van-detail-lightbox-image {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.van-detail-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  z-index: 10000;
+}
+
+.van-detail-lightbox-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.van-detail-lightbox-arrow-prev {
+  left: 16px;
+}
+
+.van-detail-lightbox-arrow-next {
+  right: 16px;
+}
+
+.van-detail-lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* ===== RESPONSIVE: 1024px ===== */
+@media (max-width: 1024px) {
+  .van-detail-gallery {
+    flex-direction: column;
+  }
+
+  .van-detail-main-image-wrap {
+    flex: none;
+    width: 100%;
+  }
+
+  .van-detail-thumb-grid {
+    flex: none;
+    max-height: none;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .van-detail-info-section {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .van-detail-details {
+    flex: none;
+  }
+
+  .van-detail-pricing-card {
+    flex: none;
+  }
+
+  .van-detail-pricing-card-inner {
+    position: static;
+  }
+}
+
+/* ===== RESPONSIVE: 768px ===== */
+@media (max-width: 768px) {
+  .van-detail-page {
+    padding-bottom: 80px;
+  }
+
+  .van-detail-container {
+    padding-top: 24px;
+  }
+
+  .van-detail-gallery {
+    margin-bottom: 28px;
+  }
+
+  .van-detail-thumb-grid {
+    display: none;
+  }
+
+  .van-detail-thumb-strip {
+    display: flex;
+    gap: 6px;
+    padding: 8px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .van-detail-thumb-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .van-detail-thumb-strip-item {
+    width: 64px;
+    height: 48px;
+    min-width: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+  }
+
+  .van-detail-thumb-strip-item:hover {
+    opacity: 0.9;
+  }
+
+  .van-detail-thumb-strip-active {
+    border-color: #FB4F14;
+    opacity: 1;
+  }
+
+  .van-detail-name {
+    font-size: 1.5rem !important;
+  }
+
+  .van-detail-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Show mobile sticky CTA */
+  .van-detail-mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    border-top: 1px solid #E0E0E0;
+    padding: 12px 20px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .van-detail-mobile-cta-price {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .van-detail-mobile-cta-amount {
+    font-weight: 700 !important;
+    color: #002244;
+    font-size: 1.5rem !important;
+  }
+
+  .van-detail-mobile-cta-unit {
+    color: #666;
+    font-size: 0.85rem !important;
+  }
+
+  .van-detail-mobile-cta-button {
+    background-color: #002244 !important;
+    color: #FFFFFF !important;
+    padding: 12px 28px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 8px !important;
+    min-height: 48px;
+    min-width: 160px;
+    transition: all 0.3s ease !important;
+  }
+
+  .van-detail-mobile-cta-button:hover {
+    background-color: #FB4F14 !important;
+  }
+
+  /* Hide desktop pricing card on mobile */
+  .van-detail-pricing-card {
+    display: none;
+  }
+}
+
+/* ===== RESPONSIVE: 600px ===== */
+@media (max-width: 600px) {
+  .van-detail-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .van-detail-meta {
+    gap: 14px;
+  }
+
+  .van-detail-gallery-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .van-detail-thumb-strip-item {
+    width: 56px;
+    height: 44px;
+    min-width: 56px;
+  }
+
+  .van-detail-lightbox-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ===== RESPONSIVE: 480px ===== */
+@media (max-width: 480px) {
+  .van-detail-container {
+    padding-top: 16px;
+  }
+
+  .van-detail-name {
+    font-size: 1.3rem !important;
+  }
+
+  .van-detail-section-title {
+    font-size: 1.15rem !important;
+  }
+
+  .van-detail-description-text {
+    font-size: 0.9rem !important;
+  }
+
+  .van-detail-feature-item p {
+    font-size: 0.85rem;
+  }
+
+  .van-detail-mobile-cta {
+    padding: 10px 16px;
+  }
+
+  .van-detail-mobile-cta-amount {
+    font-size: 1.3rem !important;
+  }
+
+  .van-detail-mobile-cta-button {
+    padding: 10px 20px !important;
+    min-width: 140px;
+    font-size: 0.85rem !important;
+  }
+
+  .van-detail-lightbox-image {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+}
+
+/* ===== RESPONSIVE: 360px ===== */
+@media (max-width: 360px) {
+  .van-detail-breadcrumbs-bar {
+    padding: 10px 0;
+  }
+
+  .van-detail-breadcrumb-link,
+  .van-detail-breadcrumb-current {
+    font-size: 0.8rem !important;
+  }
+
+  .van-detail-name {
+    font-size: 1.15rem !important;
+  }
+
+  .van-detail-meta {
+    gap: 10px;
+  }
+
+  .van-detail-meta-item p {
+    font-size: 0.8rem;
+  }
+
+  .van-detail-gallery-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .van-detail-gallery-arrow-prev {
+    left: 8px;
+  }
+
+  .van-detail-gallery-arrow-next {
+    right: 8px;
+  }
+
+  .van-detail-thumb-strip-item {
+    width: 48px;
+    height: 44px;
+    min-width: 48px;
+  }
+}

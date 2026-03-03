@@ -222,6 +222,34 @@
   color: #FFFFFF !important;
 }
 
+/* Title Link */
+.van-card-title-link {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.van-card-title-link:hover {
+  color: #FB4F14 !important;
+}
+
+/* View Details Link */
+.van-card-details-link {
+  color: #FB4F14;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.van-card-details-link:hover {
+  color: #002244;
+}
+
 /* Pricing */
 .van-card-pricing {
   margin-bottom: 16px;

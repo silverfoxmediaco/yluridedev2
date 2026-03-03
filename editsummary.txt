@@ -260,6 +260,47 @@ Edit Summary Log
   - Van 6 name: "Executive Sprinter Shuttle (Remodeled)" → "Executive Sprinter Shuttle"
   - Van 6 description: removed "remodeled" wording
 
+2026-03-03: Added Individual Van Detail Pages
+- Created frontend/src/data/vanData.js:
+  - Extracted S3_BASE, s3() helper, all van image arrays, and mockVans from Booking.jsx
+  - Shared data module used by both Booking page and VanDetail page
+- Updated frontend/src/pages/Booking.jsx:
+  - Replaced 200+ lines of inline van data with `import mockVans from '../data/vanData'`
+- Rebuilt frontend/src/pages/VanDetail.jsx (was a stub):
+  - Data loading: tries /api/vans/:id, falls back to mockVans
+  - Dynamic page title: "Van Name | NTX Luxury Van Rentals"
+  - Breadcrumbs: Home > Fleet > Van Name
+  - Image gallery: large main image with arrows + image counter
+  - Desktop: 3-column scrollable thumbnail grid (65/35 layout)
+  - Mobile: horizontal thumbnail strip below main image
+  - Share button: Web Share API with clipboard fallback
+  - "About This Van" description section
+  - Features & Amenities: 2-column grid with CheckCircle icons (1-col on mobile)
+  - Pricing card (sticky on desktop): daily/hourly/weekly rates, deposit, insurance, destination fee
+  - "Book This Van" button → opens BookingModal
+  - "Contact Us" link below pricing
+  - Lightbox: full-screen image viewer with keyboard nav (Escape/Arrow keys)
+  - Loading spinner and "Van Not Found" (404) states
+  - Mobile sticky bottom CTA bar with price + Book button
+- Created frontend/src/styles/VanDetail.css:
+  - Desktop (>=1024px): two-column gallery (65% main / 35% thumbnails), two-column info (60% details / 40% sticky pricing card)
+  - Tablet (<=1024px): single-column gallery + 6-col thumbnail grid, stacked info
+  - Mobile (<768px): single column, horizontal thumbnail strip, sticky bottom CTA, pricing card hidden
+  - Lightbox: fixed overlay z-index 9999, dark background, 48px touch targets
+  - Brand colors: Navy #002244 for headings/buttons, Orange #FB4F14 for icons/accents
+  - Breakpoints: 360px, 480px, 600px, 768px, 1024px
+  - 44px minimum touch targets throughout
+  - loading="lazy" on all thumbnails
+- Updated frontend/src/components/VanCard.jsx:
+  - Added useNavigate from react-router-dom
+  - Van name clickable → navigates to /van/:id (orange hover)
+  - Main image clickable → navigates to /van/:id
+  - Added "View Details →" link between features and pricing
+  - Arrow nav buttons still use stopPropagation
+- Updated frontend/src/styles/VanCard.css:
+  - .van-card-title-link: cursor pointer, orange hover color
+  - .van-card-details-link: orange text, 44px min touch target, hover to navy
+
 2026-03-03: Fixed Mobile Slide-Out Menu CSS Issues
 - Updated frontend/src/styles/Header.css:
   - Hamburger icon: added 7px padding + 44px min touch target
