@@ -430,6 +430,15 @@ Edit Summary Log
   - Added sendListingApprovedEmail — owner notification on approval
   - Added sendListingRejectedEmail — owner notification with rejection reason
 
+2026-03-03: Added "List Your Van" header nav item
+- Updated frontend/src/components/Header.jsx:
+  - Added "List Your Van" to menuItems array, linking to /register?role=owner
+  - Only visible to unauthenticated users (hidden when logged in)
+  - Appears in both desktop nav and mobile drawer
+- Updated frontend/src/pages/Register.jsx:
+  - Reads ?role=owner query param via useSearchParams
+  - Pre-selects "Van Owner" toggle when arriving from "List Your Van" link
+
 2026-03-03: Admin Dashboard Overhaul — Dedicated Admin Experience
 - Created frontend/src/components/AdminHeader.jsx + AdminHeader.css:
   - Navy #002244 AppBar, visually distinct from white site header

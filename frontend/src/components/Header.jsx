@@ -54,6 +54,7 @@ const Header = () => {
   const menuItems = [
     { text: 'Home', path: '/' },
     { text: 'Fleet', path: '/booking' },
+    ...(!user ? [{ text: 'List Your Van', path: '/register?role=owner' }] : []),
     { text: 'Contact', path: '/contact' },
   ];
 

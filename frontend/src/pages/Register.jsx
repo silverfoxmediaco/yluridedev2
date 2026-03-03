@@ -1,13 +1,16 @@
 // frontend/src/pages/Register.jsx
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Box, CircularProgress, ToggleButtonGroup, ToggleButton } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Register.css';
 
 const Register = () => {
-  const [accountType, setAccountType] = useState('customer');
+  const [searchParams] = useSearchParams();
+  const [accountType, setAccountType] = useState(
+    searchParams.get('role') === 'owner' ? 'owner' : 'customer'
+  );
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
