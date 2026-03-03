@@ -7,7 +7,7 @@ const Van = require('../models/Van');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const vans = await Van.find({ isActive: true }).sort({ createdAt: -1 });
+    const vans = await Van.find({ isActive: true, approvalStatus: 'approved' }).sort({ createdAt: -1 });
     res.json(vans);
   } catch (error) {
     console.error('Error fetching vans:', error);

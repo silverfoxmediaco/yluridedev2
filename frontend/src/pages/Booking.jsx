@@ -21,10 +21,10 @@ const Booking = () => {
   const fetchVans = async () => {
     try {
       setLoading(true);
-      // Try to fetch from API
+      // Fetch approved marketplace listings from API, merge with fleet vans
       const response = await axios.get('/api/vans');
       if (response.data && response.data.length > 0) {
-        setVans(response.data);
+        setVans([...fleetVans, ...response.data]);
       } else {
         setVans(fleetVans);
       }
