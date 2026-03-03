@@ -209,3 +209,16 @@ Edit Summary Log
   - Updated email template with brand colors
 - Updated backend/server.js:
   - Added contactRoutes import and registration
+
+2026-03-02: Replaced Mock Van Listings with Real Fleet Data
+- Updated frontend/src/pages/Booking.jsx:
+  - Replaced 3 fake mockVans with 6 real van listings from owner's fleet
+  - Van 1: American Coach Patriot — 2019 Sprinter 3500, $549/day, 6 pax, RV-style
+  - Van 2: Executive Custom Build — 2022 Sprinter, $469/day, 10 pax
+  - Van 3: Legends Executive — Sprinter AWD, $497/day, 12 pax
+  - Van 4: Legends All Terrain Executive — 2025 Sprinter AWD, $469/day, 10 pax (brand new)
+  - Van 5: Executive Shuttle — Sprinter, $419/day, 15 pax, x4 units
+  - Van 6: Executive Sprinter Shuttle (Remodeled) — Sprinter, $419/day, 15 pax, x4 units
+  - Images sourced from S3 kirkjohnsonX4 folder (Capture1-18.JPG, 3 per van)
+  - Pricing: hourlyRate = dailyRate/8, weeklyRate = dailyRate×5
+  - American Coach gets $750 deposit / $100 insurance; all others $500 / $75
