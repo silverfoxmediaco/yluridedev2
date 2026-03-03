@@ -42,7 +42,7 @@ const van5Images = [
   '092834', '092848', '092902', '092916', '092936', '092956',
 ].map(t => s3('WDZPF0CD6KP126126 U12MDc', `Screenshot 2026-01-31 ${t}.png`));
 
-// Van 6: Kirk Johnson X4 Remodeled Shuttle (19 images)
+// Van 6: Kirk Johnson X4 Shuttle (19 images)
 const van6Images = [
   'Capture.JPG', ...Array.from({ length: 18 }, (_, i) => `Capture${i + 1}.JPG`),
 ].map(f => s3('kirkjohnsonX4 ', f));
@@ -183,11 +183,11 @@ const mockVans = [
   },
   {
     _id: '6',
-    name: 'Executive Sprinter Shuttle (Remodeled)',
+    name: 'Executive Sprinter Shuttle',
     type: 'Sprinter',
     year: 2020,
     seating: 15,
-    description: 'Mercedes Benz Sprinter 15-passenger remodeled shuttle with diamond-stitched seating, premium wood flooring, and entertainment system. x4 units available.',
+    description: 'Mercedes Benz Sprinter 15-passenger shuttle with diamond-stitched seating, premium wood flooring, and entertainment system. x4 units available.',
     features: [
       'Diamond-Stitched Executive Seating', 'Premium Wood Flooring',
       'Ambient LED Lighting', 'Surround Sound', '24" Entertainment Screen',

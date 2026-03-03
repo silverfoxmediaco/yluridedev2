@@ -254,3 +254,8 @@ Edit Summary Log
   - Changed og:image from /NTXfaviconv2.png to S3-hosted NTXvan.png
   - Changed twitter:image from /NTXfaviconv2.png to S3-hosted NTXvan.png
   - Full URL: https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/NTXvan.png
+
+2026-03-03: Removed "Remodeled" from Van 6 listing
+- Updated frontend/src/pages/Booking.jsx:
+  - Van 6 name: "Executive Sprinter Shuttle (Remodeled)" → "Executive Sprinter Shuttle"
+  - Van 6 description: removed "remodeled" wording
