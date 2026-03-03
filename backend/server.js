@@ -18,6 +18,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const ownerRoutes = require('./routes/ownerRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // Create Express app
 const app = express();
@@ -35,6 +36,7 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/owner', ownerRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

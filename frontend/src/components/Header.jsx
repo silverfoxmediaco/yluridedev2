@@ -134,6 +134,21 @@ const Header = () => {
                 />
               </ListItem>
             )}
+            {user.role === 'admin' && (
+              <ListItem
+                disablePadding
+                className={`header-drawer-menu-item ${location.pathname.startsWith('/admin') ? 'header-drawer-menu-item-active' : ''}`}
+              >
+                <ListItemText
+                  primary="Admin Panel"
+                  onClick={() => {
+                    navigate('/admin');
+                    handleDrawerToggle();
+                  }}
+                  className="header-drawer-menu-text"
+                />
+              </ListItem>
+            )}
             <ListItem disablePadding className="header-drawer-menu-item">
               <ListItemText
                 primary="Logout"
@@ -227,6 +242,11 @@ const Header = () => {
                     {(user.role === 'owner' || user.role === 'admin') && (
                       <MenuItem onClick={() => { navigate('/owner/listings'); handleUserMenuClose(); }}>
                         My Listings
+                      </MenuItem>
+                    )}
+                    {user.role === 'admin' && (
+                      <MenuItem onClick={() => { navigate('/admin'); handleUserMenuClose(); }}>
+                        Admin Panel
                       </MenuItem>
                     )}
                     <Divider />

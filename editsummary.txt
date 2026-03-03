@@ -429,3 +429,51 @@ Edit Summary Log
   - Added sendListingSubmittedNotification — admin notification for new submissions
   - Added sendListingApprovedEmail — owner notification on approval
   - Added sendListingRejectedEmail — owner notification with rejection reason
+
+2026-03-03: Van Owner Marketplace — Phase 3: Admin Dashboard
+- Created backend/routes/adminRoutes.js:
+  - All routes protected + authorize('admin')
+  - GET /api/admin/stats — platform overview (user counts by role, van counts by status)
+  - GET /api/admin/listings — marketplace listings with optional status filter, populates owner
+  - GET /api/admin/listings/:id — single listing detail with full owner profile
+  - PUT /api/admin/listings/:id/approve — approve listing, send email to owner
+  - PUT /api/admin/listings/:id/reject — reject with notes, send email to owner
+  - PUT /api/admin/listings/:id/suspend — suspend approved listing
+  - GET /api/admin/users — all users with optional role filter
+  - PUT /api/admin/users/:id — update user role/isActive (prevents self-deactivation)
+  - PUT /api/admin/users/:id/verify-owner — verify owner + approve all documents
+- Updated backend/server.js:
+  - Imported and mounted adminRoutes at /api/admin
+- Created frontend/src/pages/admin/AdminDashboard.jsx:
+  - Platform stats: total users, customers, owners, verified owners
+  - Listing stats: total vans, fleet, marketplace, pending review, approved
+  - Pending review alert banner with "Review Now" CTA
+  - Quick action buttons: Pending Listings, All Listings, Manage Users
+  - Created frontend/src/styles/AdminDashboard.css
+- Created frontend/src/pages/admin/PendingListings.jsx:
+  - Horizontal card layout with thumbnail, van info, owner info, status badge
+  - Filter tabs: Pending Review, Approved, Rejected, All
+  - "Review" button navigates to listing detail
+  - Created frontend/src/styles/PendingListings.css
+- Created frontend/src/pages/admin/ListingReview.jsx:
+  - Full listing detail: photo gallery with thumbnail grid, description, features, pricing grid, location, vehicle details
+  - Owner sidebar: name, email, phone, business name, verification status
+  - Admin notes text field (required for rejections)
+  - Action buttons: Approve (green), Reject (red with confirmation dialog), Suspend (orange)
+  - Sends email notifications to owner on approve/reject
+  - Created frontend/src/styles/ListingReview.css
+- Created frontend/src/pages/admin/ManageUsers.jsx:
+  - Sortable table: name, email, role chip, status chip, join date, actions
+  - Filter tabs: All Users, Customers, Owners, Admins
+  - Actions menu: Activate/Deactivate, Verify Owner (with dialog), Remove Verification
+  - Prevents admin from deactivating own account
+  - Created frontend/src/styles/ManageUsers.css
+- Updated frontend/src/App.jsx:
+  - Added admin page imports
+  - Added 4 admin routes: /admin, /admin/listings, /admin/listings/:id, /admin/users
+  - All wrapped in ProtectedRoute with roles={['admin']}
+- Updated frontend/src/components/Header.jsx:
+  - Desktop dropdown: added "Admin Panel" menu item for admin users
+  - Mobile drawer: added "Admin Panel" item with active state detection
+- Created backend/scripts/createAdmin.js:
+  - Script to create admin account for james@silverfoxmedia.co

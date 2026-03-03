@@ -27,6 +27,10 @@ import Dashboard from './pages/Dashboard';
 import MyListings from './pages/owner/MyListings';
 import VanListingForm from './pages/owner/VanListingForm';
 import OwnerDocuments from './pages/owner/OwnerDocuments';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import PendingListings from './pages/admin/PendingListings';
+import ListingReview from './pages/admin/ListingReview';
+import ManageUsers from './pages/admin/ManageUsers';
 
 // Import components
 import Header from './components/Header';
@@ -77,6 +81,27 @@ function App() {
                 <Route path="/owner/documents" element={
                   <ProtectedRoute roles={['owner', 'admin']}>
                     <OwnerDocuments />
+                  </ProtectedRoute>
+                } />
+                {/* Admin routes */}
+                <Route path="/admin" element={
+                  <ProtectedRoute roles={['admin']}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/listings" element={
+                  <ProtectedRoute roles={['admin']}>
+                    <PendingListings />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/listings/:id" element={
+                  <ProtectedRoute roles={['admin']}>
+                    <ListingReview />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/users" element={
+                  <ProtectedRoute roles={['admin']}>
+                    <ManageUsers />
                   </ProtectedRoute>
                 } />
               </Routes>

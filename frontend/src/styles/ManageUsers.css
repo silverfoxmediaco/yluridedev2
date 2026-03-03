@@ -1,0 +1,135 @@
+/* ManageUsers.css */
+
+.manage-users-page {
+  background: #f5f7fa;
+  min-height: 80vh;
+  padding: 40px 0;
+}
+
+.manage-users-header {
+  margin-bottom: 24px;
+}
+
+.manage-users-back-btn {
+  color: #666 !important;
+  text-transform: none !important;
+  margin-bottom: 8px !important;
+  padding: 4px 8px !important;
+}
+
+.manage-users-back-btn:hover {
+  color: #002244 !important;
+}
+
+.manage-users-title {
+  color: #002244;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+/* Filters */
+.manage-users-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.manage-users-filter-btn {
+  text-transform: none !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+  border-radius: 20px !important;
+  padding: 6px 16px !important;
+  min-height: 36px;
+}
+
+.manage-users-filter-active {
+  background-color: #002244 !important;
+  color: #fff !important;
+}
+
+.manage-users-loading {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+/* Table */
+.manage-users-table-container {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.manage-users-table-head {
+  background-color: #f8f9fa;
+}
+
+.manage-users-table-head .MuiTableCell-root {
+  font-weight: 600;
+  color: #002244;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.manage-users-table-row:hover {
+  background-color: rgba(0, 34, 68, 0.02);
+}
+
+.manage-users-name-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.manage-users-name {
+  font-weight: 500;
+  color: #002244;
+}
+
+.manage-users-business {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.manage-users-email {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.manage-users-date {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .manage-users-page {
+    padding: 24px 0;
+  }
+
+  .manage-users-title {
+    font-size: 1.5rem;
+  }
+
+  .manage-users-table-container {
+    overflow-x: auto;
+  }
+
+  .manage-users-table-container .MuiTable-root {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .manage-users-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .manage-users-filter-btn {
+    white-space: nowrap;
+  }
+}
