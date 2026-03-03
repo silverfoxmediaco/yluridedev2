@@ -259,3 +259,18 @@ Edit Summary Log
 - Updated frontend/src/pages/Booking.jsx:
   - Van 6 name: "Executive Sprinter Shuttle (Remodeled)" → "Executive Sprinter Shuttle"
   - Van 6 description: removed "remodeled" wording
+
+2026-03-03: Fixed Mobile Slide-Out Menu CSS Issues
+- Updated frontend/src/styles/Header.css:
+  - Hamburger icon: added 7px padding + 44px min touch target
+  - Close button: increased to 10px padding + 44px min touch target
+  - Book Now button: changed #000000 → #002244 (brand navy), hover #2C2C2C → #003366
+  - Menu text hover: replaced padding-left shift with transform: translateX(8px)
+  - Added active page indicator: orange left border + navy text on current page
+  - Drawer width: 280px desktop → 75% at tablet (≤768px) → 100% at phone (≤480px)
+  - Removed 120px margin+padding on 480px logo (was causing layout waste)
+  - Merged duplicate .header-drawer-paper rule, moved animation to primary rule
+- Updated frontend/src/components/Header.jsx:
+  - Added useLocation for active page detection
+  - Applied header-drawer-menu-item-active class to current page menu item
+  - Replaced invisible closingx.png with MUI Close icon in navy blue (#002244)

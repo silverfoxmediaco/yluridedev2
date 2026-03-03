@@ -13,10 +13,10 @@ import {
   useMediaQuery,
   IconButton,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Close } from '@mui/icons-material';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 const logo = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/NTXlargemainlogotrans.png';
 const hamburgerMenu = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/hamburgermenu.png';
-const closingX = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/closingx.png';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -24,6 +24,7 @@ const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -39,21 +40,12 @@ const Header = () => {
     <Box className="header-drawer-container">
       {/* Close button in drawer */}
       <Box className="header-close-button-container">
-        <IconButton 
-          onClick={handleDrawerToggle} 
+        <IconButton
+          onClick={handleDrawerToggle}
           className="header-close-button"
-          sx={{ 
-            color: 'inherit',
-            '&:hover': {
-              backgroundColor: 'transparent'
-            }
-          }}
+          aria-label="Close menu"
         >
-          <img 
-            src={closingX} 
-            alt="Close menu" 
-            className="header-close-icon"
-          />
+          <Close sx={{ color: '#002244', fontSize: 28 }} />
         </IconButton>
       </Box>
       
@@ -73,10 +65,10 @@ const Header = () => {
       {/* Menu items */}
       <List className="header-drawer-menu-list">
         {menuItems.map((item) => (
-          <ListItem 
-            key={item.text} 
+          <ListItem
+            key={item.text}
             disablePadding
-            className="header-drawer-menu-item"
+            className={`header-drawer-menu-item ${location.pathname === item.path ? 'header-drawer-menu-item-active' : ''}`}
           >
             <ListItemText 
               primary={item.text} 

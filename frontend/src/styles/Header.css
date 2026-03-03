@@ -113,16 +113,18 @@
   
   /* Mobile Menu Icon */
   .header-mobile-menu-button {
-    padding: 0 !important;
+    padding: 7px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
   }
-  
+
   .header-hamburger-icon {
     width: 30px;
     height: 30px;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
-  
+
   .header-hamburger-icon:hover {
     opacity: 0.7;
   }
@@ -137,6 +139,7 @@
     width: 280px;
     background-color: #FFFFFF !important;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1) !important;
+    animation: slideIn 0.3s ease-out;
   }
   
   .header-drawer-container {
@@ -151,18 +154,20 @@
     justify-content: flex-end;
     padding: 16px;
   }
-  
+
   .header-close-button {
-    padding: 8px !important;
+    padding: 10px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
   }
-  
+
   .header-close-icon {
     width: 24px;
     height: 24px;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
-  
+
   .header-close-icon:hover {
     opacity: 0.6;
   }
@@ -192,12 +197,23 @@
   
   .header-drawer-menu-text:hover {
     background-color: #F5F5F5;
-    padding-left: 24px;
+    transform: translateX(8px);
   }
-  
+
   .header-drawer-menu-text span {
     font-size: 1.1rem;
     font-weight: 500;
+  }
+
+  /* Active Page Indicator */
+  .header-drawer-menu-item-active .header-drawer-menu-text {
+    background-color: rgba(0, 34, 68, 0.08);
+    border-left: 3px solid #FB4F14;
+  }
+
+  .header-drawer-menu-item-active .header-drawer-menu-text span {
+    color: #002244;
+    font-weight: 600;
   }
   
   /* Drawer Book Button */
@@ -211,14 +227,14 @@
     padding: 12px 0 !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
-    background-color: #000000 !important;
+    background-color: #002244 !important;
     color: #FFFFFF !important;
     border-radius: 50px !important;
     transition: all 0.3s ease !important;
   }
-  
+
   .header-drawer-book-button:hover {
-    background-color: #2C2C2C !important;
+    background-color: #003366 !important;
     transform: scale(1.02);
   }
   
@@ -239,6 +255,16 @@
     }
   }
   
+  @media (max-width: 768px) {
+    .header-drawer-paper {
+      width: 75%;
+    }
+
+    .header-drawer-container {
+      width: 100%;
+    }
+  }
+
   /* Mobile Responsive Improvements */
   @media (max-width: 768px) {
     .header-toolbar {
@@ -285,8 +311,6 @@
 
     .header-logo {
       width: 150px;
-      margin-right: 60px !important;
-      padding-right: 60px !important;
     }
 
     .header-logo-drawer {
@@ -336,8 +360,4 @@
     to {
       transform: translateX(0);
     }
-  }
-  
-  .header-drawer-paper {
-    animation: slideIn 0.3s ease-out;
   }
