@@ -4,11 +4,11 @@ import { Container, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import VanGrid from '../components/VanGrid';
 import BookingModal from '../components/BookingModal';
-import mockVans from '../data/vanData';
+import fleetVans from '../data/vanData';
 import '../styles/Booking.css';
 
 const Booking = () => {
-  const [vans, setVans] = useState(mockVans);
+  const [vans, setVans] = useState(fleetVans);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedVan, setSelectedVan] = useState(null);
@@ -23,18 +23,14 @@ const Booking = () => {
       setLoading(true);
       // Try to fetch from API
       const response = await axios.get('/api/vans');
-      // If API returns empty array, use mock data
       if (response.data && response.data.length > 0) {
         setVans(response.data);
       } else {
-        console.log('No vans in database, using mock data');
-        setVans(mockVans);
+        setVans(fleetVans);
       }
       setError('');
     } catch (err) {
-      console.log('API not available, using mock data');
-      // Use mock data if API is not available
-      setVans(mockVans);
+      setVans(fleetVans);
       setError('');
     } finally {
       setLoading(false);

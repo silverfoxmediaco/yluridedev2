@@ -13,7 +13,7 @@ import {
   DirectionsCar,
 } from '@mui/icons-material';
 import axios from 'axios';
-import mockVans from '../data/vanData';
+import fleetVans from '../data/vanData';
 import BookingModal from '../components/BookingModal';
 import '../styles/VanDetail.css';
 
@@ -41,8 +41,8 @@ const VanDetail = () => {
           throw new Error('No data');
         }
       } catch {
-        // Fall back to mock data
-        const found = mockVans.find(v => v._id === id);
+        // Fall back to local fleet data
+        const found = fleetVans.find(v => v._id === id);
         if (found) {
           setVan(found);
         } else {

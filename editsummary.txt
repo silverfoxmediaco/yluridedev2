@@ -301,6 +301,11 @@ Edit Summary Log
   - .van-card-title-link: cursor pointer, orange hover color
   - .van-card-details-link: orange text, 44px min touch target, hover to navy
 
+2026-03-03: Renamed mockVans to fleetVans across codebase
+- Renamed variable in vanData.js, Booking.jsx, VanDetail.jsx
+- Removed "mock data" console.log messages and comments
+- This is real fleet data, not mock data
+
 2026-03-03: Fixed mobile scroll-to-top landing at bottom of Booking page
 - Updated ScrollToTop.jsx: switched from useEffect to useLayoutEffect (fires before paint)
 - Updated ScrollToTop.jsx: added behavior: 'instant' to override CSS smooth scrolling

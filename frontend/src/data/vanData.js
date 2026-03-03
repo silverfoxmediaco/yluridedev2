@@ -42,8 +42,8 @@ const van6Images = [
   'Capture.JPG', ...Array.from({ length: 18 }, (_, i) => `Capture${i + 1}.JPG`),
 ].map(f => s3('kirkjohnsonX4 ', f));
 
-// Real fleet data
-const mockVans = [
+// Fleet data
+const fleetVans = [
   {
     _id: '1',
     name: 'American Coach Patriot',
@@ -204,4 +204,4 @@ const mockVans = [
   },
 ];
 
-export default mockVans;
+export default fleetVans;
