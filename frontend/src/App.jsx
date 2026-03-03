@@ -9,6 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import theme from './styles/theme';
 
+// Auth
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+
 // Import pages
 import Home from './pages/Home';
 import Fleet from './pages/Fleet';
@@ -20,6 +24,9 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import MyListings from './pages/owner/MyListings';
+import VanListingForm from './pages/owner/VanListingForm';
+import OwnerDocuments from './pages/owner/OwnerDocuments';
 
 // Import components
 import Header from './components/Header';
@@ -30,39 +37,66 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <ScrollToTop />
-        <div className="app-container">
-          <Header />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/fleet" element={<Fleet />} />
-              <Route path="/van/:id" element={<VanDetail />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/booking/success" element={<BookingSuccess />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-        <ToastContainer 
-          position="top-right" 
-          theme="light"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </Router>
+      <AuthProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="app-container">
+            <Header />
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/fleet" element={<Fleet />} />
+                <Route path="/van/:id" element={<VanDetail />} />
+                <Route path="/booking" element={<Booking />} />
+                <Route path="/booking/success" element={<BookingSuccess />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } />
+                {/* Owner routes */}
+                <Route path="/owner/listings" element={
+                  <ProtectedRoute roles={['owner', 'admin']}>
+                    <MyListings />
+                  </ProtectedRoute>
+                } />
+                <Route path="/owner/listings/new" element={
+                  <ProtectedRoute roles={['owner', 'admin']}>
+                    <VanListingForm />
+                  </ProtectedRoute>
+                } />
+                <Route path="/owner/listings/:id/edit" element={
+                  <ProtectedRoute roles={['owner', 'admin']}>
+                    <VanListingForm />
+                  </ProtectedRoute>
+                } />
+                <Route path="/owner/documents" element={
+                  <ProtectedRoute roles={['owner', 'admin']}>
+                    <OwnerDocuments />
+                  </ProtectedRoute>
+                } />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+          <ToastContainer
+            position="top-right"
+            theme="light"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -1,0 +1,204 @@
+/* OwnerDocuments.css */
+
+.owner-docs-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.owner-docs-page {
+  background: #f5f7fa;
+  min-height: 80vh;
+  padding: 40px 0;
+}
+
+.owner-docs-title {
+  color: #002244;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.owner-docs-subtitle {
+  color: #666;
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+/* Progress */
+.owner-docs-progress {
+  padding: 20px 24px;
+  border-radius: 12px !important;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.owner-docs-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.owner-docs-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #002244, #FB4F14);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.owner-docs-progress-text {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.owner-docs-verified-chip {
+  align-self: flex-start;
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  font-weight: 600 !important;
+}
+
+/* Document Cards */
+.owner-docs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.owner-docs-card {
+  padding: 24px;
+  border-radius: 12px !important;
+  border-left: 4px solid #e0e0e0;
+  transition: border-color 0.2s;
+}
+
+.owner-docs-card-uploaded {
+  border-left-color: #2e7d32;
+}
+
+.owner-docs-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.owner-docs-card-icon {
+  color: #002244;
+  padding: 8px;
+  background: rgba(0, 34, 68, 0.06);
+  border-radius: 8px;
+  display: flex;
+}
+
+.owner-docs-card-title-container {
+  flex: 1;
+}
+
+.owner-docs-card-title {
+  font-weight: 600;
+  color: #002244;
+  font-size: 1.05rem;
+}
+
+.owner-docs-card-desc {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.owner-docs-card-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.owner-docs-card-file {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.owner-docs-card-file-text {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.owner-docs-card-view-link {
+  color: #002244;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.owner-docs-card-view-link:hover {
+  color: #FB4F14;
+  text-decoration: underline;
+}
+
+.owner-docs-upload-btn {
+  border-color: #002244 !important;
+  color: #002244 !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  min-height: 44px;
+}
+
+.owner-docs-reupload-btn {
+  color: #666 !important;
+  text-transform: none !important;
+  font-size: 0.85rem !important;
+}
+
+/* Pending Notice */
+.owner-docs-pending-notice {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  border-radius: 12px !important;
+  border-left: 4px solid #e67e00;
+}
+
+.owner-docs-pending-text {
+  color: #666;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .owner-docs-page {
+    padding: 24px 0;
+  }
+
+  .owner-docs-title {
+    font-size: 1.5rem;
+  }
+
+  .owner-docs-card {
+    padding: 20px 16px;
+  }
+
+  .owner-docs-card-header {
+    flex-wrap: wrap;
+  }
+
+  .owner-docs-card-status {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .owner-docs-card-file {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

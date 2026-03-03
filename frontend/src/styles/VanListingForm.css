@@ -1,0 +1,310 @@
+/* VanListingForm.css */
+
+.van-listing-form-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.van-listing-form-page {
+  background: #f5f7fa;
+  min-height: 80vh;
+  padding: 40px 0;
+}
+
+.van-listing-form-title {
+  color: #002244;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.van-listing-form-stepper {
+  margin-bottom: 32px;
+}
+
+.van-listing-form-stepper .MuiStepIcon-root.Mui-active {
+  color: #002244;
+}
+
+.van-listing-form-stepper .MuiStepIcon-root.Mui-completed {
+  color: #2e7d32;
+}
+
+.van-listing-form-card {
+  padding: 36px 40px;
+  border-radius: 12px !important;
+}
+
+/* Step Content */
+.van-listing-form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.van-listing-form-step-title {
+  color: #002244;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.van-listing-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.van-listing-form-input .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.van-listing-form-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.van-listing-form-input .MuiInputLabel-root.Mui-focused {
+  color: #002244;
+}
+
+.van-listing-form-label {
+  font-weight: 600;
+  color: #002244;
+  margin-top: 8px;
+}
+
+.van-listing-form-hint {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Features */
+.van-listing-form-feature-input {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.van-listing-form-feature-add-btn {
+  border-color: #002244 !important;
+  color: #002244 !important;
+  text-transform: none !important;
+  min-height: 56px;
+  white-space: nowrap;
+}
+
+.van-listing-form-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.van-listing-form-feature-chip {
+  background-color: rgba(0, 34, 68, 0.08) !important;
+  color: #002244 !important;
+}
+
+/* Photos */
+.van-listing-form-upload-btn {
+  border-color: #002244 !important;
+  color: #002244 !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  padding: 12px 28px !important;
+  align-self: flex-start;
+}
+
+.van-listing-form-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.van-listing-form-image-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.van-listing-form-image-item:hover {
+  border-color: #002244;
+}
+
+.van-listing-form-image-thumb {
+  border-color: #FB4F14;
+}
+
+.van-listing-form-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.van-listing-form-thumb-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background-color: #FB4F14 !important;
+  color: #fff !important;
+  font-size: 0.7rem !important;
+}
+
+.van-listing-form-image-remove {
+  position: absolute !important;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #c62828 !important;
+}
+
+/* Pricing Preview */
+.van-listing-form-pricing-preview {
+  margin-top: 12px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #002244;
+}
+
+/* Review */
+.van-listing-form-review-section {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.van-listing-form-review-label {
+  font-weight: 600;
+  color: #002244;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.van-listing-form-review-value {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Navigation */
+.van-listing-form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.van-listing-form-nav-right {
+  display: flex;
+  gap: 12px;
+}
+
+.van-listing-form-nav-btn {
+  color: #666 !important;
+  text-transform: none !important;
+}
+
+.van-listing-form-save-btn {
+  border-color: #002244 !important;
+  color: #002244 !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  min-height: 44px;
+}
+
+.van-listing-form-next-btn {
+  background-color: #002244 !important;
+  color: #fff !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  min-height: 44px;
+  padding: 10px 28px !important;
+}
+
+.van-listing-form-next-btn:hover {
+  background-color: #003366 !important;
+}
+
+.van-listing-form-next-btn:disabled {
+  background-color: #ccc !important;
+}
+
+.van-listing-form-submit-btn {
+  background-color: #FB4F14 !important;
+  color: #fff !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  min-height: 44px;
+  padding: 10px 28px !important;
+}
+
+.van-listing-form-submit-btn:hover {
+  background-color: #c93e10 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .van-listing-form-page {
+    padding: 24px 0;
+  }
+
+  .van-listing-form-card {
+    padding: 24px 20px;
+  }
+
+  .van-listing-form-title {
+    font-size: 1.5rem;
+  }
+
+  .van-listing-form-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .van-listing-form-nav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .van-listing-form-nav-right {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .van-listing-form-save-btn,
+  .van-listing-form-next-btn,
+  .van-listing-form-submit-btn {
+    width: 100%;
+  }
+
+  .van-listing-form-image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .van-listing-form-stepper .MuiStepLabel-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .van-listing-form-card {
+    padding: 20px 16px;
+  }
+
+  .van-listing-form-feature-input {
+    flex-direction: column;
+  }
+
+  .van-listing-form-feature-add-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+}

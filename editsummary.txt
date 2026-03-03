@@ -337,3 +337,95 @@ Edit Summary Log
   - Added useLocation for active page detection
   - Applied header-drawer-menu-item-active class to current page menu item
   - Replaced invisible closingx.png with MUI Close icon in navy blue (#002244)
+
+2026-03-03: Van Owner Marketplace — Phase 1: Authentication System
+- Created backend/models/User.js:
+  - Full user schema: firstName, lastName, email (unique), password, phone, role (customer|owner|admin), isActive, lastLogin
+  - ownerProfile subdoc: businessName, businessAddress, documents (governmentId, vanRegistration, safetyInspection, proofOfInsurance each with url/key/uploadedAt/status), isVerified
+  - Pre-save bcrypt password hashing, matchPassword() method
+- Created backend/middleware/auth.js:
+  - protect middleware: verifies JWT Bearer token, attaches req.user, checks isActive
+  - authorize(...roles): role-based access control, returns 403 if not allowed
+  - generateToken(userId): 30-day JWT expiry
+- Updated backend/routes/authRoutes.js (stub → full):
+  - POST /api/auth/register — register customer with express-validator
+  - POST /api/auth/register-owner — register owner (unverified) with businessName
+  - POST /api/auth/login — login with JWT response, updates lastLogin
+  - GET /api/auth/me — get current user profile (protected)
+  - PUT /api/auth/profile — update profile fields (protected)
+- Created frontend/src/utils/api.js:
+  - Axios instance with /api base, Bearer token interceptor, 401 auto-logout
+- Created frontend/src/context/AuthContext.jsx:
+  - Provides: user, token, loading, login(), register(), logout(), updateUser()
+  - localStorage persistence, token verification on mount
+- Created frontend/src/components/ProtectedRoute.jsx:
+  - Auth check with redirect to /login, optional roles prop, loading spinner
+- Updated frontend/src/pages/Login.jsx (stub → full):
+  - Email + password form, redirect if already logged in, toast notifications
+  - Created frontend/src/styles/Login.css with brand styling
+- Updated frontend/src/pages/Register.jsx (stub → full):
+  - Customer/Owner toggle (ToggleButtonGroup), phone formatting
+  - Owner adds businessName field, form validation
+  - Created frontend/src/styles/Register.css with brand styling
+- Updated frontend/src/components/Header.jsx:
+  - Logged out: "Login" link in desktop nav
+  - Logged in: user dropdown (firstName + arrow) with Dashboard, Logout
+  - Owner/Admin: + "My Listings" in dropdown
+  - Mobile drawer: same auth-aware items (Dashboard, My Listings, Logout)
+- Updated frontend/src/styles/Header.css:
+  - Added .header-login-button, .header-user-menu-btn, .header-user-dropdown styles
+- Updated frontend/src/App.jsx:
+  - Wrapped in <AuthProvider>, added ProtectedRoute wrappers
+  - Added routes: /owner/listings, /owner/listings/new, /owner/listings/:id/edit, /owner/documents
+
+2026-03-03: Van Owner Marketplace — Phase 2: Owner Dashboard & Van Listing
+- Updated backend/models/Van.js:
+  - Added marketplace fields: owner (ObjectId ref User, null=fleet), listingType (fleet|marketplace), approvalStatus (draft|pending_review|approved|rejected|suspended), adminNotes, reviewedBy, reviewedAt
+  - Added marketplace-specific: vin, mileage, location (address/city/state/zip/serviceRadius), blackoutDates[], cancellationPolicy, driverAvailability
+  - Updated isAvailableForDates() to also check blackoutDates
+- Updated backend/config/s3.js:
+  - Added vanImageStorage (vanImages/{ownerId}/, 15MB, images only)
+  - Added ownerDocumentStorage (ownerDocuments/{ownerId}/{docType}/, 10MB, images+PDF)
+  - Exported uploadVanImages, uploadOwnerDocument
+- Updated backend/routes/uploadRoutes.js:
+  - POST /api/upload/van-images — up to 25 images (owner/admin, protected)
+  - POST /api/upload/owner-document — single doc (owner/admin, protected)
+  - DELETE /api/upload/image/:key — delete any S3 image (owner/admin, protected)
+- Created backend/routes/ownerRoutes.js:
+  - All routes protected + authorize('owner','admin')
+  - GET /api/owner/dashboard — stats (total, approved, pending, drafts, rejected, active)
+  - GET /api/owner/vans — owner's listings sorted by createdAt
+  - POST /api/owner/vans — create draft listing with validation
+  - PUT /api/owner/vans/:id — update listing (ownership check)
+  - PUT /api/owner/vans/:id/submit — submit for review (requires images)
+  - DELETE /api/owner/vans/:id — soft delete (set suspended)
+  - POST /api/owner/documents — save uploaded doc reference to user profile
+- Updated backend/server.js:
+  - Imported and mounted ownerRoutes at /api/owner
+- Created backend/scripts/migrateVanSchema.js:
+  - Sets existing vans to owner:null, listingType:fleet, approvalStatus:approved
+- Updated frontend/src/pages/Dashboard.jsx (stub → full):
+  - Role-aware: customer sees bookings + account info, owner sees stats + actions
+  - Owner: verification banner, stats grid (total/approved/pending/drafts), quick actions
+  - Created frontend/src/styles/Dashboard.css
+- Created frontend/src/pages/owner/MyListings.jsx:
+  - Van cards with status badges (draft/pending/approved/rejected/suspended)
+  - Filter tabs (All/Drafts/Pending/Approved/Rejected)
+  - Actions menu: Edit, View Live, Submit for Review, Deactivate
+  - Created frontend/src/styles/MyListings.css
+- Created frontend/src/pages/owner/VanListingForm.jsx:
+  - Multi-step form: Van Details → Photos → Pricing → Location & Availability → Review
+  - Features input with chips, S3 image upload with thumbnail management
+  - Save Draft + Submit for Review actions
+  - Edit mode: loads existing listing data
+  - Created frontend/src/styles/VanListingForm.css
+- Created frontend/src/pages/owner/OwnerDocuments.jsx:
+  - Upload Gov ID, Registration, Safety Inspection, Insurance
+  - Status badges per doc (pending/approved/rejected)
+  - Progress bar showing upload completion
+  - Created frontend/src/styles/OwnerDocuments.css
+- Updated backend/utils/emailService.js:
+  - Added sendOwnerWelcomeEmail — welcome + getting started steps
+  - Added sendListingSubmittedNotification — admin notification for new submissions
+  - Added sendListingApprovedEmail — owner notification on approval
+  - Added sendListingRejectedEmail — owner notification with rejection reason

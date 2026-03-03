@@ -2,10 +2,13 @@
 // Uploads all files from frontend/src/assets/ to s3://ntxvanrentals/siteimages/
 // Usage: node scripts/uploadAssetsToS3.js
 
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const path = require('path');
 const fs = require('fs');
-const dotenv = require('dotenv');
+
+// Resolve modules from backend/node_modules
+const backendDir = path.join(__dirname, '..', 'backend');
+const { S3Client, PutObjectCommand } = require(path.join(backendDir, 'node_modules', '@aws-sdk', 'client-s3'));
+const dotenv = require(path.join(backendDir, 'node_modules', 'dotenv'));
 
 // Load env vars from backend/.env
 dotenv.config({ path: path.join(__dirname, '..', 'backend', '.env') });

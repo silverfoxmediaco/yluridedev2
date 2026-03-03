@@ -44,6 +44,65 @@ const uploadLicense = multer({
   },
 });
 
+// Configure multer-s3 storage for Van Images (marketplace)
+const vanImageStorage = multerS3({
+  s3: s3Client,
+  bucket: BUCKET_NAME,
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  key: (req, file, cb) => {
+    const ownerId = req.user ? req.user._id : 'unknown';
+    const uniqueSuffix = crypto.randomUUID();
+    const ext = path.extname(file.originalname);
+    cb(null, `vanImages/${ownerId}/${uniqueSuffix}${ext}`);
+  },
+});
+
+// Multer upload middleware for van images (up to 25, max 15MB each)
+const uploadVanImages = multer({
+  storage: vanImageStorage,
+  limits: {
+    fileSize: 15 * 1024 * 1024, // 15MB max file size
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPG, PNG, and WebP files are allowed.'), false);
+    }
+  },
+});
+
+// Configure multer-s3 storage for Owner Documents
+const ownerDocumentStorage = multerS3({
+  s3: s3Client,
+  bucket: BUCKET_NAME,
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  key: (req, file, cb) => {
+    const ownerId = req.user ? req.user._id : 'unknown';
+    const docType = req.body.docType || 'general';
+    const uniqueSuffix = crypto.randomUUID();
+    const ext = path.extname(file.originalname);
+    cb(null, `ownerDocuments/${ownerId}/${docType}/${uniqueSuffix}${ext}`);
+  },
+});
+
+// Multer upload middleware for owner documents (single file, max 10MB)
+const uploadOwnerDocument = multer({
+  storage: ownerDocumentStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB max file size
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPG, PNG, and PDF files are allowed.'), false);
+    }
+  },
+});
+
 // Helper function to delete image from S3
 const deleteImage = async (key) => {
   try {
@@ -67,6 +126,8 @@ const getPublicUrl = (key) => {
 module.exports = {
   s3Client,
   uploadLicense,
+  uploadVanImages,
+  uploadOwnerDocument,
   deleteImage,
   getPublicUrl,
 };

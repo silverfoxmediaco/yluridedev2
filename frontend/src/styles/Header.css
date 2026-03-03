@@ -91,6 +91,54 @@
     width: 80%;
   }
   
+  /* Login Button */
+  .header-login-button {
+    color: #002244 !important;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .header-login-button:hover {
+    color: #FB4F14 !important;
+  }
+
+  /* User Menu Button */
+  .header-user-menu-btn {
+    color: #002244 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+  }
+
+  .header-user-menu-btn:hover {
+    background-color: rgba(0, 34, 68, 0.06) !important;
+  }
+
+  /* User Dropdown */
+  .header-user-dropdown {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+    margin-top: 4px !important;
+    min-width: 180px !important;
+  }
+
+  .header-user-dropdown .MuiMenuItem-root {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    color: #333;
+  }
+
+  .header-user-dropdown .MuiMenuItem-root:hover {
+    background-color: rgba(0, 34, 68, 0.06);
+    color: #002244;
+  }
+
   /* Book Now Button */
   .header-book-button {
     margin-left: 16px !important;

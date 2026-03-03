@@ -79,6 +79,65 @@ const vanSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+
+  // === Marketplace fields ===
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null // null = NTX fleet van
+  },
+  listingType: {
+    type: String,
+    enum: ['fleet', 'marketplace'],
+    default: 'fleet'
+  },
+  approvalStatus: {
+    type: String,
+    enum: ['draft', 'pending_review', 'approved', 'rejected', 'suspended'],
+    default: 'approved'
+  },
+  adminNotes: {
+    type: String,
+    trim: true
+  },
+  reviewedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  reviewedAt: {
+    type: Date
+  },
+
+  // Marketplace-specific fields
+  vin: {
+    type: String,
+    trim: true
+  },
+  mileage: {
+    type: Number
+  },
+  location: {
+    address: { type: String, trim: true },
+    city: { type: String, trim: true },
+    state: { type: String, trim: true },
+    zip: { type: String, trim: true },
+    serviceRadius: { type: Number, default: 50 } // miles
+  },
+  blackoutDates: [{
+    startDate: Date,
+    endDate: Date,
+    reason: String
+  }],
+  cancellationPolicy: {
+    type: String,
+    enum: ['flexible', 'moderate', 'strict'],
+    default: 'moderate'
+  },
+  driverAvailability: {
+    type: String,
+    enum: ['owner_drives', 'renter_drives', 'both'],
+    default: 'both'
   }
 }, {
   timestamps: true
@@ -89,15 +148,26 @@ vanSchema.methods.isAvailableForDates = function(startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
+  // Check booked dates
   for (const booked of this.bookedDates) {
     const bookedStart = new Date(booked.startDate);
     const bookedEnd = new Date(booked.endDate);
-
-    // Check for overlap
     if (start < bookedEnd && end > bookedStart) {
       return false;
     }
   }
+
+  // Check blackout dates
+  if (this.blackoutDates && this.blackoutDates.length > 0) {
+    for (const blackout of this.blackoutDates) {
+      const blackoutStart = new Date(blackout.startDate);
+      const blackoutEnd = new Date(blackout.endDate);
+      if (start < blackoutEnd && end > blackoutStart) {
+        return false;
+      }
+    }
+  }
+
   return true;
 };
 

@@ -139,6 +139,139 @@ const sendContactEmail = async (contactDetails) => {
   }
 };
 
+// Send owner welcome email
+const sendOwnerWelcomeEmail = async (ownerDetails) => {
+  const { email, firstName, businessName } = ownerDetails;
+
+  const mailOptions = {
+    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: 'Welcome to NTX Luxury Van Rentals Marketplace!',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
+          Welcome, ${firstName}!
+        </h1>
+        <p>Thank you for registering <strong>${businessName}</strong> on the NTX Luxury Van Rentals Marketplace.</p>
+        <p>Here's how to get started:</p>
+        <ol>
+          <li><strong>Upload your documents</strong> — Government ID, vehicle registration, safety inspection, and insurance</li>
+          <li><strong>Create your first listing</strong> — Add your van details, photos, and pricing</li>
+          <li><strong>Submit for review</strong> — Our team will review and approve your listing</li>
+        </ol>
+        <p>Once approved, your van will be visible to thousands of customers in the Dallas area.</p>
+        <p>If you have any questions, don't hesitate to reach out.</p>
+        <p>Best regards,<br>NTX Luxury Van Rentals Team</p>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Owner welcome email sent:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending owner welcome email:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Send listing submitted notification to admin
+const sendListingSubmittedNotification = async (listingDetails) => {
+  const { ownerName, ownerEmail, vanName, vanId } = listingDetails;
+
+  const mailOptions = {
+    from: `"NTX Marketplace" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_USER,
+    subject: `New Listing Submitted — ${vanName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
+          New Listing Pending Review
+        </h1>
+        <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+          <p><strong>Van:</strong> ${vanName}</p>
+          <p><strong>Owner:</strong> ${ownerName} (${ownerEmail})</p>
+          <p><strong>Listing ID:</strong> ${vanId}</p>
+        </div>
+        <p>Please review this listing in the admin dashboard.</p>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Listing submitted notification sent:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending listing notification:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Send listing approved email to owner
+const sendListingApprovedEmail = async (listingDetails) => {
+  const { ownerEmail, ownerName, vanName } = listingDetails;
+
+  const mailOptions = {
+    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    to: ownerEmail,
+    subject: `Your Listing Has Been Approved — ${vanName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
+          Listing Approved!
+        </h1>
+        <p>Hi ${ownerName},</p>
+        <p>Great news! Your listing for <strong>${vanName}</strong> has been approved and is now live on the NTX Luxury Van Rentals marketplace.</p>
+        <p>Customers can now find and book your van. You'll receive an email notification when a booking is made.</p>
+        <p>Best regards,<br>NTX Luxury Van Rentals Team</p>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Listing approved email sent:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending listing approved email:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Send listing rejected email to owner
+const sendListingRejectedEmail = async (listingDetails) => {
+  const { ownerEmail, ownerName, vanName, reason } = listingDetails;
+
+  const mailOptions = {
+    from: `"NTX Luxury Van Rentals" <${process.env.EMAIL_USER}>`,
+    to: ownerEmail,
+    subject: `Listing Update — ${vanName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
+          Listing Requires Changes
+        </h1>
+        <p>Hi ${ownerName},</p>
+        <p>Your listing for <strong>${vanName}</strong> was not approved at this time.</p>
+        ${reason ? `<div style="background-color: #fff3e0; padding: 16px; border-radius: 5px; margin: 16px 0; border-left: 4px solid #e67e00;"><p><strong>Reason:</strong> ${reason}</p></div>` : ''}
+        <p>Please update your listing and resubmit for review.</p>
+        <p>Best regards,<br>NTX Luxury Van Rentals Team</p>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Listing rejected email sent:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending listing rejected email:', error);
+    return { success: false, error: error.message };
+  }
+};
+
 // Generic send email function
 const sendEmail = async (to, subject, html, text = null) => {
   const mailOptions = {
@@ -165,5 +298,9 @@ module.exports = {
   sendBookingConfirmation,
   sendBookingNotification,
   sendContactEmail,
-  sendEmail
+  sendEmail,
+  sendOwnerWelcomeEmail,
+  sendListingSubmittedNotification,
+  sendListingApprovedEmail,
+  sendListingRejectedEmail
 };

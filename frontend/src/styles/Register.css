@@ -1,0 +1,160 @@
+/* Register.css */
+
+.register-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  padding: 40px 16px;
+}
+
+.register-container {
+  width: 100%;
+}
+
+.register-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 48px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.register-title {
+  color: #002244;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.register-subtitle {
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 1rem;
+}
+
+/* Account Type Toggle */
+.register-type-toggle {
+  margin-bottom: 28px;
+}
+
+.register-toggle-group {
+  width: 100%;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.register-toggle-btn {
+  flex: 1;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 0.95rem !important;
+  border-color: #002244 !important;
+  color: #002244 !important;
+}
+
+.register-toggle-btn.Mui-selected {
+  background-color: #002244 !important;
+  color: #fff !important;
+}
+
+.register-toggle-btn.Mui-selected:hover {
+  background-color: #003366 !important;
+}
+
+.register-type-hint {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+/* Form */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.register-name-row {
+  display: flex;
+  gap: 16px;
+}
+
+.register-input .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.register-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #002244;
+}
+
+.register-input .MuiInputLabel-root.Mui-focused {
+  color: #002244;
+}
+
+.register-submit-btn {
+  background-color: #002244 !important;
+  color: #fff !important;
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  margin-top: 8px !important;
+  min-height: 48px;
+}
+
+.register-submit-btn:hover {
+  background-color: #003366 !important;
+}
+
+.register-submit-btn:disabled {
+  background-color: #999 !important;
+}
+
+.register-footer {
+  margin-top: 24px;
+  color: #666;
+}
+
+.register-link {
+  color: #FB4F14;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link:hover {
+  color: #002244;
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .register-page {
+    padding: 24px 12px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .register-card {
+    padding: 32px 24px;
+  }
+
+  .register-title {
+    font-size: 1.6rem;
+  }
+
+  .register-name-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .register-card {
+    padding: 24px 16px;
+  }
+}
