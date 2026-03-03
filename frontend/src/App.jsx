@@ -24,12 +24,14 @@ import Dashboard from './pages/Dashboard';
 // Import components
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop />
         <div className="app-container">
           <Header />
           <main className="main-content">
