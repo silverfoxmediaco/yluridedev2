@@ -301,6 +301,11 @@ Edit Summary Log
   - .van-card-title-link: cursor pointer, orange hover color
   - .van-card-details-link: orange text, 44px min touch target, hover to navy
 
+2026-03-03: Removed breadcrumbs from VanDetail page
+- Removed breadcrumb bar (Home > Fleet > Van Name) from VanDetail.jsx
+- Removed NavigateNext import (no longer needed)
+- Removed all breadcrumb CSS from VanDetail.css
+
 2026-03-03: Fixed Mobile Slide-Out Menu CSS Issues
 - Updated frontend/src/styles/Header.css:
   - Hamburger icon: added 7px padding + 44px min touch target

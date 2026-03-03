@@ -11,7 +11,6 @@ import {
   People,
   CalendarMonth,
   DirectionsCar,
-  NavigateNext,
 } from '@mui/icons-material';
 import axios from 'axios';
 import mockVans from '../data/vanData';
@@ -148,19 +147,6 @@ const VanDetail = () => {
 
   return (
     <Box className="van-detail-page">
-      {/* Breadcrumbs */}
-      <Box className="van-detail-breadcrumbs-bar">
-        <Container maxWidth="lg">
-          <Box className="van-detail-breadcrumbs">
-            <Link to="/" className="van-detail-breadcrumb-link">Home</Link>
-            <NavigateNext className="van-detail-breadcrumb-sep" />
-            <Link to="/booking" className="van-detail-breadcrumb-link">Fleet</Link>
-            <NavigateNext className="van-detail-breadcrumb-sep" />
-            <Typography className="van-detail-breadcrumb-current">{van.name}</Typography>
-          </Box>
-        </Container>
-      </Box>
-
       <Container maxWidth="lg" className="van-detail-container">
         {/* Gallery Section */}
         <Box className="van-detail-gallery">
