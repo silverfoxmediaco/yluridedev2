@@ -18,7 +18,7 @@ import {
   Email,
   LocationOn,
 } from '@mui/icons-material';
-import logo from '../assets/NTXlargemainlogotrans.png';
+const logo = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/NTXlargemainlogotrans.png';
 import '../styles/Footer.css';
 
 const Footer = () => {

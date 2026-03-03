@@ -172,6 +172,21 @@ Edit Summary Log
   - Added STRIPE_WEBHOOK_SECRET placeholder
   - Added FRONTEND_URL for Stripe redirects
 
+2026-03-02: Migrated from Cloudinary to AWS S3
+- Backend dependencies: Installed @aws-sdk/client-s3 and multer-s3, uninstalled cloudinary and multer-storage-cloudinary
+- Updated backend/.env: Removed CLOUDINARY_* vars, added AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, S3_BUCKET_NAME
+- Created backend/config/s3.js: S3Client config, multer-s3 storage for licenses/ folder, deleteImage(), getPublicUrl() helpers
+- Updated backend/routes/uploadRoutes.js: Switched from Cloudinary to S3 (req.file.location/key), wildcard DELETE route for S3 keys, preserved response shape
+- Deleted backend/config/cloudinary.js
+- Created scripts/uploadAssetsToS3.js: Node.js script to upload frontend/src/assets/ to s3://ntxvanrentals/siteimages/
+- Updated frontend image imports to S3 URLs:
+  - frontend/src/components/Header.jsx: logo, hamburger menu, close icon (3 images)
+  - frontend/src/components/Footer.jsx: logo (1 image)
+  - frontend/src/components/Hero.jsx: van background desktop + mobile (2 images)
+  - frontend/src/pages/Home.jsx: sprinter van image (1 image)
+  - frontend/src/pages/Booking.jsx: 7 van images for mock data
+- Updated CLAUDE.md: Replaced Cloudinary references with AWS S3, updated env var list
+
 2025-12-01: Built Contact Page
 - Updated frontend/src/pages/Contact.jsx:
   - Hero section with navy blue gradient background

@@ -1,7 +1,7 @@
 // backend/routes/uploadRoutes.js
 const express = require('express');
 const router = express.Router();
-const { uploadLicense, deleteImage } = require('../config/cloudinary');
+const { uploadLicense, deleteImage } = require('../config/s3');
 
 // POST /api/upload/license - Upload driver's license image
 router.post('/license', uploadLicense.single('licenseImage'), async (req, res) => {
@@ -13,13 +13,13 @@ router.post('/license', uploadLicense.single('licenseImage'), async (req, res) =
       });
     }
 
-    // Return the uploaded file details
+    // Return the uploaded file details (same response shape as before)
     res.status(200).json({
       success: true,
       message: 'License uploaded successfully',
       data: {
-        url: req.file.path,
-        publicId: req.file.filename,
+        url: req.file.location,
+        publicId: req.file.key,
         originalName: req.file.originalname,
       },
     });
@@ -32,21 +32,19 @@ router.post('/license', uploadLicense.single('licenseImage'), async (req, res) =
   }
 });
 
-// DELETE /api/upload/license/:publicId - Delete a license image
-router.delete('/license/:publicId', async (req, res) => {
+// DELETE /api/upload/license/:key(*) - Delete a license image
+router.delete('/license/:key(*)', async (req, res) => {
   try {
-    const { publicId } = req.params;
+    const { key } = req.params;
 
-    if (!publicId) {
+    if (!key) {
       return res.status(400).json({
         success: false,
-        message: 'Public ID is required',
+        message: 'S3 key is required',
       });
     }
 
-    // The publicId includes the folder path, so we need to construct the full path
-    const fullPublicId = `ntx-luxury-vans/licenses/${publicId}`;
-    await deleteImage(fullPublicId);
+    await deleteImage(key);
 
     res.status(200).json({
       success: true,

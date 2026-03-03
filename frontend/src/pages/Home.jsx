@@ -20,7 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 import OurServices from '../components/OurServices';
-import sprinterVanImage from '../assets/vans/sprintervanhotel1.png';
+const sprinterVanImage = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/sprintervanhotel1.png';
 import '../styles/Home.css';
 
 const Home = () => {

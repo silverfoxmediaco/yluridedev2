@@ -14,9 +14,9 @@ import {
   IconButton,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/NTXlargemainlogotrans.png';
-import hamburgerMenu from '../assets/hamburgermenu.png';
-import closingX from '../assets/closingx.png';
+const logo = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/NTXlargemainlogotrans.png';
+const hamburgerMenu = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/hamburgermenu.png';
+const closingX = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/closingx.png';
 import '../styles/Header.css';
 
 const Header = () => {

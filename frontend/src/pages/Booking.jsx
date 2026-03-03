@@ -6,14 +6,14 @@ import VanGrid from '../components/VanGrid';
 import BookingModal from '../components/BookingModal';
 import '../styles/Booking.css';
 
-// Import van images
-import sprintervan1 from '../assets/vans/sprintervan1.png';
-import sprintervanhotel1 from '../assets/vans/sprintervanhotel1.png';
-import mbExecutiveSprinter from '../assets/vans/MB-Executive-Sprinter-Van.jpg';
-import mercedesvan2 from '../assets/vans/mercedesvan2.webp';
-import mercedesvanv1 from '../assets/vans/mercedesvanv1.jpg';
-import vaninterior1 from '../assets/vans/vaninterior1.png';
-import vaninteriorsideview1 from '../assets/vans/vaninteriorsideview1.png';
+// Van images from S3
+const sprintervan1 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/sprintervan1.png';
+const sprintervanhotel1 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/sprintervanhotel1.png';
+const mbExecutiveSprinter = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/MB-Executive-Sprinter-Van.jpg';
+const mercedesvan2 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/mercedesvan2.webp';
+const mercedesvanv1 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/mercedesvanv1.jpg';
+const vaninterior1 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/vaninterior1.png';
+const vaninteriorsideview1 = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/vans/vaninteriorsideview1.png';
 
 // Temporary mock data until API is connected
 const mockVans = [

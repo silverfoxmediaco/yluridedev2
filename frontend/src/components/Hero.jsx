@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import vanBackground from '../assets/mercedesvanv1.jpg';
-import vanBackgroundMobile from '../assets/mercedesvanv1.jpg';
+const vanBackground = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/mercedesvanv1.jpg';
+const vanBackgroundMobile = 'https://ntxvanrentals.s3.us-east-2.amazonaws.com/siteimages/mercedesvanv1.jpg';
 import '../styles/Hero.css';
 
 const Hero = () => {
