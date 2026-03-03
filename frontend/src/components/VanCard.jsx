@@ -16,6 +16,7 @@ import {
   DirectionsCar,
   ChevronLeft,
   ChevronRight,
+  VerifiedUser,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import '../styles/VanCard.css';
@@ -104,6 +105,24 @@ const VanCard = ({ van, onBookNow }) => {
           label={van.availability ? "Available" : "Booked"}
           className={`van-card-availability ${van.availability ? 'available' : 'booked'}`}
         />
+
+        {/* Verification Badges — marketplace vans only */}
+        {van.owner && (
+          <Box className="van-card-verification-badges">
+            {van.owner?.ownerProfile?.documents?.safetyInspection?.status === 'approved' && (
+              <Box className="van-card-verified-badge">
+                <VerifiedUser className="van-card-verified-badge-icon" />
+                <span>Safety Inspected</span>
+              </Box>
+            )}
+            {van.owner?.ownerProfile?.documents?.vanRegistration?.status === 'approved' && (
+              <Box className="van-card-verified-badge">
+                <VerifiedUser className="van-card-verified-badge-icon" />
+                <span>Registered</span>
+              </Box>
+            )}
+          </Box>
+        )}
       </Box>
 
       {/* Thumbnail Strip */}

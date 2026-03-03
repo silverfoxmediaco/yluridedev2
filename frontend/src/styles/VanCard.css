@@ -154,6 +154,37 @@
   color: #FFFFFF !important;
 }
 
+/* Verification Badges */
+.van-card-verification-badges {
+  position: absolute !important;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  z-index: 2;
+}
+
+.van-card-verified-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background-color: rgba(76, 175, 80, 0.92);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.van-card-verified-badge-icon {
+  font-size: 0.8rem !important;
+  color: #FFFFFF !important;
+}
+
 /* Card Content */
 .van-card-content {
   padding: 20px !important;
@@ -334,6 +365,15 @@
 @media (max-width: 600px) {
   .van-card-image-container {
     padding-top: 56.25%; /* 16:9 aspect ratio on mobile */
+  }
+
+  .van-card-verified-badge {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+  }
+
+  .van-card-verified-badge-icon {
+    font-size: 0.7rem !important;
   }
 
   .van-card-nav-button {

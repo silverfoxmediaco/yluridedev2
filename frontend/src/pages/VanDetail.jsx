@@ -11,6 +11,7 @@ import {
   People,
   CalendarMonth,
   DirectionsCar,
+  VerifiedUser,
 } from '@mui/icons-material';
 import axios from 'axios';
 import fleetVans from '../data/vanData';
@@ -243,6 +244,30 @@ const VanDetail = () => {
                 )}
               </Box>
             </Box>
+
+            {/* Verification Badges — marketplace vans only */}
+            {van.owner && (
+              <Box className="van-detail-verification-badges">
+                {van.owner?.ownerProfile?.documents?.safetyInspection?.status === 'approved' && (
+                  <Box className="van-detail-verified-badge">
+                    <VerifiedUser className="van-detail-verified-badge-icon" />
+                    <span>Safety Inspected</span>
+                  </Box>
+                )}
+                {van.owner?.ownerProfile?.documents?.vanRegistration?.status === 'approved' && (
+                  <Box className="van-detail-verified-badge">
+                    <VerifiedUser className="van-detail-verified-badge-icon" />
+                    <span>Registered</span>
+                  </Box>
+                )}
+                {van.owner?.ownerProfile?.documents?.proofOfInsurance?.status === 'approved' && (
+                  <Box className="van-detail-verified-badge">
+                    <VerifiedUser className="van-detail-verified-badge-icon" />
+                    <span>Insured</span>
+                  </Box>
+                )}
+              </Box>
+            )}
 
             {/* Description */}
             <Box className="van-detail-description-section">

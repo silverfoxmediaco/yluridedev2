@@ -266,6 +266,32 @@
   white-space: nowrap;
 }
 
+/* Verification Badges */
+.van-detail-verification-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.van-detail-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.van-detail-verified-badge-icon {
+  font-size: 1rem !important;
+  color: #FFFFFF !important;
+}
+
 /* Section Titles */
 .van-detail-section-title {
   font-weight: 700 !important;
@@ -673,6 +699,20 @@
   .van-detail-header {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .van-detail-verification-badges {
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .van-detail-verified-badge {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .van-detail-verified-badge-icon {
+    font-size: 0.85rem !important;
   }
 
   .van-detail-meta {

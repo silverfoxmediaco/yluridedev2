@@ -7,7 +7,9 @@ const Van = require('../models/Van');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const vans = await Van.find({ isActive: true, approvalStatus: 'approved' }).sort({ createdAt: -1 });
+    const vans = await Van.find({ isActive: true, approvalStatus: 'approved' })
+      .populate('owner', 'ownerProfile.documents.safetyInspection.status ownerProfile.documents.vanRegistration.status ownerProfile.documents.proofOfInsurance.status ownerProfile.isVerified')
+      .sort({ createdAt: -1 });
     res.json(vans);
   } catch (error) {
     console.error('Error fetching vans:', error);
@@ -20,7 +22,8 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/:id', async (req, res) => {
   try {
-    const van = await Van.findById(req.params.id);
+    const van = await Van.findById(req.params.id)
+      .populate('owner', 'ownerProfile.documents.safetyInspection.status ownerProfile.documents.vanRegistration.status ownerProfile.documents.proofOfInsurance.status ownerProfile.isVerified');
     if (!van) {
       return res.status(404).json({ message: 'Van not found' });
     }

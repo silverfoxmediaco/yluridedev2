@@ -544,6 +544,31 @@ Edit Summary Log
 - Created backend/scripts/createAdmin.js:
   - Script to create admin account for james@silverfoxmedia.co
 
+2026-03-03: Verification Badges for Marketplace Vans
+- Updated backend/routes/vanRoutes.js:
+  - Added .populate('owner', 'ownerProfile.documents...status ownerProfile.isVerified') to GET /api/vans and GET /api/vans/:id
+  - Only exposes document approval statuses — no URLs, keys, or sensitive data
+- Updated frontend/src/components/VanCard.jsx:
+  - Imported VerifiedUser icon from @mui/icons-material
+  - Added verification badge row at bottom-left of image container (marketplace vans only)
+  - "Safety Inspected" badge when safetyInspection.status === 'approved'
+  - "Registered" badge when vanRegistration.status === 'approved'
+  - Green (#4CAF50) chips with white VerifiedUser icon, small size
+  - Fleet vans (no owner) show no badges
+- Updated frontend/src/styles/VanCard.css:
+  - .van-card-verification-badges: absolute bottom-left, flex row, gap 4px, z-index 2
+  - .van-card-verified-badge: green background, white text, 0.65rem font, rounded, backdrop blur
+  - Mobile (600px): slightly smaller font and padding
+- Updated frontend/src/pages/VanDetail.jsx:
+  - Imported VerifiedUser icon from @mui/icons-material
+  - Added verification badges below van header, before "About This Van" section
+  - Shows "Safety Inspected", "Registered", and "Insured" badges based on owner doc statuses
+  - Only rendered for marketplace vans (van.owner exists)
+- Updated frontend/src/styles/VanDetail.css:
+  - .van-detail-verification-badges: flex row wrap, gap 8px, margin-bottom 24px
+  - .van-detail-verified-badge: green chip with icon, 0.8rem font, rounded pill
+  - Mobile (600px): smaller font and padding
+
 2026-03-03: Email Verification for Van Owner Registration
 - Updated backend/models/User.js:
   - Added isEmailVerified (Boolean, default false), emailVerificationToken (String, select: false), emailVerificationExpires (Date, select: false)
