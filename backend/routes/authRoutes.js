@@ -100,7 +100,8 @@ router.post('/register-owner', [
     await user.save();
 
     // Send verification email (fire-and-forget)
-    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
+    const frontendUrl = process.env.FRONTEND_URL || 'https://ntxluxuryvanrentals.com';
+    const verificationUrl = `${frontendUrl}/verify-email?token=${rawToken}`;
     sendOwnerVerificationEmail({ email, firstName, businessName, verificationUrl }).catch(err => {
       console.error('Failed to send verification email:', err);
     });
@@ -355,7 +356,8 @@ router.post('/resend-verification', protect, async (req, res) => {
     const rawToken = user.generateEmailVerificationToken();
     await user.save();
 
-    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
+    const frontendUrl = process.env.FRONTEND_URL || 'https://ntxluxuryvanrentals.com';
+    const verificationUrl = `${frontendUrl}/verify-email?token=${rawToken}`;
     await sendOwnerVerificationEmail({
       email: user.email,
       firstName: user.firstName,
