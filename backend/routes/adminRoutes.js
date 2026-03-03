@@ -36,13 +36,22 @@ router.get('/stats', async (req, res) => {
 });
 
 // @route   GET /api/admin/listings
-// @desc    Get all marketplace listings (with optional status filter)
+// @desc    Get listings (with optional status and type filters)
 // @access  Admin
 router.get('/listings', async (req, res) => {
   try {
-    const { status } = req.query;
-    const filter = { listingType: 'marketplace' };
-    if (status) filter.approvalStatus = status;
+    const { status, type } = req.query;
+    const filter = {};
+
+    // Type filter: fleet, marketplace, or all
+    if (type === 'fleet') {
+      filter.listingType = 'fleet';
+    } else if (type === 'marketplace') {
+      filter.listingType = 'marketplace';
+    }
+    // No type = all listings
+
+    if (status && status !== 'all') filter.approvalStatus = status;
 
     const vans = await Van.find(filter)
       .populate('owner', 'firstName lastName email phone ownerProfile.businessName ownerProfile.isVerified')
@@ -255,6 +264,72 @@ router.put('/users/:id/verify-owner', async (req, res) => {
     res.json({ message: 'Owner verification updated', user });
   } catch (error) {
     console.error('Verify owner error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/admin/owners
+// @desc    Get all owners with van counts (optional verified filter)
+// @access  Admin
+router.get('/owners', async (req, res) => {
+  try {
+    const { verified } = req.query;
+    const filter = { role: 'owner' };
+
+    if (verified === 'true') {
+      filter['ownerProfile.isVerified'] = true;
+    } else if (verified === 'false') {
+      filter['ownerProfile.isVerified'] = { $ne: true };
+    }
+
+    const owners = await User.find(filter)
+      .select('-password')
+      .sort({ createdAt: -1 });
+
+    // Get van counts for each owner
+    const ownerIds = owners.map(o => o._id);
+    const vanCounts = await Van.aggregate([
+      { $match: { owner: { $in: ownerIds } } },
+      { $group: { _id: '$owner', count: { $sum: 1 } } }
+    ]);
+
+    const vanCountMap = {};
+    vanCounts.forEach(vc => {
+      vanCountMap[vc._id.toString()] = vc.count;
+    });
+
+    const ownersWithCounts = owners.map(owner => ({
+      ...owner.toObject(),
+      vanCount: vanCountMap[owner._id.toString()] || 0
+    }));
+
+    res.json(ownersWithCounts);
+  } catch (error) {
+    console.error('Admin owners list error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/admin/owners/:id
+// @desc    Get single owner with all their vans
+// @access  Admin
+router.get('/owners/:id', async (req, res) => {
+  try {
+    const owner = await User.findById(req.params.id).select('-password');
+
+    if (!owner) {
+      return res.status(404).json({ message: 'Owner not found' });
+    }
+
+    if (owner.role !== 'owner') {
+      return res.status(400).json({ message: 'User is not an owner' });
+    }
+
+    const vans = await Van.find({ owner: owner._id }).sort({ createdAt: -1 });
+
+    res.json({ owner, vans });
+  } catch (error) {
+    console.error('Admin owner detail error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

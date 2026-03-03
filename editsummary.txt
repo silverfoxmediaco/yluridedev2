@@ -430,6 +430,50 @@ Edit Summary Log
   - Added sendListingApprovedEmail — owner notification on approval
   - Added sendListingRejectedEmail — owner notification with rejection reason
 
+2026-03-03: Admin Dashboard Overhaul — Dedicated Admin Experience
+- Created frontend/src/components/AdminHeader.jsx + AdminHeader.css:
+  - Navy #002244 AppBar, visually distinct from white site header
+  - Logo links to /admin, nav items: Dashboard, Users, Van Owners, Listings, Bookings, Payments
+  - "Back to Site" button, mobile hamburger drawer with icons and active state highlighting
+- Refactored frontend/src/App.jsx:
+  - Extracted AppContent wrapper inside Router so useLocation works for route detection
+  - isAdminRoute: shows AdminHeader on /admin/* pages, regular Header elsewhere
+  - Footer hidden on all admin pages
+  - Added 4 new admin routes: /admin/owners, /admin/owners/:id, /admin/bookings, /admin/payments
+- Updated frontend/src/pages/admin/AdminDashboard.jsx:
+  - All 8 stat cards now clickable with navigation:
+    - Total Users → /admin/users, Customers → /admin/users?role=customer
+    - Van Owners → /admin/owners, Verified Owners → /admin/owners?verified=true
+    - Total Vans → /admin/listings?status=all, Fleet → /admin/listings?type=fleet
+    - Marketplace → /admin/listings?type=marketplace, Approved → /admin/listings?status=approved
+  - Added "Van Owners" quick action button
+  - Added .admin-dash-stat-clickable CSS with orange border hover
+- Created frontend/src/pages/admin/OwnersList.jsx + OwnersList.css:
+  - Card-based layout with owner name, business, email, verified badge, van count, join date
+  - Filter tabs: All Owners, Verified, Unverified
+  - Click card navigates to /admin/owners/:id
+  - Responsive grid (auto-fill 340px cards, 1fr on mobile)
+- Created frontend/src/pages/admin/OwnerDetail.jsx + OwnerDetail.css:
+  - Two-column layout: main content + sticky sidebar
+  - Profile section: avatar, name, business, email, phone, join date, last login
+  - Documents section (4 cards): thumbnail/icon preview, upload date, status chip, approve/reject buttons per document
+  - Vans section: horizontal cards with image, status badge, pricing, "Review" link to listing review
+  - Sidebar: verify/unverify toggle switch with confirmation dialog, docs completion stats (uploaded/approved), van counts, account status
+  - Responsive: sidebar stacks below main on tablet, column layout on mobile
+- Created frontend/src/pages/admin/AdminBookings.jsx:
+  - "Coming Soon" placeholder page with navy branding
+- Created frontend/src/pages/admin/AdminPayments.jsx:
+  - "Coming Soon" placeholder page with navy branding
+- Updated backend/routes/adminRoutes.js:
+  - GET /api/admin/owners: all owners with van counts, supports ?verified=true/false filter
+  - GET /api/admin/owners/:id: single owner with all their vans
+  - Updated GET /api/admin/listings: added ?type=fleet/marketplace filter alongside existing status filter
+- Updated frontend/src/pages/admin/PendingListings.jsx + PendingListings.css:
+  - Reads type query param, passes to API
+  - New type filter tabs (All Types / Fleet / Marketplace) above status filter tabs
+  - Fleet/Marketplace type chip badge on listing cards
+  - Dynamic page title based on listing type
+
 2026-03-03: Van Owner Marketplace — Phase 3: Admin Dashboard
 - Created backend/routes/adminRoutes.js:
   - All routes protected + authorize('admin')

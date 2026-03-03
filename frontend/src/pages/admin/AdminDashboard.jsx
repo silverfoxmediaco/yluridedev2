@@ -74,28 +74,40 @@ const AdminDashboard = () => {
         <Typography variant="h5" className="admin-dash-section-title">Users</Typography>
         <Grid container spacing={3} className="admin-dash-stats-grid">
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/users')}
+            >
               <People className="admin-dash-stat-icon admin-dash-icon-navy" />
               <Typography className="admin-dash-stat-number">{stats?.users?.total || 0}</Typography>
               <Typography className="admin-dash-stat-label">Total Users</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/users?role=customer')}
+            >
               <People className="admin-dash-stat-icon admin-dash-icon-green" />
               <Typography className="admin-dash-stat-number">{stats?.users?.customers || 0}</Typography>
               <Typography className="admin-dash-stat-label">Customers</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/owners')}
+            >
               <Store className="admin-dash-stat-icon admin-dash-icon-orange" />
               <Typography className="admin-dash-stat-number">{stats?.users?.owners || 0}</Typography>
               <Typography className="admin-dash-stat-label">Van Owners</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/owners?verified=true')}
+            >
               <VerifiedUser className="admin-dash-stat-icon admin-dash-icon-green" />
               <Typography className="admin-dash-stat-number">{stats?.users?.verifiedOwners || 0}</Typography>
               <Typography className="admin-dash-stat-label">Verified Owners</Typography>
@@ -107,28 +119,40 @@ const AdminDashboard = () => {
         <Typography variant="h5" className="admin-dash-section-title">Listings</Typography>
         <Grid container spacing={3} className="admin-dash-stats-grid">
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/listings?status=all')}
+            >
               <DirectionsCar className="admin-dash-stat-icon admin-dash-icon-navy" />
               <Typography className="admin-dash-stat-number">{stats?.vans?.total || 0}</Typography>
               <Typography className="admin-dash-stat-label">Total Vans</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/listings?type=fleet')}
+            >
               <DirectionsCar className="admin-dash-stat-icon admin-dash-icon-navy" />
               <Typography className="admin-dash-stat-number">{stats?.vans?.fleet || 0}</Typography>
               <Typography className="admin-dash-stat-label">Fleet Vans</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/listings?type=marketplace')}
+            >
               <Store className="admin-dash-stat-icon admin-dash-icon-orange" />
               <Typography className="admin-dash-stat-number">{stats?.vans?.marketplace || 0}</Typography>
               <Typography className="admin-dash-stat-label">Marketplace</Typography>
             </Paper>
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Paper className="admin-dash-stat-card">
+            <Paper
+              className="admin-dash-stat-card admin-dash-stat-clickable"
+              onClick={() => navigate('/admin/listings?status=approved')}
+            >
               <CheckCircle className="admin-dash-stat-icon admin-dash-icon-green" />
               <Typography className="admin-dash-stat-number">{stats?.vans?.approved || 0}</Typography>
               <Typography className="admin-dash-stat-label">Approved</Typography>
@@ -162,6 +186,14 @@ const AdminDashboard = () => {
             className="admin-dash-action-secondary"
           >
             Manage Users
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<Store />}
+            onClick={() => navigate('/admin/owners')}
+            className="admin-dash-action-secondary"
+          >
+            Van Owners
           </Button>
         </Box>
       </Container>

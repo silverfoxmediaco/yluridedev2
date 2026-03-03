@@ -94,6 +94,17 @@
   transform: translateY(-2px);
 }
 
+.admin-dash-stat-clickable {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-dash-stat-clickable:hover {
+  border-color: #FB4F14;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
 .admin-dash-stat-icon {
   font-size: 28px !important;
   margin-bottom: 8px;

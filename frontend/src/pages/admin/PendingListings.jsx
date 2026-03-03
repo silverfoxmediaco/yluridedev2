@@ -21,23 +21,29 @@ const PendingListings = () => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('pending_review');
+  const [listingType, setListingType] = useState('');
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const statusParam = searchParams.get('status');
+    const typeParam = searchParams.get('type');
     if (statusParam) setFilter(statusParam);
+    if (typeParam) setListingType(typeParam);
   }, [searchParams]);
 
   useEffect(() => {
     fetchListings();
-  }, [filter]);
+  }, [filter, listingType]);
 
   const fetchListings = async () => {
     setLoading(true);
     try {
-      const query = filter === 'all' ? '' : `?status=${filter}`;
-      const { data } = await api.get(`/admin/listings${query}`);
+      const params = new URLSearchParams();
+      if (filter && filter !== 'all') params.append('status', filter);
+      if (listingType) params.append('type', listingType);
+      const queryStr = params.toString();
+      const { data } = await api.get(`/admin/listings${queryStr ? `?${queryStr}` : ''}`);
       setListings(data);
     } catch (error) {
       toast.error('Failed to load listings');
@@ -53,6 +59,12 @@ const PendingListings = () => {
     { key: 'all', label: 'All' },
   ];
 
+  const typeTabs = [
+    { key: '', label: 'All Types' },
+    { key: 'fleet', label: 'Fleet' },
+    { key: 'marketplace', label: 'Marketplace' },
+  ];
+
   return (
     <div className="pending-listings-page">
       <Container maxWidth="lg" className="pending-listings-container">
@@ -65,11 +77,26 @@ const PendingListings = () => {
             Admin Dashboard
           </Button>
           <Typography variant="h3" className="pending-listings-title">
-            Marketplace Listings
+            {listingType === 'fleet' ? 'Fleet' : listingType === 'marketplace' ? 'Marketplace' : ''} Listings
           </Typography>
         </Box>
 
-        {/* Filter Tabs */}
+        {/* Type Filter Tabs */}
+        <Box className="pending-listings-type-filters">
+          {typeTabs.map(tab => (
+            <Button
+              key={tab.key}
+              variant={listingType === tab.key ? 'contained' : 'text'}
+              onClick={() => setListingType(tab.key)}
+              className={`pending-listings-type-btn ${listingType === tab.key ? 'pending-listings-type-active' : ''}`}
+              size="small"
+            >
+              {tab.label}
+            </Button>
+          ))}
+        </Box>
+
+        {/* Status Filter Tabs */}
         <Box className="pending-listings-filters">
           {filterTabs.map(tab => (
             <Button
@@ -91,7 +118,8 @@ const PendingListings = () => {
         ) : listings.length === 0 ? (
           <Paper className="pending-listings-empty">
             <Typography className="pending-listings-empty-text">
-              No {filter === 'all' ? '' : filter.replace('_', ' ')} listings found.
+              No {filter === 'all' ? '' : filter.replace('_', ' ')} listings found
+              {listingType ? ` in ${listingType}` : ''}.
             </Typography>
           </Paper>
         ) : (
@@ -113,6 +141,17 @@ const PendingListings = () => {
                       className="pending-listing-status-chip"
                       sx={{ backgroundColor: status.bg, color: status.color }}
                     />
+                    {van.listingType && (
+                      <Chip
+                        label={van.listingType === 'fleet' ? 'Fleet' : 'Marketplace'}
+                        className="pending-listing-type-chip"
+                        size="small"
+                        sx={{
+                          backgroundColor: van.listingType === 'fleet' ? '#e3f2fd' : '#fff3e0',
+                          color: van.listingType === 'fleet' ? '#1565c0' : '#e67e00',
+                        }}
+                      />
+                    )}
                   </Box>
 
                   <Box className="pending-listing-info">
