@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const crypto = require('crypto');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { generateToken, protect } = require('../middleware/auth');
+const { sendOwnerVerificationEmail } = require('../utils/emailService');
 
 // @route   POST /api/auth/register
 // @desc    Register a new customer
@@ -86,10 +88,21 @@ router.post('/register-owner', [
       password,
       phone,
       role: 'owner',
+      isEmailVerified: false,
       ownerProfile: {
         businessName,
         isVerified: false
       }
+    });
+
+    // Generate email verification token
+    const rawToken = user.generateEmailVerificationToken();
+    await user.save();
+
+    // Send verification email (fire-and-forget)
+    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
+    sendOwnerVerificationEmail({ email, firstName, businessName, verificationUrl }).catch(err => {
+      console.error('Failed to send verification email:', err);
     });
 
     const token = generateToken(user._id);
@@ -103,6 +116,7 @@ router.post('/register-owner', [
         email: user.email,
         phone: user.phone,
         role: user.role,
+        isEmailVerified: false,
         ownerProfile: {
           businessName: user.ownerProfile.businessName,
           isVerified: user.ownerProfile.isVerified
@@ -156,7 +170,8 @@ router.post('/login', [
       lastName: user.lastName,
       email: user.email,
       phone: user.phone,
-      role: user.role
+      role: user.role,
+      isEmailVerified: user.isEmailVerified
     };
 
     if (user.role === 'owner' && user.ownerProfile) {
@@ -191,6 +206,7 @@ router.get('/me', protect, async (req, res) => {
       phone: user.phone,
       role: user.role,
       isActive: user.isActive,
+      isEmailVerified: user.isEmailVerified,
       lastLogin: user.lastLogin,
       createdAt: user.createdAt
     };
@@ -256,7 +272,8 @@ router.put('/profile', protect, [
       lastName: user.lastName,
       email: user.email,
       phone: user.phone,
-      role: user.role
+      role: user.role,
+      isEmailVerified: user.isEmailVerified
     };
 
     if (user.role === 'owner' && user.ownerProfile) {
@@ -269,6 +286,86 @@ router.put('/profile', protect, [
     res.json(userData);
   } catch (error) {
     console.error('Update profile error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/auth/verify-email/:token
+// @desc    Verify owner email address
+// @access  Public
+router.get('/verify-email/:token', async (req, res) => {
+  try {
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await User.findOne({
+      emailVerificationToken: hashedToken,
+      emailVerificationExpires: { $gt: Date.now() }
+    }).select('+emailVerificationToken +emailVerificationExpires');
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid or expired verification link' });
+    }
+
+    user.isEmailVerified = true;
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpires = undefined;
+    await user.save();
+
+    const token = generateToken(user._id);
+
+    const userData = {
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      isEmailVerified: true
+    };
+
+    if (user.role === 'owner' && user.ownerProfile) {
+      userData.ownerProfile = {
+        businessName: user.ownerProfile.businessName,
+        isVerified: user.ownerProfile.isVerified
+      };
+    }
+
+    res.json({ token, user: userData });
+  } catch (error) {
+    console.error('Verify email error:', error);
+    res.status(500).json({ message: 'Server error during email verification' });
+  }
+});
+
+// @route   POST /api/auth/resend-verification
+// @desc    Resend email verification for unverified owners
+// @access  Private
+router.post('/resend-verification', protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user || user.role !== 'owner') {
+      return res.status(400).json({ message: 'Only van owners can request email verification' });
+    }
+
+    if (user.isEmailVerified) {
+      return res.status(400).json({ message: 'Email is already verified' });
+    }
+
+    const rawToken = user.generateEmailVerificationToken();
+    await user.save();
+
+    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
+    await sendOwnerVerificationEmail({
+      email: user.email,
+      firstName: user.firstName,
+      businessName: user.ownerProfile?.businessName || '',
+      verificationUrl
+    });
+
+    res.json({ message: 'Verification email sent' });
+  } catch (error) {
+    console.error('Resend verification error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

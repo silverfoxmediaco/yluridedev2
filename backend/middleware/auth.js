@@ -51,4 +51,15 @@ const authorize = (...roles) => {
   };
 };
 
-module.exports = { generateToken, protect, authorize };
+// Require email verification for owners — admins and customers pass through
+const requireEmailVerified = (req, res, next) => {
+  if (req.user.role === 'owner' && !req.user.isEmailVerified) {
+    return res.status(403).json({
+      message: 'Email verification required',
+      code: 'EMAIL_NOT_VERIFIED'
+    });
+  }
+  next();
+};
+
+module.exports = { generateToken, protect, authorize, requireEmailVerified };

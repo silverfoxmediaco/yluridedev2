@@ -135,39 +135,44 @@ const sendContactEmail = async (contactDetails) => {
   }
 };
 
-// Send owner welcome email
-const sendOwnerWelcomeEmail = async (ownerDetails) => {
-  const { email, firstName, businessName } = ownerDetails;
+// Send owner email verification email
+const sendOwnerVerificationEmail = async (ownerDetails) => {
+  const { email, firstName, businessName, verificationUrl } = ownerDetails;
 
   const mailOptions = {
     from: '"NTX Luxury Van Rentals" <james@silverfoxmedia.co>',
     to: email,
-    subject: 'Welcome to NTX Luxury Van Rentals Marketplace!',
+    subject: 'Verify Your Email — NTX Luxury Van Rentals',
+    text: `Hi ${firstName},\n\nThank you for registering ${businessName} on NTX Luxury Van Rentals.\n\nPlease verify your email by visiting the following link within 24 hours:\n${verificationUrl}\n\nIf you did not create this account, you can safely ignore this email.\n\nBest regards,\nNTX Luxury Van Rentals Team`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #002244; border-bottom: 2px solid #FB4F14; padding-bottom: 10px;">
-          Welcome, ${firstName}!
-        </h1>
-        <p>Thank you for registering <strong>${businessName}</strong> on the NTX Luxury Van Rentals Marketplace.</p>
-        <p>Here's how to get started:</p>
-        <ol>
-          <li><strong>Upload your documents</strong> — Government ID, vehicle registration, safety inspection, and insurance</li>
-          <li><strong>Create your first listing</strong> — Add your van details, photos, and pricing</li>
-          <li><strong>Submit for review</strong> — Our team will review and approve your listing</li>
-        </ol>
-        <p>Once approved, your van will be visible to thousands of customers in the Dallas area.</p>
-        <p>If you have any questions, don't hesitate to reach out.</p>
-        <p>Best regards,<br>NTX Luxury Van Rentals Team</p>
+        <div style="background-color: #002244; padding: 24px; text-align: center;">
+          <h1 style="color: #fff; margin: 0; font-size: 22px;">NTX Luxury Van Rentals</h1>
+        </div>
+        <div style="padding: 32px 24px;">
+          <h2 style="color: #002244; margin-top: 0;">Welcome, ${firstName}!</h2>
+          <p>Thank you for registering <strong>${businessName}</strong> on the NTX Luxury Van Rentals Marketplace.</p>
+          <p>Please verify your email address to access your owner dashboard and start listing your vans.</p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${verificationUrl}" style="background-color: #FB4F14; color: #ffffff; padding: 14px 36px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px; display: inline-block;">Verify My Email</a>
+          </div>
+          <p style="color: #666; font-size: 14px;">If the button doesn't work, copy and paste this link into your browser:</p>
+          <p style="color: #666; font-size: 13px; word-break: break-all;">${verificationUrl}</p>
+          <p style="color: #999; font-size: 13px; margin-top: 24px;">This link expires in 24 hours. If you did not create this account, you can safely ignore this email.</p>
+        </div>
+        <div style="background-color: #f5f5f5; padding: 16px 24px; text-align: center;">
+          <p style="color: #999; font-size: 12px; margin: 0;">NTX Luxury Van Rentals — Premium Mercedes Sprinter Vans in Dallas</p>
+        </div>
       </div>
     `
   };
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('Owner welcome email sent:', info.messageId);
+    console.log('Owner verification email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('Error sending owner welcome email:', error);
+    console.error('Error sending owner verification email:', error);
     return { success: false, error: error.message };
   }
 };
@@ -295,7 +300,7 @@ module.exports = {
   sendBookingNotification,
   sendContactEmail,
   sendEmail,
-  sendOwnerWelcomeEmail,
+  sendOwnerVerificationEmail,
   sendListingSubmittedNotification,
   sendListingApprovedEmail,
   sendListingRejectedEmail

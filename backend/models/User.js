@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -41,6 +42,18 @@ const userSchema = new mongoose.Schema({
   },
   lastLogin: {
     type: Date
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: {
+    type: String,
+    select: false
+  },
+  emailVerificationExpires: {
+    type: Date,
+    select: false
   },
   // Owner-specific profile (only populated when role=owner)
   ownerProfile: {
@@ -114,6 +127,14 @@ userSchema.pre('save', async function(next) {
 // Compare entered password with hashed password
 userSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Generate email verification token (stores hash in DB, returns raw token for email)
+userSchema.methods.generateEmailVerificationToken = function() {
+  const rawToken = crypto.randomBytes(32).toString('hex');
+  this.emailVerificationToken = crypto.createHash('sha256').update(rawToken).digest('hex');
+  this.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+  return rawToken;
 };
 
 module.exports = mongoose.model('User', userSchema);

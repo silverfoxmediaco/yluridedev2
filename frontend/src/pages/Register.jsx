@@ -78,7 +78,11 @@ const Register = () => {
 
       await register(payload);
       toast.success('Account created successfully!');
-      navigate('/dashboard', { replace: true });
+      if (accountType === 'owner') {
+        navigate('/verify-email-sent', { replace: true, state: { email: formData.email } });
+      } else {
+        navigate('/dashboard', { replace: true });
+      }
     } catch (error) {
       const msg = error.response?.data?.message || 'Registration failed. Please try again.';
       toast.error(msg);

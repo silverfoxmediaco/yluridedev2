@@ -4,9 +4,10 @@ import {
   Container, Typography, Box, Paper, Button, Chip, Grid, CircularProgress
 } from '@mui/material';
 import {
-  DirectionsCar, Pending, CheckCircle, Edit, Add, Description
+  DirectionsCar, Pending, CheckCircle, Edit, Add, Description, MarkEmailRead
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import '../styles/Dashboard.css';
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [resendingEmail, setResendingEmail] = useState(false);
 
   useEffect(() => {
     if (user?.role === 'owner') {
@@ -35,6 +37,21 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
+
+  const handleResendVerification = async () => {
+    setResendingEmail(true);
+    try {
+      await api.post('/auth/resend-verification');
+      toast.success('Verification email sent!');
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Failed to resend email.';
+      toast.error(msg);
+    } finally {
+      setResendingEmail(false);
+    }
+  };
+
+  const emailVerified = user?.isEmailVerified !== false;
 
   if (loading) {
     return (
@@ -61,8 +78,33 @@ const Dashboard = () => {
         {/* Owner Dashboard */}
         {user?.role === 'owner' && (
           <>
-            {/* Verification Banner */}
-            {!user?.ownerProfile?.isVerified && (
+            {/* Email Verification Banner */}
+            {!emailVerified && (
+              <Paper className="dashboard-email-verify-banner">
+                <Box className="dashboard-verify-content">
+                  <MarkEmailRead sx={{ color: '#FB4F14', fontSize: 28 }} />
+                  <Box>
+                    <Typography className="dashboard-verify-title">
+                      Verify Your Email
+                    </Typography>
+                    <Typography className="dashboard-verify-text">
+                      Check your inbox for a verification link to activate your owner account.
+                    </Typography>
+                  </Box>
+                </Box>
+                <Button
+                  variant="outlined"
+                  onClick={handleResendVerification}
+                  disabled={resendingEmail}
+                  className="dashboard-verify-btn"
+                >
+                  {resendingEmail ? 'Sending...' : 'Resend Email'}
+                </Button>
+              </Paper>
+            )}
+
+            {/* Document Verification Banner */}
+            {emailVerified && !user?.ownerProfile?.isVerified && (
               <Paper className="dashboard-verify-banner">
                 <Box className="dashboard-verify-content">
                   <Description sx={{ color: '#FB4F14', fontSize: 28 }} />
@@ -123,6 +165,7 @@ const Dashboard = () => {
                 variant="contained"
                 startIcon={<Add />}
                 onClick={() => navigate('/owner/listings/new')}
+                disabled={!emailVerified}
                 className="dashboard-action-btn-primary"
               >
                 Create New Listing
@@ -131,6 +174,7 @@ const Dashboard = () => {
                 variant="outlined"
                 startIcon={<DirectionsCar />}
                 onClick={() => navigate('/owner/listings')}
+                disabled={!emailVerified}
                 className="dashboard-action-btn-secondary"
               >
                 View My Listings
@@ -139,6 +183,7 @@ const Dashboard = () => {
                 variant="outlined"
                 startIcon={<Description />}
                 onClick={() => navigate('/owner/documents')}
+                disabled={!emailVerified}
                 className="dashboard-action-btn-secondary"
               >
                 My Documents

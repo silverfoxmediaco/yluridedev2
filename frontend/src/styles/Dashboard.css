@@ -95,6 +95,20 @@
   background-color: rgba(251, 79, 20, 0.08) !important;
 }
 
+/* Email Verification Banner */
+.dashboard-email-verify-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  border-radius: 12px;
+  border-left: 4px solid #FB4F14;
+  background: #fff8f5;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 /* Stats Grid */
 .dashboard-stats-grid {
   margin-bottom: 32px;
@@ -215,7 +229,8 @@
     font-size: 1.5rem;
   }
 
-  .dashboard-verify-banner {
+  .dashboard-verify-banner,
+  .dashboard-email-verify-banner {
     flex-direction: column;
     align-items: flex-start;
   }

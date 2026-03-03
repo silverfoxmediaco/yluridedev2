@@ -4,7 +4,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Van = require('../models/Van');
 const User = require('../models/User');
-const { protect, authorize } = require('../middleware/auth');
+const { protect, authorize, requireEmailVerified } = require('../middleware/auth');
 
 // All owner routes require auth + owner/admin role
 router.use(protect, authorize('owner', 'admin'));
@@ -49,8 +49,8 @@ router.get('/vans', async (req, res) => {
 
 // @route   POST /api/owner/vans
 // @desc    Create a new van listing (draft)
-// @access  Owner/Admin
-router.post('/vans', [
+// @access  Owner/Admin (email verified)
+router.post('/vans', requireEmailVerified, [
   body('name').trim().notEmpty().withMessage('Van name is required'),
   body('type').isIn(['Sprinter', 'Transit', 'Metris', 'Other']).withMessage('Invalid van type'),
   body('year').isInt({ min: 2000, max: 2030 }).withMessage('Valid year is required'),
@@ -83,8 +83,8 @@ router.post('/vans', [
 
 // @route   PUT /api/owner/vans/:id
 // @desc    Update a van listing
-// @access  Owner/Admin
-router.put('/vans/:id', async (req, res) => {
+// @access  Owner/Admin (email verified)
+router.put('/vans/:id', requireEmailVerified, async (req, res) => {
   try {
     const van = await Van.findById(req.params.id);
 
@@ -119,8 +119,8 @@ router.put('/vans/:id', async (req, res) => {
 
 // @route   PUT /api/owner/vans/:id/submit
 // @desc    Submit listing for review
-// @access  Owner/Admin
-router.put('/vans/:id/submit', async (req, res) => {
+// @access  Owner/Admin (email verified)
+router.put('/vans/:id/submit', requireEmailVerified, async (req, res) => {
   try {
     const van = await Van.findById(req.params.id);
 
@@ -183,8 +183,8 @@ router.delete('/vans/:id', async (req, res) => {
 
 // @route   POST /api/owner/documents
 // @desc    Save uploaded document reference to user profile
-// @access  Owner/Admin
-router.post('/documents', async (req, res) => {
+// @access  Owner/Admin (email verified)
+router.post('/documents', requireEmailVerified, async (req, res) => {
   try {
     const { docType, url, key } = req.body;
 

@@ -23,6 +23,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import VerifyEmail from './pages/VerifyEmail';
+import VerifyEmailSent from './pages/VerifyEmailSent';
 import Dashboard from './pages/Dashboard';
 import MyListings from './pages/owner/MyListings';
 import VanListingForm from './pages/owner/VanListingForm';
@@ -62,6 +64,8 @@ function AppContent() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/verify-email-sent" element={<VerifyEmailSent />} />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
