@@ -198,11 +198,21 @@
 }
 
 @media (max-width: 480px) {
+  .admin-dash-page {
+    padding: 16px 0;
+  }
+
   .admin-dash-stat-card {
     padding: 16px 12px;
   }
 
   .admin-dash-stat-number {
     font-size: 1.5rem;
+  }
+
+  .admin-dash-action-primary,
+  .admin-dash-action-secondary {
+    padding: 12px 20px !important;
+    font-size: 0.9rem !important;
   }
 }

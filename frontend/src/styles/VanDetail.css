@@ -581,7 +581,7 @@
 /* ===== RESPONSIVE: 768px ===== */
 @media (max-width: 768px) {
   .van-detail-page {
-    padding-bottom: 80px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
   }
 
   .van-detail-container {
@@ -648,6 +648,7 @@
     background-color: #FFFFFF;
     border-top: 1px solid #E0E0E0;
     padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
     align-items: center;
     justify-content: space-between;
     z-index: 100;

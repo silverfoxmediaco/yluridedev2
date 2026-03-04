@@ -479,6 +479,14 @@
 }
 
 @media (max-width: 480px) {
+  .owner-detail-page {
+    padding: 16px 0;
+  }
+
+  .owner-detail-profile-card {
+    padding: 16px;
+  }
+
   .owner-detail-profile-top {
     flex-direction: column;
     text-align: center;
@@ -495,5 +503,21 @@
   .owner-detail-doc-approve-btn,
   .owner-detail-doc-reject-btn {
     width: 100%;
+  }
+
+  .owner-detail-sidebar-card {
+    padding: 16px;
+  }
+
+  .owner-detail-van-info {
+    padding: 12px;
+  }
+
+  .owner-detail-van-review-btn {
+    width: 100%;
+  }
+
+  .owner-detail-van-actions {
+    padding: 0 12px 12px;
   }
 }

@@ -250,6 +250,10 @@
 }
 
 @media (max-width: 480px) {
+  .dashboard-page {
+    padding: 16px 0;
+  }
+
   .dashboard-header {
     margin-bottom: 20px;
   }
@@ -260,5 +264,14 @@
 
   .dashboard-stat-number {
     font-size: 1.5rem;
+  }
+
+  .dashboard-verify-banner,
+  .dashboard-email-verify-banner {
+    padding: 16px;
+  }
+
+  .dashboard-customer-card {
+    padding: 20px 16px;
   }
 }

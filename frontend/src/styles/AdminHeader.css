@@ -96,6 +96,7 @@
   flex-direction: column;
   height: 100%;
   padding: 0;
+  padding-top: env(safe-area-inset-top);
 }
 
 .admin-header-drawer-top {

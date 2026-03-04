@@ -299,6 +299,13 @@
     padding: 20px 16px;
   }
 
+  .van-listing-form-stepper {
+    overflow-x: auto;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 0 16px;
+  }
+
   .van-listing-form-feature-input {
     flex-direction: column;
   }
@@ -306,5 +313,9 @@
   .van-listing-form-feature-add-btn {
     min-height: 44px;
     width: 100%;
+  }
+
+  .van-listing-form-image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   }
 }

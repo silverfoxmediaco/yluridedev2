@@ -58,7 +58,8 @@
 /* Table */
 .manage-users-table-container {
   border-radius: 12px !important;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .manage-users-table-head {
@@ -123,6 +124,10 @@
 }
 
 @media (max-width: 480px) {
+  .manage-users-page {
+    padding: 16px 0;
+  }
+
   .manage-users-filters {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -131,5 +136,9 @@
 
   .manage-users-filter-btn {
     white-space: nowrap;
+  }
+
+  .manage-users-table-container .MuiTable-root {
+    min-width: 500px;
   }
 }

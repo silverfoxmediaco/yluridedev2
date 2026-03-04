@@ -184,11 +184,21 @@
 }
 
 @media (max-width: 400px) {
+  .booking-success-page {
+    padding: 16px 8px;
+  }
+
   .booking-success-paper {
     padding: 20px 16px;
   }
 
   .booking-success-section {
     padding: 16px;
+  }
+
+  .booking-success-btn-primary,
+  .booking-success-btn-secondary {
+    padding: 12px 20px !important;
+    font-size: 0.9rem !important;
   }
 }

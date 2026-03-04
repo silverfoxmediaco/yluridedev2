@@ -248,6 +248,10 @@
 }
 
 @media (max-width: 480px) {
+  .pending-listings-page {
+    padding: 20px 0;
+  }
+
   .pending-listings-filters,
   .pending-listings-type-filters {
     overflow-x: auto;
@@ -258,5 +262,13 @@
   .pending-listings-filter-btn,
   .pending-listings-type-btn {
     white-space: nowrap;
+  }
+
+  .pending-listing-info {
+    padding: 12px 14px;
+  }
+
+  .pending-listing-name {
+    font-size: 1rem;
   }
 }

@@ -202,3 +202,23 @@
     gap: 8px;
   }
 }
+
+@media (max-width: 480px) {
+  .owner-docs-page {
+    padding: 16px 0;
+  }
+
+  .owner-docs-card {
+    padding: 16px 12px;
+  }
+
+  .owner-docs-progress {
+    padding: 16px;
+  }
+
+  .owner-docs-pending-notice {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

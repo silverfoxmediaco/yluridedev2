@@ -73,7 +73,7 @@
 /* Grid */
 .my-listings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -201,6 +201,10 @@
 }
 
 @media (max-width: 480px) {
+  .my-listings-page {
+    padding: 16px 0;
+  }
+
   .my-listings-filters {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -210,5 +214,9 @@
 
   .my-listings-filter-btn {
     white-space: nowrap;
+  }
+
+  .my-listing-info {
+    padding: 12px 14px 16px;
   }
 }

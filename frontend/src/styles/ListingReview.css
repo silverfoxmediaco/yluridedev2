@@ -295,3 +295,22 @@
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   }
 }
+
+@media (max-width: 480px) {
+  .listing-review-page {
+    padding: 20px 0;
+  }
+
+  .listing-review-title {
+    font-size: 1.25rem;
+  }
+
+  .listing-review-pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .listing-review-section,
+  .listing-review-sidebar-card {
+    padding: 14px;
+  }
+}

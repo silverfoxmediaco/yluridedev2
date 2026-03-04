@@ -12,6 +12,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -28,8 +29,12 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   overscroll-behavior-y: contain;
+  overflow-x: hidden;
   /* Safe area insets for notched devices */
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-right: env(safe-area-inset-left);
 }
 
 /* Typography */
@@ -245,12 +250,7 @@ button,
 }
 
 /* PWA Standalone Mode Optimizations */
-@media (display-mode: standalone) {
-  body {
-    /* Extra padding for standalone app */
-    padding-top: env(safe-area-inset-top);
-  }
-}
+/* Body already has safe-area-inset padding — no duplicate needed */
 
 /* Landscape orientation adjustments */
 @media (orientation: landscape) and (max-height: 500px) {

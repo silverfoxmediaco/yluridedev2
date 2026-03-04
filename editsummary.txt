@@ -544,6 +544,44 @@ Edit Summary Log
 - Created backend/scripts/createAdmin.js:
   - Script to create admin account for james@silverfoxmedia.co
 
+2026-03-03: Mobile/Tablet Responsiveness Audit — Horizontal Scroll & Safe Area Fixes
+- Updated frontend/src/index.css:
+  - Added overflow-x: hidden to html element — prevents any horizontal scroll globally
+  - Added overflow-x: hidden to body element
+  - Removed duplicate PWA standalone safe-area padding-top (was doubling the inset)
+- Updated frontend/src/styles/VanDetail.css:
+  - Mobile sticky CTA: added padding-bottom: calc(12px + env(safe-area-inset-bottom)) for notched phones
+  - Mobile page bottom padding: uses calc(80px + env(safe-area-inset-bottom))
+- Updated frontend/src/styles/Header.css:
+  - Drawer container: added padding-top: env(safe-area-inset-top) for notch clearance
+- Updated frontend/src/styles/AdminHeader.css:
+  - Drawer container: added padding-top: env(safe-area-inset-top) for notch clearance
+- Updated frontend/src/styles/MyListings.css:
+  - Grid: changed minmax(340px, 1fr) to minmax(min(340px, 100%), 1fr) — prevents overflow at 425px
+  - Added 480px breakpoint with tighter padding
+- Updated frontend/src/styles/OwnersList.css:
+  - Grid: same minmax(min(340px, 100%), 1fr) fix
+- Updated frontend/src/styles/ManageUsers.css:
+  - Table container: changed overflow: hidden to overflow-x: auto / overflow-y: hidden (fixes mobile table scroll)
+  - Added 480px breakpoint, reduced table min-width to 500px
+- Updated frontend/src/styles/ListingReview.css:
+  - Added 480px breakpoint: pricing grid goes to 1 column, tighter section padding
+- Updated frontend/src/styles/PendingListings.css:
+  - Added 480px breakpoint with tighter padding
+- Updated frontend/src/styles/VanListingForm.css:
+  - Added stepper overflow-x: auto at 480px for multi-step labels
+  - Added smaller image grid thumbnails at 480px
+- Updated frontend/src/styles/Dashboard.css:
+  - Added 480px breakpoint: tighter padding on page, banners, and cards
+- Updated frontend/src/styles/AdminDashboard.css:
+  - Added 480px breakpoint: tighter page padding, smaller action buttons
+- Updated frontend/src/styles/OwnerDocuments.css:
+  - Added 480px breakpoint: tighter padding on cards, progress bar, and pending notice
+- Updated frontend/src/styles/OwnerDetail.css:
+  - Added 480px breakpoint: tighter padding on profile/sidebar/van cards, full-width review button
+- Updated frontend/src/styles/BookingSuccess.css:
+  - Added 400px breakpoint: tighter page padding, smaller buttons
+
 2026-03-03: Admin Email Notifications for New User Signups
 - Updated backend/utils/emailService.js:
   - Added sendNewUserNotification() — sends email to james@silverfoxmedia.co when a new user registers
