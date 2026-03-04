@@ -273,6 +273,47 @@ const sendListingRejectedEmail = async (listingDetails) => {
   }
 };
 
+// Send admin notification when a new user registers
+const sendNewUserNotification = async (userDetails) => {
+  const { firstName, lastName, email, phone, role, businessName } = userDetails;
+  const roleLabel = role === 'owner' ? 'Van Owner' : 'Renter';
+
+  const mailOptions = {
+    from: '"NTX Signup Alert" <james@silverfoxmedia.co>',
+    to: 'james@silverfoxmedia.co',
+    subject: `New ${roleLabel} Signup — ${firstName} ${lastName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #002244; padding: 24px; text-align: center;">
+          <h1 style="color: #fff; margin: 0; font-size: 22px;">New ${roleLabel} Registered</h1>
+        </div>
+        <div style="padding: 24px;">
+          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px;">
+            <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+            <p><strong>Account Type:</strong> ${roleLabel}</p>
+            ${businessName ? `<p><strong>Business Name:</strong> ${businessName}</p>` : ''}
+          </div>
+          ${role === 'owner' ? '<p style="color: #666; margin-top: 16px;">This owner will need to verify their email before they can list vans.</p>' : ''}
+        </div>
+        <div style="background-color: #f5f5f5; padding: 16px 24px; text-align: center;">
+          <p style="color: #999; font-size: 12px; margin: 0;">NTX Luxury Van Rentals — Signup Notification</p>
+        </div>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`New ${roleLabel} notification sent:`, info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error(`Error sending new ${roleLabel} notification:`, error);
+    return { success: false, error: error.message };
+  }
+};
+
 // Generic send email function
 const sendEmail = async (to, subject, html, text = null) => {
   const mailOptions = {
@@ -303,5 +344,6 @@ module.exports = {
   sendOwnerVerificationEmail,
   sendListingSubmittedNotification,
   sendListingApprovedEmail,
-  sendListingRejectedEmail
+  sendListingRejectedEmail,
+  sendNewUserNotification
 };

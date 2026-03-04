@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { generateToken, protect } = require('../middleware/auth');
-const { sendOwnerVerificationEmail } = require('../utils/emailService');
+const { sendOwnerVerificationEmail, sendNewUserNotification } = require('../utils/emailService');
 
 // @route   POST /api/auth/register
 // @desc    Register a new customer
@@ -39,6 +39,11 @@ router.post('/register', [
     });
 
     const token = generateToken(user._id);
+
+    // Notify admin of new renter signup (fire-and-forget)
+    sendNewUserNotification({ firstName, lastName, email, phone, role: 'customer' }).catch(err => {
+      console.error('Failed to send new renter notification:', err);
+    });
 
     res.status(201).json({
       token,
@@ -104,6 +109,11 @@ router.post('/register-owner', [
     const verificationUrl = `${frontendUrl}/verify-email?token=${rawToken}`;
     sendOwnerVerificationEmail({ email, firstName, businessName, verificationUrl }).catch(err => {
       console.error('Failed to send verification email:', err);
+    });
+
+    // Notify admin of new van owner signup (fire-and-forget)
+    sendNewUserNotification({ firstName, lastName, email, phone, role: 'owner', businessName }).catch(err => {
+      console.error('Failed to send new owner notification:', err);
     });
 
     const token = generateToken(user._id);

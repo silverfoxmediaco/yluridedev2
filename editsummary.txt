@@ -544,6 +544,18 @@ Edit Summary Log
 - Created backend/scripts/createAdmin.js:
   - Script to create admin account for james@silverfoxmedia.co
 
+2026-03-03: Admin Email Notifications for New User Signups
+- Updated backend/utils/emailService.js:
+  - Added sendNewUserNotification() — sends email to james@silverfoxmedia.co when a new user registers
+  - Includes name, email, phone, account type (Renter or Van Owner), and business name (for owners)
+  - Brand-styled HTML template with navy header bar
+  - Exported in module.exports
+- Updated backend/routes/authRoutes.js:
+  - Imported sendNewUserNotification from emailService
+  - POST /api/auth/register (customer): calls sendNewUserNotification fire-and-forget after registration
+  - POST /api/auth/register-owner: calls sendNewUserNotification fire-and-forget after registration
+  - Both are non-blocking — registration response is not delayed by email sending
+
 2026-03-03: Verification Badges for Marketplace Vans
 - Updated backend/routes/vanRoutes.js:
   - Added .populate('owner', 'ownerProfile.documents...status ownerProfile.isVerified') to GET /api/vans and GET /api/vans/:id
