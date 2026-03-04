@@ -25,6 +25,7 @@ const Contact = () => {
     phone: '',
     subject: '',
     message: '',
+    website: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -77,6 +78,7 @@ const Contact = () => {
           phone: '',
           subject: '',
           message: '',
+          website: '',
         });
       } else {
         throw new Error(data.message || 'Failed to send message');
@@ -123,6 +125,17 @@ const Contact = () => {
             )}
 
             <form onSubmit={handleSubmit} className="contact-form">
+              {/* Honeypot field — hidden from humans, bots auto-fill it */}
+              <TextField
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                autoComplete="off"
+                tabIndex={-1}
+                sx={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+                aria-hidden="true"
+              />
+
               <TextField
                 label="Your Name"
                 name="name"

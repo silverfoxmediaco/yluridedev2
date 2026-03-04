@@ -1,21 +1,36 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { generateToken, protect } = require('../middleware/auth');
 const { sendOwnerVerificationEmail, sendNewUserNotification } = require('../utils/emailService');
 
+// Rate limiter for registration: 10 requests per 15 minutes per IP
+const registerLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { message: 'Too many registration attempts. Please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // @route   POST /api/auth/register
 // @desc    Register a new customer
 // @access  Public
-router.post('/register', [
+router.post('/register', registerLimiter, [
   body('firstName').trim().notEmpty().withMessage('First name is required'),
   body('lastName').trim().notEmpty().withMessage('Last name is required'),
   body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
   body('phone').optional().trim()
 ], async (req, res) => {
+  // Honeypot check — bots fill hidden "website" field, humans don't
+  if (req.body.website) {
+    return res.status(201).json({ token: 'ok', user: { _id: '0', firstName: '', lastName: '', email: '', role: 'customer' } });
+  }
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: errors.array()[0].msg });
@@ -65,7 +80,7 @@ router.post('/register', [
 // @route   POST /api/auth/register-owner
 // @desc    Register a new van owner (unverified)
 // @access  Public
-router.post('/register-owner', [
+router.post('/register-owner', registerLimiter, [
   body('firstName').trim().notEmpty().withMessage('First name is required'),
   body('lastName').trim().notEmpty().withMessage('Last name is required'),
   body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
@@ -73,6 +88,11 @@ router.post('/register-owner', [
   body('phone').optional().trim(),
   body('businessName').trim().notEmpty().withMessage('Business name is required')
 ], async (req, res) => {
+  // Honeypot check — bots fill hidden "website" field, humans don't
+  if (req.body.website) {
+    return res.status(201).json({ token: 'ok', user: { _id: '0', firstName: '', lastName: '', email: '', role: 'owner' } });
+  }
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: errors.array()[0].msg });

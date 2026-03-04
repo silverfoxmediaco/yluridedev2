@@ -18,7 +18,8 @@ const Register = () => {
     phone: '',
     password: '',
     confirmPassword: '',
-    businessName: ''
+    businessName: '',
+    website: ''
   });
   const [submitting, setSubmitting] = useState(false);
   const { register, user } = useAuth();
@@ -69,7 +70,8 @@ const Register = () => {
         email: formData.email,
         phone: formData.phone,
         password: formData.password,
-        role: accountType
+        role: accountType,
+        website: formData.website
       };
 
       if (accountType === 'owner') {
@@ -125,6 +127,17 @@ const Register = () => {
           </Box>
 
           <form onSubmit={handleSubmit} className="register-form">
+            {/* Honeypot field — hidden from humans, bots auto-fill it */}
+            <TextField
+              name="website"
+              value={formData.website}
+              onChange={handleChange}
+              autoComplete="off"
+              tabIndex={-1}
+              sx={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+              aria-hidden="true"
+            />
+
             <Box className="register-name-row">
               <TextField
                 label="First Name"
