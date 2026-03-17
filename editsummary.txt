@@ -681,3 +681,12 @@ Edit Summary Log
 - Updated frontend/src/App.jsx:
   - Added imports for VerifyEmail and VerifyEmailSent pages
   - Added two public routes: /verify-email and /verify-email-sent
+
+2026-03-17: Fixed Page Scrolling Bug
+- Updated frontend/src/index.css:
+  - Removed overflow-x: hidden from html element (line 15)
+  - Having overflow-x: hidden on BOTH html AND body creates two nested scroll containers per CSS spec,
+    which prevents vertical scrolling on some pages. Keeping it only on body is sufficient.
+- Updated frontend/src/styles/ManageUsers.css:
+  - Changed overflow-y: hidden to overflow-y: auto on .manage-users-table-container (line 62)
+  - Was completely blocking vertical scrolling within the users table

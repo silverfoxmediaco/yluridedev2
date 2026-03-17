@@ -59,7 +59,7 @@
 .manage-users-table-container {
   border-radius: 12px !important;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .manage-users-table-head {
